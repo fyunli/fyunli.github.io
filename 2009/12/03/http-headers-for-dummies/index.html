@@ -1,0 +1,1194 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="雲之彼岸" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="http://fyun.li/images/ilogo.png" />
+
+
+
+
+  <title> 为菜鸟准备的HTTP头教程 // 雲之彼岸 </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">雲之彼岸</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              为菜鸟准备的HTTP头教程
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-12-03
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/12/03/http-headers-for-dummies/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/12/03/http-headers-for-dummies/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/" target="_blank" rel="external">http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/</a></p>
+<p>作者：Burak Guzel</p>
+<p>无论你是不是程序员，你看到它在网络上无所不在。这会儿你的浏览器地址栏就显示以”<a href="http://”开头的东西。甚至你的第一个hello" target="_blank" rel="external">http://”开头的东西。甚至你的第一个hello</a> world脚本就在你无意识下发送了HTTP头。本文中，我们会学习HTTP头的基础知识，以及我们如何在web应用中使用它们。</p>
+<a id="more"></a>
+<h2 id="什么是HTTP头？">什么是HTTP头？</h2><p>HTTP指“超文本传输协议”，整个万维网都是用此协议。它创立于1990年代初期。几乎所有你在浏览器中看到的内容都是通过HTTP传送到你的电脑。比如，但你打开本文页面，你的浏览器可能已经发送超过40个HTTP请求，并且为每一个请求接收了HTTP相应。</p>
+<p>HTTP头是HTTP请求和相应的核心部分，它们携带关于客户端浏览器，被请求页面，服务器及其它信息。</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image.png" alt=""></p>
+<p><strong>示例</strong></p>
+<p>但你在地址栏输入一个URL，浏览器撒送一个HTTP请求，他看起来像这样子：</p>
+<p><pre lang="html">GET /tutorials/other/top-20-mysql-best-practices/ HTTP/1.1<br>Host: net.tutsplus.com<br>User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Language: en-us,en;q=0.5<br>Accept-Encoding: gzip,deflate<br>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7<br>Keep-Alive: 300<br>Connection: keep-alive<br>Cookie: PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120<br>Pragma: no-cache<br>Cache-Control: no-cache</pre><br>第一行是“请求行”，包含一些请求的基本信息。剩下的是HTTP头。</p>
+<p>在这一请求之后，你的浏览器接收一个HTTP相应，看起来可能像这样子：</p>
+<p><pre lang="html">HTTP/1.x 200 OK<br>Transfer-Encoding: chunked<br>Date: Sat, 28 Nov 2009 04:36:25 GMT<br>Server: LiteSpeed<br>Connection: close<br>X-Powered-By: W3 Total Cache/0.8<br>Pragma: public<br>Expires: Sat, 28 Nov 2009 05:36:25 GMT<br>Etag: “pub1259380237;gz”<br>Cache-Control: max-age=3600, public<br>Content-Type: text/html; charset=UTF-8<br>Last-Modified: Sat, 28 Nov 2009 03:50:37 GMT<br>X-Pingback: <a href="http://net.tutsplus.com/xmlrpc.php" target="_blank" rel="external">http://net.tutsplus.com/xmlrpc.php</a><br>Content-Encoding: gzip<br>Vary: Accept-Encoding, Cookie, User-Agent</pre></p>
+<p>&lt;!– … rest of the html … –&gt;<br>第一行是“状态行”，接下来是HTTP头，直至空白行。在此之后，“内容”开始（在此情况下是HTML输出）。</p>
+<p>但你在浏览器中查看一个网页的源代码，你只会看到HTML部分而不是HTTP头，即使它们确实被一起传送，如你上面看到的一样。</p>
+<p>这些HTTP请求也发送和接收其它东西，例如图像、CSS文件、JAVASCRTIP文件等等。因此我刚才说但你装载本文页面时你的浏览器已经发送了至少40个HTTP请求。</p>
+<p>现在，让我们开始回顾更详细的结构。</p>
+<h2 id="如何查看HTTP头">如何查看HTTP头</h2><p>我使用以下Firefox扩展区分析HTTP头：</p>
+<p><a href="http://getfirebug.com/" target="_blank" rel="external">Firebug</a></p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image1.png" alt=""></p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3829" target="_blank" rel="external">Live HTTP Headers</a></p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image2.png" alt=""></p>
+<p>在PHP中：</p>
+<ul>
+<li><a href="http://php.net/manual/en/function.getallheaders.php" target="_blank" rel="external">getallheaders()</a> 获取HTTP请求头。你也可以使用$_SERVER数组。</li>
+<li><a href="http://www.php.net/manual/en/function.headers-list.php" target="_blank" rel="external">headers_list()</a> 获取HTTP响应头。<br>此外，在本文中，我们将看到一些PHP代码示例。</li>
+</ul>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image3.png" alt=""></p>
+<p>HTTP头第一行称为请求行，包含三个部分：</p>
+<ul>
+<li>“办法”表明是什么样的要求。最常见的方法是GET，POST和HEAD。</li>
+<li>“路径”通常是主机（域名）后的URL部分。例如，当请求“<a href="http://net.tutsplus.com/tutorials/other/top-20-mysql-best-practices/”，路径部分是“/tutorials/other/top-20-mysql-best-practices/”。" target="_blank" rel="external">http://net.tutsplus.com/tutorials/other/top-20-mysql-best-practices/”，路径部分是“/tutorials/other/top-20-mysql-best-practices/”。</a></li>
+<li>“协议”部分包含“HTTP”及版本，在现代浏览器中通常是1.1。</li>
+</ul>
+<blockquote>
+<p>GET /tutorials/other/top-20-mysql-best-practices/ HTTP/1.1</p>
+<p>Host: net.tutsplus.com<br>而你仍然会从WEB服务器得到一个有效响应。</p>
+</blockquote>
+<h2 id="请求方法">请求方法</h2><p>最常用的三个请求方法是：GET, POST和HEAD，你可能已经从编写HTML表单中熟悉了前两个。</p>
+<p><strong>GET: 检索文档</strong></p>
+<p>只是用于检索HTML、图像、JavaScript、CSS等的主要方法。你浏览器中装载的不多数数据使用该方法请求。</p>
+<p>比如，但载入一篇Nettuts+的文章，HTTP请求的第一行看起来像这样：</p>
+<blockquote>
+<p>GET /tutorials/other/top-20-mysql-best-practices/ HTTP/1.1</p>
+<p>…<br>一旦载入HTML，浏览器将开始发送图像的GET请求，可能看起来像这样：<br>GET /wp-content/themes/tuts_theme/images/header_bg_tall.png HTTP/1.1</p>
+<p>…<br>WEB表单可被设置为使用GET方法，示例如下：<br>&lt;form method=”GET” action=”foo.php”&gt;</p>
+<p>First Name: &lt;input type=”text” name=”first_name”&gt; &lt;br /&gt;</p>
+<p>Last Name: &lt;input type=”text” name=”last_name”&gt; &lt;br /&gt;</p>
+<p>&lt;input type=”submit” name=”action” value=”Submit” /&gt;</p>
+<p>&lt;/form&gt;<br>当表单提交，HTTP请求会这样开始：<br>GET /foo.php?first_name=John&amp;last_name=Doe&amp;action=Submit HTTP/1.1</p>
+<p>…<br>你会看到每个表单输入都被添加到查询字符串中。</p>
+</blockquote>
+<p><strong>POST: 向服务器发送数据</strong></p>
+<p>即使你可以使用GET和查询字符串向服务器发送数据，许多情况下，POST方法会更好。使用GET发送大量数据时不现实的，就有局限性。</p>
+<p>POST请求通常由WEB表单发送。让我们修改上面的表单例子为POST方法：</p>
+<blockquote>
+<p>&lt;form method=”POST” action=”foo.php”&gt;</p>
+<p>First Name: &lt;input type=”text” name=”first_name” /&gt; &lt;br /&gt;</p>
+<p>Last Name: &lt;input type=”text” name=”last_name” /&gt; &lt;br /&gt;</p>
+<p>&lt;input type=”submit” name=”action” value=”Submit” /&gt;</p>
+<p>&lt;/form&gt;<br>提交表单会创建如下HTTP请求：<br>POST /foo.php HTTP/1.1</p>
+<p>Host: localhost</p>
+<p>User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)</p>
+<p>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8</p>
+<p>Accept-Language: en-us,en;q=0.5</p>
+<p>Accept-Encoding: gzip,deflate</p>
+<p>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7</p>
+<p>Keep-Alive: 300</p>
+<p>Connection: keep-alive</p>
+<p>Referer: <a href="http://localhost/test.php" target="_blank" rel="external">http://localhost/test.php</a></p>
+<p>Content-Type: application/x-www-form-urlencoded</p>
+<p>Content-Length: 43</p>
+<p>first_name=John&amp;last_name=Doe&amp;action=Submit<br>这里要注意三个重要的事情：</p>
+</blockquote>
+<ul>
+<li>第一行的路径是很简单的/ foo.php，也没有查询字符串了。</li>
+<li>Content-Type和Content-Lenght头被添加，提供有关被发送数据的信息。</li>
+<li>现在所有数据都在HTTP头之后发送，格式和查询字符串一样。<br>POST方法请求也可以通过AJAX，以用程序，cURL，等等。所有文件上传表单都要求使用POST方法。</li>
+</ul>
+<p><strong>HEAD: 检索头信息</strong></p>
+<p>HEAD等同于GET，除了服务器不会在HTTP响应中返回内容。当你发送一个HEAD请求，则意味着你只对相应代码和HTTP头感兴趣，而不是文档本身。</p>
+<blockquote>
+<h3 id="当你发送一个HEAD请求，则意味着你只对相应代码和HTTP头感兴趣，而不是文档本身。">当你发送一个HEAD请求，则意味着你只对相应代码和HTTP头感兴趣，而不是文档本身。</h3><p>用该方法，浏览器可以检查文档是否被修改，为了缓存的目的。它也能检查文档是否存在。</p>
+</blockquote>
+<p>例如，如果你的网站上有大量链接，你可以定期发送HEAD请求给所有链接已检查链接是否损坏。这会比使用GET工作快很多。</p>
+<h2 id="HTTP响应结构">HTTP响应结构</h2><p>发送HTTP请求之后，服务器用HTTP响应回应，除去内容，它看起来如下：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image4.png" alt=""></p>
+<p>数据的第一部分是协议。在现代服务器中，通常又是使用HTTP/1.x或HTTP/1.1。</p>
+<p>接下来的部分是状态代码接着简短的信息，代码200意味着我们的GET请求成功并且服务器会在HTTP头后返回被请求文档的内容。</p>
+<p>我们都看过“404”页面，这个数据实际上来自于HTTP响应状态代码部分。如果GET请求一个服务器找不到的路径，则会返回404，而不是200。</p>
+<p>响应的剩余部分和HTTP请求相似，这些值可以包含服务器软件、页面/文件最后修改时间、mime类型等信息。</p>
+<h2 id="HTTP状态代码">HTTP状态代码</h2><ul>
+<li>200的用于成功的请求。</li>
+<li>300用于重定向。</li>
+<li>400用于有问题的请求。</li>
+<li>500用于服务器错误。<br><strong>200 OK</strong></li>
+</ul>
+<p>如前所述，这个状态代码在响应一个成功的请求中发送。</p>
+<p><strong>206 部分内容</strong></p>
+<p>如果应用程序只请求文件的范围，会返回206代码。</p>
+<p>最常用于下载管理器，可以停止和恢复一个下载、或者把下载分割成片段。</p>
+<p><strong>404 未找到</strong></p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image5.png" alt=""></p>
+<p>当请求的页面或文件找不到，服务器会发送404响应代码。</p>
+<p><strong>401 未授权</strong></p>
+<p>密码保护的WEB页面会发送这个代码。如果你没有正确登录，你可能在浏览器中看到如下显示：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image6.png" alt=""></p>
+<p>请注意这只用于HTTP密码保护的页面，那些弹出的登录想这个样子：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image7.png" alt=""></p>
+<p><strong>403 禁止</strong></p>
+<p>如果你不允许访问一个网页，此代码可能会发送到你的浏览器。这个常常发生在你尝试打开一个未包含index页面的目录的URL。如果服务器设置不允许显示目录内容，你会得到403错误。</p>
+<p>比如，我在我本地服务器中创建了一个图片目录。在这个目录里，我建了个.htaccess文件，有这么一行：”Option -Indexes”。现在但我请求打开<a href="http://localhost/images/" target="_blank" rel="external">http://localhost/images/</a>，我看到这个：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image8.png" alt=""></p>
+<p>有其他的方式阻止访问，并发送403.比如，你可以通过一些htaccess指定的帮助用IP地址阻止。</p>
+<blockquote>
+<p>order allow,deny</p>
+<p>deny from 192.168.44.201</p>
+<p>deny from 224.39.163.12</p>
+<p>deny from 172.16.7.92</p>
+<p>allow from all<br><strong>302（或者307）临时移动 &amp; 301 永久移动</strong></p>
+</blockquote>
+<p>这两个代码用来重定向浏览器。比如，当你使用URL缩短服务，如<a href="http://bit.ly" target="_blank" rel="external">bit.ly</a>，这正是他们转发人们点击他们链接的方式。</p>
+<p>302和301都被浏览器类似处理，但他们对于搜索引擎爬虫有不同的意义。例如，如果你的网站正在维护，你可能用302重定向到其它位置。搜索引擎爬虫会继续在以后检查你的页面。但是如果你用301重定向，它会告诉爬虫你的网站已经永久移动到其它位置。为了给你一个更清晰的概念，<a href="http://www.nettuts.com" target="_blank" rel="external">http://www.nettuts.com</a>重定向到<a href="http://net.tutsplus.com/" target="_blank" rel="external">http://net.tutsplus.com/</a>，使用301代码而不是302。</p>
+<p><strong>500 服务器内部错误</strong></p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image9.png" alt=""></p>
+<p>这个代码通常在web脚本崩溃时看到。不想PHP，大多数CGI脚本不直接向浏览器输出错误。如果有任何致命错误，他们只是发送500状态代码。程序员需要搜索服务器错误日志去查找错误信息。</p>
+<p><strong>完整列表</strong></p>
+<p>你可以在<a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank" rel="external">这里</a>找到HTTP状态代码及其解释的完整列表。</p>
+<h2 id="HTTP请求中的HTTP头">HTTP请求中的HTTP头</h2><p>现在，我们会回顾一些在HTTP请求中发现的最普通的HTTP头。</p>
+<p>在PHP中，几乎所有这些HTTP头都能在$_SERVER数组中找到。你也可以使用<a href="http://php.net/manual/en/function.getallheaders.php" target="_blank" rel="external">getallheaders()</a>函数一次性检索所有的HTTP头。</p>
+<p><strong>Host</strong></p>
+<p>一个HTTP头被发送到一个特定的IP地址。但是既然大部分服务器有能力在一个IP下托管多个网站，他们必须知道浏览器查找哪个域名。</p>
+<blockquote>
+<p>Host: net.tutsplus.com<br>基本上，这就是主机名，包括域名和子域名。</p>
+</blockquote>
+<p>在PHP中，可以用$_SERVER[‘HTTP_HOST’] 或 $_SERVER[‘SERVER_NAME’] 得到。</p>
+<p><strong>User-Agent</strong></p>
+<blockquote>
+<p>User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)<br>这个HTTP头可以携带如下几条信息：</p>
+</blockquote>
+<ul>
+<li>浏览器名称和版本。</li>
+<li>操作系统名称和版本。</li>
+<li>默认语言。<br>因此，网站可以收集关于他们的浏览者的某些系统信息。比如，他们可以侦测浏览者是否使用手机浏览器并将他们重定向到他们网站的手机版本——在低分辨率下工作更好。</li>
+</ul>
+<p>在PHP中，可以用$_SERVER[‘HTTP_USER_AGENT’] 得到。</p>
+<p><pre lang="php"><br>if ( strstr($_SERVER[‘HTTP_USER_AGENT’],’MSIE 6’) ) {<br>    echo “Please stop using IE6!”;<br>}<br></pre><br><strong>Accept-Language</strong></p>
+<blockquote>
+<p>Accept-Language: en-us,en;q=0.5<br>这个HTTP头显示用户设置的默认语言。如果网站有不同的语言版本，他可以用这个数据重定向浏览。</p>
+</blockquote>
+<p>它可以携带多个语言，用逗号分隔。第一个是首选语言，其它每个语言可以带一个“q”值，这厮用户对该语言的偏好估计（最小0，最大1）。</p>
+<p>在PHP中，可以用$_SERVER[“HTTP_ACCEPT_LANGUAGE”] 得到。</p>
+<p><pre lang="php"><br>if (substr($_SERVER[‘HTTP_ACCEPT_LANGUAGE’], 0, 2) == ‘fr’) {<br>    header(‘Location: <a href="http://french.mydomain.com" target="_blank" rel="external">http://french.mydomain.com</a>‘);<br>}<br></pre><br><strong>Accept-Encoding</strong></p>
+<blockquote>
+<p>Accept-Encoding: gzip,deflate<br>大多数现代浏览器支持GZIP，并且会在HTTP头中发送这个。WEB服务器则会用压缩格式发送HTML输出。这最多将减少80%的大小，以节约带宽和时间。</p>
+</blockquote>
+<p>在PHP中，可以用$_SERVER[“HTTP_ACCEPT_ENCODING”] 得到。无论如何，但你使用<a href="http://www.php.net/manual/en/function.ob-gzhandler.php" target="_blank" rel="external">ob_gzhandler()</a>回调函数，它会自动检查该值，所以你不需要自己干。</p>
+<p><pre lang="php"><br>// enables output buffering<br>// and all output is compressed if the browser supports it<br>ob_start(‘ob_gzhandler’);<br></pre><br><strong>If-Modified-Since</strong></p>
+<p>如果一个web文档已经在你的浏览器中缓存，当你再次访问它，浏览器会发送下面HTTP头检查文档是否更新：</p>
+<blockquote>
+<p>If-Modified-Since: Sat, 28 Nov 2009 06:38:19 GMT<br>如果在那个日期后没有更新，服务器会发送一个“304 未更新”响应代码，不带内容的，浏览器会从缓存中载入内容。</p>
+</blockquote>
+<p>在PHP中，可以用$_SERVER[‘HTTP_IF_MODIFIED_SINCE’] 得到。</p>
+<p><pre lang="php"><br>// assume $last_modify_time was the last the output was updated  </pre></p>
+<p>// did the browser send If-Modified-Since header?<br>if(isset($_SERVER[‘HTTP_IF_MODIFIED_SINCE’])) {  </p>
+<pre><code>// <span class="keyword">if</span> the browser cache matches the modify <span class="keyword">time</span>  
+<span class="keyword">if</span> (<span class="variable">$last_modify_time</span> == strtotime(<span class="variable">$_SERVER</span>[<span class="string">'HTTP_IF_MODIFIED_SINCE'</span>])) {  
+
+    <span class="regexp">//</span> <span class="keyword">send</span> a <span class="number">304</span> header, <span class="keyword">and</span> <span class="keyword">no</span> content  
+    header(<span class="string">"HTTP/1.1 304 Not Modified"</span>);  
+    <span class="keyword">exit</span>;  
+}  
+</code></pre><p>}<br><br>还有另一个叫做Etag的HTTP头，可用于确保缓存是最新的。稍后我们会谈到它。</p>
+<p><strong>Cookie</strong></p>
+<p>顾名思义，这个HTTP头为该域发送存储在你浏览器中的cookie。</p>
+<blockquote>
+<p>Cookie: PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120; foo=bar<br>这些键值对由分号分开，Cookie也可以包含会话ID。</p>
+</blockquote>
+<p>在PHP中，独立的cookie可以用$_COOKIE数组访问。你可以用$_SESSION数组直接访问会话变量，如果你需要会话ID,你可以使用session_id()函数，而不是cookie。</p>
+<p><pre lang="php"><br>echo $_COOKIE[‘foo’];<br>// output: bar<br>echo $_COOKIE[‘PHPSESSID’];<br>// output: r2t5uvjq435r4q7ib3vtdjq120<br>session_start();<br>echo session_id();<br>// output: r2t5uvjq435r4q7ib3vtdjq120<br></pre><br><strong>Referer</strong></p>
+<p>顾名思义，这个HTTP头包含引用网址。</p>
+<p>比如，我访问Nettuts+主页，并点击一个文章链接，下面这个HTTP头会发送到我的浏览器：</p>
+<blockquote>
+<p>Referer: <a href="http://net.tutsplus.com/" target="_blank" rel="external">http://net.tutsplus.com/</a><br>在PHP中，可以用$_SERVER[‘HTTP_REFERER’] 获得：</p>
+<p><pre lang="php"><br>if (isset($_SERVER[‘HTTP_REFERER’])) {  </pre></p>
+</blockquote>
+<pre><code><span class="variable">$url</span>_info = parse_url($_SERVER[<span class="string">'HTTP_REFERER'</span>]);  
+
+// is the surfer coming from Google?  
+<span class="keyword">if</span> (<span class="variable">$url</span>_info[<span class="string">'host'</span>] == <span class="string">'www.google.com'</span>) {  
+
+    parse_str(<span class="variable">$url</span>_info[<span class="string">'query'</span>], <span class="variable">$vars</span>);  
+
+    echo <span class="string">"You searched on Google for this keyword: "</span>. <span class="variable">$vars</span>[<span class="string">'q'</span>];  
+
+}  
+</code></pre><p>}<br>// if the referring url was:<br>// <a href="http://www.google.com/search?source=ig&amp;hl=en&amp;rlz=&amp;=&amp;q=http+headers&amp;aq=f&amp;oq=&amp;aqi=g-p1g9" target="_blank" rel="external">http://www.google.com/search?source=ig&amp;hl=en&amp;rlz=&amp;=&amp;q=http+headers&amp;aq=f&amp;oq=&amp;aqi=g-p1g9</a><br>// the output will be:<br>// You searched on Google for this keyword: http headers<br><br>你可能注意到了单词“referrer” 被误写为“referer”。不幸的是，这进入了正式的HTTP规范并被留用。</p>
+<p><strong>Authorization</strong></p>
+<p>当网页请求授权，浏览器会打开一个登录窗口。但你在窗口中输入用户名和密码，浏览器会发送另一个HTTP请求，这次它会包含这个HTTP头：</p>
+<blockquote>
+<p>Authorization: Basic bXl1c2VyOm15cGFzcw==<br>在这个HTTP头中的数据是base64编码的，比如</p>
+</blockquote>
+<p>base64_decode(‘bXl1c2VyOm15cGFzcw==’)会返回’myuser:mypass’</p>
+<p>在PHP中，这些值可以用$_SERVER[‘PHP_AUTH_USER’] 和 $_SERVER[‘PHP_AUTH_PW’] 获得。</p>
+<p>更多关于此的细节我们会在讨论WWW-Authenticate头时讨论。</p>
+<h2 id="HTTP响应中的HTTP头">HTTP响应中的HTTP头</h2><p>现在，让我们看看HTTP响应中最常见的HTTP头。</p>
+<p>在PHP中，你可以用<a href="http://php.net/manual/en/function.header.php" target="_blank" rel="external">header()</a>函数设置响应头。PHP会自动发送特定的HTTP头，如加载内容和设置Cookie等。你可以用<a href="http://www.php.net/manual/en/function.headers-list.php" target="_blank" rel="external">headers_list()</a>函数查看已发送或将发送的HTTP头。你可以用<a href="http://www.php.net/manual/en/function.headers-sent.php" target="_blank" rel="external">headers_sent()</a>函数检查头是否已经发送。</p>
+<p><strong>Cache-Control</strong></p>
+<p>w3.org的定义：“Cache-Control通用HTTP头用于指定所有请求/响应链中的缓存机制的指令”。这些“缓存机制”包括你的ISP可能使用的网关、代理。</p>
+<p>比如：</p>
+<blockquote>
+<p>Cache-Control: max-age=3600, public<br>“public”表示响应可以被任意缓存。“max-age”表示缓存有效时间为多少秒。允许你的网站被缓存可以减少服务器负载和带宽，提高浏览器载入时间。</p>
+</blockquote>
+<p>也可以使用“no-cache”指令禁用缓存。</p>
+<blockquote>
+<p>Cache-Control: no-cache<br>更多细节请参考<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9" target="_blank" rel="external">w3.org</a>。</p>
+</blockquote>
+<p><strong>Content-Type</strong></p>
+<p>这个HTTP头表明文档的MIME类型。浏览器用以决定如何解释内容。比如，HTML页面（或者PHP脚本的HTML输出）可能如下面一般返回：</p>
+<blockquote>
+<p>Content-Type: text/html; charset=UTF-8<br>“text”是文档类型，“html”是子类型。这个HTTP头也包含更多信息，比如编码。</p>
+</blockquote>
+<p>对于gif图像，可能会发送这个：</p>
+<blockquote>
+<p>Content-Type: image/gif<br>浏览器会决定使用该MIME类型的外部程序或浏览器扩展。比如，下面这个会打开Adobe Reader：<br>Content-Type: application/pdf<br>但直接载入时，apache通常会检测文档的MIME类型并发送相应的HTTP头。大多数浏览器也有一定的容错性和MIME自动检测能力，以免HTTP头错误或者缺失。</p>
+</blockquote>
+<p>你可以在<a href="http://www.webmaster-toolkit.com/mime-types.shtml" target="_blank" rel="external">这里</a>找到通用MIME类型的列表。</p>
+<p>在PHP中，你可以使用<a href="http://www.php.net/manual/en/function.finfo-file.php" target="_blank" rel="external">finfo_file()</a>函数检测文件的MIME类型。</p>
+<p><strong>Content-Disposition</strong></p>
+<p>这个HTTP头指示浏览器打开一个文件下载框，而非常识解析内容，如：</p>
+<blockquote>
+<p>Content-Disposition: attachment; filename=”download.zip”<br>会导致浏览器这样工作：</p>
+</blockquote>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image10.png" alt=""></p>
+<p>请注意，相应的Content-Type也需要一起发送：</p>
+<blockquote>
+<p>Content-Type: application/zip</p>
+<p>Content-Disposition: attachment; filename=”download.zip”<br><strong>Content-Length</strong></p>
+</blockquote>
+<p>当内容将被传送给浏览器的时候，服务器会用这个HTTP头标示大小（字节数）。</p>
+<blockquote>
+<p>Content-Length: 89123<br>这对文件下载特别有用，浏览器可以因此判断下载的进度。</p>
+</blockquote>
+<p>比如，这是我写的一个虚拟脚本，用于模拟一个慢下载。</p>
+<p><pre lang="php"><br>// it’s a zip file<br>header(‘Content-Type: application/zip’);<br>// 1 million bytes (about 1megabyte)<br>header(‘Content-Length: 1000000’);<br>// load a download dialogue, and save it as download.zip<br>header(‘Content-Disposition: attachment; filename=”download.zip”‘);  </pre></p>
+<p>// 1000 times 1000 bytes of data<br>for ($i = 0; $i &lt; 1000; $i++) {<br>    echo str_repeat(“.”,1000);  </p>
+<pre><code><span class="comment">// sleep to slow down the download  </span>
+usleep(<span class="number">50000</span>);  
+</code></pre><p>}<br><br>结果会是：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image11.png" alt=""></p>
+<p>现在，我注释掉Content-Length头。</p>
+<p><pre lang="php"><br>// it’s a zip file<br>header(‘Content-Type: application/zip’);<br>// the browser won’t know the size<br>// header(‘Content-Length: 1000000’);<br>// load a download dialogue, and save it as download.zip<br>header(‘Content-Disposition: attachment; filename=”download.zip”‘);  </pre></p>
+<p>// 1000 times 1000 bytes of data<br>for ($i = 0; $i &lt; 1000; $i++) {<br>    echo str_repeat(“.”,1000);  </p>
+<pre><code><span class="comment">// sleep to slow down the download  </span>
+usleep(<span class="number">50000</span>);  
+</code></pre><p>}<br><br>现在的结果是：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image12.png" alt=""></p>
+<p>浏览器只能告诉你已经下载多少字节，但是它不知道总数，所以进度条不会显示进度。</p>
+<p><strong>Etag</strong></p>
+<p>这是另一个用于缓存目的的HTTP头，看起来如下：</p>
+<blockquote>
+<p>Etag: “pub1259380237;gz”<br>WEB服务器可能为每个文档发送这个HTTP头。其值可根据最后修改日期、文件大小、甚至文件的校验和值设定。浏览器会在缓存文档时保存该值。当浏览器下次请求同一个文件时，会在HTTP请求中发送下面这个HTTP头。<br>If-None-Match: “pub1259380237;gz”<br>如果文档的Etag值相符，服务器会发送304代码而不是200，并且没有内容，浏览器将从缓存中装载内容。</p>
+</blockquote>
+<p><strong>Last-Modified</strong></p>
+<p>顾名思义，这个HTTP以GMT格式表明民文档的最后修改日期。</p>
+<blockquote>
+<p>Last-Modified: Sat, 28 Nov 2009 03:50:37 GMT<br>$modify_time = filemtime($file);</p>
+<p>header(“Last-Modified: “ . gmdate(“D, d M Y H:i:s”, $modify_time) . “ GMT”);<br>它提供浏览器缓存文档的另一种方式。浏览器可以在HTTP请求中发送：<br>If-Modified-Since: Sat, 28 Nov 2009 06:38:19 GMT<br>我们已经在”If-Modified-Since”一节中对此讨论过。</p>
+</blockquote>
+<p><strong>Location</strong></p>
+<p>这个HTTP头用于重定向。如果响应代码是301或302，服务器必须也发送这个HTTP头。比如，但你访问<a href="http://www.nettuts.com" target="_blank" rel="external">http://www.nettuts.com</a>，你的浏览器可能会收到：</p>
+<blockquote>
+<p>HTTP/1.x 301 Moved Permanently</p>
+<p>…</p>
+<p>Location: <a href="http://net.tutsplus.com/" target="_blank" rel="external">http://net.tutsplus.com/</a></p>
+<p>…<br>在PHP中，你可以如下重定向浏览：<br>header(‘Location: <a href="http://net.tutsplus.com/" target="_blank" rel="external">http://net.tutsplus.com/‘</a>);<br>默认地，会发送302响应代码，如果你想发送301：<br>header(‘Location: <a href="http://net.tutsplus.com/" target="_blank" rel="external">http://net.tutsplus.com/</a>‘, true, 301);<br><strong>Set-Cookie</strong></p>
+</blockquote>
+<p>当网站想设置或者更新浏览器cookie，它会使用这个HTTP头。</p>
+<blockquote>
+<p>Set-Cookie: skin=noskin; path=/; domain=.amazon.com; expires=Sun, 29-Nov-2009 21:42:28 GMT</p>
+<p>Set-Cookie: session-id=120-7333518-8165026; path=/; domain=.amazon.com; expires=Sat Feb 27 08:00:00 2010 GMT<br>每个cookie都被独立HTTP头发送。请注意通过JavaScript设置的cookie不通过HTTP头。</p>
+</blockquote>
+<p>在PHP中，你可以使用<a href="http://php.net/manual/en/function.setcookie.php" target="_blank" rel="external">setcookie()</a>函数设置cookie，PHP会发送相应的HTTP头。</p>
+<blockquote>
+<p>setcookie(“TestCookie”, “foobar”);<br>会导致发送以下HTTP头：<br>Set-Cookie: TestCookie=foobar<br>如果截止日期没有指定，cookie会在浏览器关闭时删除。</p>
+</blockquote>
+<p><strong>WWW-Authenticate</strong></p>
+<p>网站可能用这个HTTP头通过HTTP认证用户。当浏览器看到这个HTTP头，它会打开一个登录对话窗口：</p>
+<blockquote>
+<p>WWW-Authenticate: Basic realm=”Restricted Area”<br>如下所示：</p>
+</blockquote>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image13.png" alt=""></p>
+<p>在PHP指南中有个<a href="http://php.net/manual/en/features.http-auth.php" target="_blank" rel="external">部分</a>，有代码示范如何在PHP中实现：</p>
+<p><pre lang="php"><br>if (!isset($_SERVER[‘PHP_AUTH_USER’])) {<br>    header(‘WWW-Authenticate: Basic realm=”My Realm”‘);<br>    header(‘HTTP/1.0 401 Unauthorized’);<br>    echo ‘Text to send if user hits Cancel button’;<br>    exit;<br>} else {<br>    echo “</pre></p>
+<p>Hello {$_SERVER[‘PHP_AUTH_USER’]}.<br>“;<br>    echo “</p>
+<p>You entered {$_SERVER[‘PHP_AUTH_PW’]} as your password.<br>“;<br>}<br><br><strong>Content-Encoding</strong></p>
+<p>这个HTTP头通常在内容被压缩时设置：</p>
+<blockquote>
+<p>Content-Encoding: gzip<br>在PHP中，如果你使用<a href="http://www.php.net/manual/en/function.ob-gzhandler.php" target="_blank" rel="external">ob_gzhandler()</a>回调函数，它会自动设置。</p>
+</blockquote>
+<h2 id="结论">结论</h2><p>感谢阅读。我希望这篇文章是学习HTTP头的一个好的开端。请在下面留下你的评论和问题，我会尽量回复。</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2009/12/05/cube/">我想要更黑暗 - 《异次元杀阵》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2009/12/02/tian-dao-lun-wang/">天道沦亡</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="http://fyun.li/images/avatar.png" alt="fyunli" />
+          <p class="site-author-name">fyunli</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/fyunli" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/fyunli" target="_blank">twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/fyunli" target="_blank">weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://douban.com/people/fyun" target="_blank">douban</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是HTTP头？"><span class="nav-number">1.</span> <span class="nav-text">什么是HTTP头？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何查看HTTP头"><span class="nav-number">2.</span> <span class="nav-text">如何查看HTTP头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求方法"><span class="nav-number">3.</span> <span class="nav-text">请求方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你发送一个HEAD请求，则意味着你只对相应代码和HTTP头感兴趣，而不是文档本身。"><span class="nav-number">3.1.</span> <span class="nav-text">当你发送一个HEAD请求，则意味着你只对相应代码和HTTP头感兴趣，而不是文档本身。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP响应结构"><span class="nav-number">4.</span> <span class="nav-text">HTTP响应结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP状态代码"><span class="nav-number">5.</span> <span class="nav-text">HTTP状态代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP请求中的HTTP头"><span class="nav-number">6.</span> <span class="nav-text">HTTP请求中的HTTP头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP响应中的HTTP头"><span class="nav-number">7.</span> <span class="nav-text">HTTP响应中的HTTP头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">8.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">fyunli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'fyunli';
+      var disqus_identifier = '2009/12/03/http-headers-for-dummies/';
+      var disqus_url = 'http://fyun.li/2009/12/03/http-headers-for-dummies/';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
+
+  
+</body>
+</html>

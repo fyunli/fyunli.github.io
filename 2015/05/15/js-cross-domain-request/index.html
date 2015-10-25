@@ -1,0 +1,962 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="cors,js,jsonp," />
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="雲之彼岸" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="http://fyun.li/images/ilogo.png" />
+
+
+
+
+  <title> javascript 跨域问题小记 // 雲之彼岸 </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">雲之彼岸</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              javascript 跨域问题小记
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/05/15/js-cross-domain-request/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/15/js-cross-domain-request/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h1 id="1、同源策略">1、同源策略</h1><p>同源策略是有 Netscape 提出的一个著名的安全策略，现在所有的支持 javascript 的浏览器都会使用这个策略。</p>
+<p>所谓同源是指主机名、协议、端口相同：</p>
+<ul>
+<li>相同的主机名</li>
+<li>相同的协议</li>
+<li>相同的端口</li>
+</ul>
+<p>三者必须同时满足，只要主机名、协议、端口三者其中之一不同，就为不同的源。</p>
+<a id="more"></a>
+<p>同源策略限制了一个源中加载文本或者脚本与来自其他源中资源的交互方式，简而言之就是一个源上的 js 只能访问当前源的资源。</p>
+<p>同源策略以源为边界，把资源分隔开，从而保护用户的信息安全。</p>
+<h1 id="2、跨域的方式">2、跨域的方式</h1><p>那么，在如今微服务兴起的情况下，往往很多业务调用必须跨越同源限制。比如，某商城服务部署在 www.xmall.com，而其支付服务可能部署在 www.xpay.com，因此必须要有方式可以绕过同源策略这堵墙。</p>
+<p>常用的 js 跨域方式主要有：</p>
+<ul>
+<li>修改 document.domain 跨子域</li>
+<li>通过 jsonp 跨域</li>
+<li>通过 html5 的 window.postMessage 跨域</li>
+<li>通过 CORS 跨域</li>
+</ul>
+<p>另外，还可以通过 iframe + window.name 或者 iframe + window.location.hash 进行跨域。</p>
+<p>以下涉及示例均使用 <a href="http://www.aaa.com/a.html" target="_blank" rel="external">http://www.aaa.com/a.html</a> 跨域访问 <a href="http://www.bbb.com/b.html" target="_blank" rel="external">http://www.bbb.com/b.html</a> 的数据。</p>
+<h1 id="3、修改_document-domain_跨子域">3、修改 document.domain 跨子域</h1><p>www.aaa.com 和 pay.aaa.com 是不同域的，要使他们可以跨域访问，可以通过修改 document.domain 来实现。即在两个页面中都设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.domain = &#34;aaa.com&#34;;</span><br></pre></td></tr></table></figure>
+<p>这里有个限制就是，document.domain 只能向父域修改，也就是说 www.aaa.com 改为 aaa.com 是允许的，但 aaa.com 改为 www.abc.xyz 则是不被允许的。这也限制了修改 document.domain 方式只能用于跨子域访问。</p>
+<h1 id="4、通过_jsonp_跨域">4、通过 jsonp 跨域</h1><p>js 脚本的“源”与它存储的地址无关，而是取决于脚本被加载的页面。例如我们在 <a href="http://www.aaa.com/a.html" target="_blank" rel="external">http://www.aaa.com/a.html</a> 中引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script src=&#34;http://cdn.staticfile.org/jquery/1.11.1/jquery.min.js&#34;&#62;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+<p>那么脚本与 a.html 页面是同源的，也就是说，脚本的源是 <a href="http://www.aaa.com" target="_blank" rel="external">http://www.aaa.com</a>.</p>
+<p>PS: 除了 script, img, iframe, link 等都具有跨域加载资源的能力。</p>
+<p>jsonp 正是利用 script 标签没有跨域限制的特性，通过在 src 的 url 的参数上附加回调函数名字，然后服务器接收回调函数名字并返回一个包含数据的回调函数。</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script&#62;&#10;function callback(data) &#123;&#10;    alert(data.message);&#10;&#125;&#10;&#60;/script&#62;&#10;&#60;script src=&#34;http://www.bbb.com/b.html?callback=callback&#34;&#62;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+<p>我们只要服务器端 b.html 输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callback(&#123;&#34;message&#34;:&#34;test jsonp ok&#34;&#125;)</span><br></pre></td></tr></table></figure>
+<p>页面即会执行并弹出 “test jsonp ok”。</p>
+<p>jQuery 对此做了很好的支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;&#10;    url:&#39;http://www.bbb.com/b.html&#39;,&#10;    dataType:&#34;jsonp&#34;,&#10;    jsonp:&#34;callback&#34;,&#10;    success:function(data)&#123;&#10;        // callback logic&#10;    &#125;&#10;&#125;);&#10;&#10;// &#25110;&#32773;&#31616;&#21270;&#26041;&#24335;&#10;$.getJSON(&#34;http://www.bbb.com/b.html?callback=?&#34;, null, &#10;    function(data) &#123;&#10;        // callback logic&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong> <span style="color:red">需要特别强调的是，jsonp 方式只能用于 GET 方法！ </span></strong></p>
+<h1 id="5、通过html5_window-postMessage_进行跨域">5、通过html5 window.postMessage 进行跨域</h1><p>假设在a.html里嵌套个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;iframe src=&#34;http://www.bbbb.com/b.html&#34; frameborder=&#34;0&#34;&#62;&#60;/iframe&#62;</span><br></pre></td></tr></table></figure>
+<p>在这两个页面里互相通信</p>
+<p>a.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function() &#123;&#10;    window.addEventListener(&#34;message&#34;, function(e) &#123;&#10;        alert(e.data);&#10;    &#125;);&#10;&#10;    window.frames[0].postMessage(&#34;b data&#34;, &#34;http://www.b.com/b.html&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>b.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function() &#123;&#10;    window.addEventListener(&#34;message&#34;, function(e) &#123;&#10;        alert(e.data);&#10;    &#125;);&#10;    window.parent.postMessage(&#34;a data&#34;, &#34;http://www.a.com/a.html&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样打开 a.html 页面就先弹出 a data,再弹出 b data.</p>
+<h1 id="6、通过_CORS_进行跨域">6、通过 CORS 进行跨域</h1><p>CORS 是W3C XMLHttpRequest Level 2 里规定的一种跨域方式。CORS 规范请参考 <a href="http://www.w3.org/TR/cors/" target="_blank" rel="external">CORS 规范</a> </p>
+<p>CORS 旨在定义一种规范让浏览器在接收到从提供者获取的资源时能够正决定是否应该将此资源分发给消费者作进一步处理。CROS利用资源提供者的显式授权来决定目标资源是否应该与消费者共享。换句话说，浏览器需要得到提供者的授权之后才会将其提供的资源分发给消费者。那么，资源的提供者如何进行资源的授权，并将授权的结果告诉浏览器呢？</p>
+<p>一个 CORS 请求大致过程如下：</p>
+<p>（1）消费者发送一个 Origin 报头到提供者端：Origin: <a href="http://www.bbb.com；" target="_blank" rel="external">http://www.bbb.com；</a><br>（2）提供者发送一个 Access-Control-Allow-Origin 响应报头给消费者，如果值为 * 或 Origin 对应的站点，则表示同意共享资源给消费者，如果值为 null 或者不存在 Access-Control-Allow-Origin 报头，则表示不同意共享资源给消费者；<br>（3）浏览器根据提供者的响应报文判断是否允许消费者跨域访问到提供者源。</p>
+<p>CORS 是在支持这个规范的浏览器里，javascript 的写法和不跨域的 ajax 写法一模一样。</p>
+<h2 id="6-1、CORS_的浏览器支持">6.1、CORS 的浏览器支持</h2><p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1exdkvr5yw0j20se09ltby.jpg" alt="Cors Browser Support"></p>
+<h2 id="6-2、CORS_的服务器端配置">6.2、CORS 的服务器端配置</h2><h3 id="6-2-1_Apache">6.2.1 Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header set Access-Control-Allow-Origin &#34;*&#34;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-2_Nginx">6.2.2 Nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#10;# Wide-open CORS config for nginx&#10;#&#10;location / &#123;&#10;     if ($request_method = &#39;OPTIONS&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        #&#10;        # Om nom nom cookies&#10;        #&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        #&#10;        # Custom headers and headers various browsers *should* be OK with but aren&#39;t&#10;        #&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;        #&#10;        # Tell client that this pre-flight info is valid for 20 days&#10;        #&#10;        add_header &#39;Access-Control-Max-Age&#39; 1728000;&#10;        add_header &#39;Content-Type&#39; &#39;text/plain charset=UTF-8&#39;;&#10;        add_header &#39;Content-Length&#39; 0;&#10;        return 204;&#10;     &#125;&#10;     if ($request_method = &#39;POST&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;     &#125;&#10;     if ($request_method = &#39;GET&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;     &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-3_ExpressJS">6.2.3 ExpressJS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(function(req, res, next) &#123;&#10;  res.header(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);&#10;  res.header(&#34;Access-Control-Allow-Headers&#34;, &#34;Origin, X-Requested-With, Content-Type, Accept&#34;);&#10;  next();&#10;&#125;);&#10;&#10;app.get(&#39;/&#39;, function(req, res, next) &#123;&#10;  // Handle the get for this route&#10;&#125;);&#10;&#10;app.post(&#39;/&#39;, function(req, res, next) &#123;&#10; // Handle the post for this route&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-4_Tomcat">6.2.4 Tomcat</h3><p>Tomcat 7.0.41 版本之后提供了一个 CorsFilter 以支持 CORS，详情猛击</p>
+<p><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#CORS_Filter" target="_blank" rel="external">http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#CORS_Filter</a></p>
+<p>下面是一段最简单的 CORS 配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;filter&#62;&#10;  &#60;filter-name&#62;CorsFilter&#60;/filter-name&#62;&#10;  &#60;filter-class&#62;org.apache.catalina.filters.CorsFilter&#60;/filter-class&#62;&#10;&#60;/filter&#62;&#10;&#60;filter-mapping&#62;&#10;  &#60;filter-name&#62;CorsFilter&#60;/filter-name&#62;&#10;  &#60;url-pattern&#62;/*&#60;/url-pattern&#62;&#10;&#60;/filter-mapping&#62;</span><br></pre></td></tr></table></figure>
+<p>如果希望自己实现一个 CORS 过滤器，可参考 tomcat 的实现或者下面这个链接：</p>
+<p><a href="https://github.com/eBay/cors-filter/blob/master/src/main/java/org/ebaysf/web/cors/CORSFilter.java" target="_blank" rel="external">https://github.com/eBay/cors-filter/blob/master/src/main/java/org/ebaysf/web/cors/CORSFilter.java</a></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cors/"> #cors </a>
+          
+            <a href="/tags/js/"> #js </a>
+          
+            <a href="/tags/jsonp/"> #jsonp </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/25/ubuntu-devenv-note/">Ubuntu环境配置速记</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/02/pentaho-cde/">Pentaho CDE生火指南</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="http://fyun.li/images/avatar.png" alt="fyunli" />
+          <p class="site-author-name">fyunli</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/fyunli" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/fyunli" target="_blank">twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/fyunli" target="_blank">weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://douban.com/people/fyun" target="_blank">douban</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、同源策略"><span class="nav-number">1.</span> <span class="nav-text">1、同源策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、跨域的方式"><span class="nav-number">2.</span> <span class="nav-text">2、跨域的方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、修改_document-domain_跨子域"><span class="nav-number">3.</span> <span class="nav-text">3、修改 document.domain 跨子域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、通过_jsonp_跨域"><span class="nav-number">4.</span> <span class="nav-text">4、通过 jsonp 跨域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、通过html5_window-postMessage_进行跨域"><span class="nav-number">5.</span> <span class="nav-text">5、通过html5 window.postMessage 进行跨域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、通过_CORS_进行跨域"><span class="nav-number">6.</span> <span class="nav-text">6、通过 CORS 进行跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1、CORS_的浏览器支持"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、CORS 的浏览器支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2、CORS_的服务器端配置"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、CORS 的服务器端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1_Apache"><span class="nav-number">6.2.1.</span> <span class="nav-text">6.2.1 Apache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2_Nginx"><span class="nav-number">6.2.2.</span> <span class="nav-text">6.2.2 Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3_ExpressJS"><span class="nav-number">6.2.3.</span> <span class="nav-text">6.2.3 ExpressJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-4_Tomcat"><span class="nav-number">6.2.4.</span> <span class="nav-text">6.2.4 Tomcat</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">fyunli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'fyunli';
+      var disqus_identifier = '2015/05/15/js-cross-domain-request/';
+      var disqus_url = 'http://fyun.li/2015/05/15/js-cross-domain-request/';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
+
+  
+</body>
+</html>

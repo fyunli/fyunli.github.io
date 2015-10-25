@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title><![CDATA[雲之彼岸]]></title>
+    <link>http://fyun.li/</link>
+    <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
+    <description></description>
+    <pubDate>Tue, 22 Sep 2015 02:03:12 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Ubuntu环境配置速记]]></title>
+      <link>http://fyun.li/2015/10/25/ubuntu-devenv-note/</link>
+      <guid>http://fyun.li/2015/10/25/ubuntu-devenv-note/</guid>
+      <pubDate>Sun, 25 Oct 2015 12:28:50 GMT</pubDate>
+      <description>
+      <![CDATA[<h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="三、安装_java">三、安装 java</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties&#10;sudo add-apt-repository ppa:webupd8team/java&#10;sudo apt-get update&#10;sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+<h1 id="四、安装_Tomcat">四、安装 Tomcat</h1><h2 id="1、创建_tomcat_用户">1、创建 tomcat 用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd tomcat&#10;sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat</span><br></pre></td></tr></table></figure>
+<h2 id="2、下载_tomcat_并解压">2、下载 tomcat 并解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt&#10;sudo wget http://www.apache.org/dist/tomcat/tomcat-8/v8.0.26/bin/apache-tomcat-8.0.26.tar.gz&#10;sudo tar -xvf apache-tomcat-8.0.26.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="3、修改_tomcat_目录权限">3、修改 tomcat 目录权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R tomcat:tomcat /opt/apache-tomcat-8.0.26</span><br></pre></td></tr></table></figure>
+<h2 id="4、设置环境变量">4、设置环境变量</h2><p>编辑 /etc/environment，在末尾添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=&#34;/usr/lib/jvm/java-8-oracle&#34;&#10;CATALINA_HOME=&#34;/opt/apache-tomcat-8.0.26&#34;</span><br></pre></td></tr></table></figure>
+<h2 id="5、测试安装结果">5、测试安装结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/apache-tomcat-8.0.26/bin/startup.sh</span><br></pre></td></tr></table></figure>
+<p>控制台输出以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Using CATALINA_BASE:   /opt/apache-tomcat-8.0.26&#10;Using CATALINA_HOME:   /opt/apache-tomcat-8.0.26&#10;Using CATALINA_TMPDIR: /opt/apache-tomcat-8.0.26/temp&#10;Using JRE_HOME:        /usr&#10;Using CLASSPATH:       /opt/apache-tomcat-8.0.26/bin/bootstrap.jar:/opt/apache-tomcat-8.0.26/bin/tomcat-juli.jar&#10;Tomcat started.</span><br></pre></td></tr></table></figure>
+<p>打开浏览器访问 <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a></p>
+<h1 id="五、开机启动_tomcat">五、开机启动 tomcat</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/init/tomcat.conf</span><br></pre></td></tr></table></figure>
+<p>内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">description &#34;Tomcat Server&#34;&#10;&#10;start on runlevel [2345]&#10;stop on runlevel [!2345]&#10;respawn&#10;respawn limit 10 5&#10;&#10;setuid tomcat&#10;setgid tomcat&#10;&#10;env JAVA_HOME=/usr/lib/jvm/java-8-oracle&#10;env CATALINA_HOME=/opt/apache-tomcat-8.0.26&#10;&#10;# Modify these options as needed&#10;env JAVA_OPTS=&#34;-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom&#34;&#10;env CATALINA_OPTS=&#34;-Xms512M -Xmx1024M -server -XX:+UseParallelGC&#34;&#10;&#10;exec $CATALINA_HOME/bin/catalina.sh run&#10;&#10;# cleanup temp directory after stop&#10;post-stop script&#10;    rm -rf $CATALINA_HOME/temp/*&#10;end script</span><br></pre></td></tr></table></figure>
+<p>重载配置并启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo initctl reload-configuration&#10;sudo initctl start tomcat</span><br></pre></td></tr></table></figure>
+<h1 id="六、启动多个_Tomcat_实例">六、启动多个 Tomcat 实例</h1><h2 id="1、建立新的_tomcat_实例目录_tomcat1，并复制必要的文件:">1、建立新的 tomcat 实例目录 tomcat1，并复制必要的文件:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /opt/tomcat-instance/tomcat1&#10;cd /opt/tomcat-instance/tomcat1&#10;sudo cp -r /opt/apache-tomcat-8.0.26/conf conf&#10;sudo cp -r /opt/apache-tomcat-8.0.26/webapps webapps&#10;sudo mkdir logs&#10;sudo mkdir temp</span><br></pre></td></tr></table></figure>
+<h2 id="2、修改_tomcat1_目录权限">2、修改 tomcat1 目录权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R tomcat:tomcat /opt/tomcat-instance/tomcat1</span><br></pre></td></tr></table></figure>
+<h2 id="3、修改端口设置">3、修改端口设置</h2><p>打开 server.xml 配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /opt/tomcat-instance/tomcat1/conf/server.xml</span><br></pre></td></tr></table></figure>
+<p>找到以下几行，修改对应的端口后，使之与其他的 server 端口不冲突：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;Server port=&#34;8005&#34; shutdown=&#34;SHUTDOWN&#34;&#62;&#10;...&#10;&#60;Connector port=&#34;8080&#34; protocol=&#34;HTTP/1.1&#34;&#10;               connectionTimeout=&#34;20000&#34;&#10;               redirectPort=&#34;8443&#34; /&#62;&#10;...&#10;&#60;Connector port=&#34;8009&#34; protocol=&#34;AJP/1.3&#34; redirectPort=&#34;8443&#34; /&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="4、编辑启动/停止脚本">4、编辑启动/停止脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi startup.sh</span><br></pre></td></tr></table></figure>
+<p>内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/sh&#10;export CATALINA_BASE=&#34;/opt/tomcat-instance/tomcat1&#34;&#10;exec &#34;/opt/apache-tomcat-8.0.26/bin/startup.sh&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi shutdown.sh</span><br></pre></td></tr></table></figure>
+<p>内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/sh&#10;export CATALINA_BASE=&#34;/opt/tomcat-instance/tomcat1&#34;&#10;exec &#34;/opt/apache-tomcat-8.0.26/bin/shutdown.sh&#34;</span><br></pre></td></tr></table></figure>
+<p>设置权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown tomcat/tomcat *.sh&#10;sudo chmod +x *.sh</span><br></pre></td></tr></table></figure>
+<h2 id="5、更多实例">5、更多实例</h2><p>需要建立更多实例，只需要复制 tomcat1 并修改对应的 server.xml 和启动脚本 CATALINA_BASE 设置。</p>
+<h1 id="七、安装_nginx">七、安装 nginx</h1><h2 id="1、使用_apt-get_安装_nginx">1、使用 apt-get 安装 nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<h2 id="2、配置_nginx_反向代理负载均衡_tomcat">2、配置 nginx 反向代理负载均衡 tomcat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upstream tomcat-server &#123;&#10;    server 127.0.0.1:8080 weight=10;&#10;    server 127.0.0.1:8081 weight=10;&#10;&#125;&#10;&#10;erver &#123;&#10;&#9;listen 80 default_server;&#10;&#9;listen [::]:80 default_server ipv6only=on;&#10;&#10;&#9;root /usr/share/nginx/html;&#10;&#9;index index.html index.htm;&#10;&#10;&#9;# Make site accessible from http://localhost/&#10;&#9;server_name localhost;&#10;&#10;&#9;location / &#123;&#10;&#9;&#9;proxy_pass http://tomcat-server;&#10;        proxy_set_header  X-Real-IP  $remote_addr;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="八、配置iptables开放指定的端口">八、配置iptables开放指定的端口</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20801;&#35768;&#26412;&#22320;&#22238;&#29615;&#25509;&#21475;(&#21363;&#36816;&#34892;&#26412;&#26426;&#35775;&#38382;&#26412;&#26426;)&#10;iptables -A INPUT -i lo -j ACCEPT&#10;# &#20801;&#35768;&#24050;&#24314;&#31435;&#30340;&#25110;&#30456;&#20851;&#36830;&#30340;&#36890;&#34892;&#10;iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT&#10;#&#20801;&#35768;&#25152;&#26377;&#26412;&#26426;&#21521;&#22806;&#30340;&#35775;&#38382;&#10;iptables -A OUTPUT -j ACCEPT&#10;# &#20801;&#35768;&#35775;&#38382;22&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 22 -j ACCEPT&#10;#&#20801;&#35768;&#35775;&#38382;80&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 80 -j ACCEPT&#10;#&#20801;&#35768;FTP&#26381;&#21153;&#30340;21&#21644;20&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -A INPUT -p tcp --dport 20 -j ACCEPT&#10;#&#22914;&#26524;&#26377;&#20854;&#20182;&#31471;&#21475;&#30340;&#35805;&#65292;&#35268;&#21017;&#20063;&#31867;&#20284;&#65292;&#31245;&#24494;&#20462;&#25913;&#19978;&#36848;&#35821;&#21477;&#23601;&#34892;&#10;#&#20801;&#35768;ping&#10;iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT&#10;#&#31105;&#27490;&#20854;&#20182;&#26410;&#20801;&#35768;&#30340;&#35268;&#21017;&#35775;&#38382;&#10;iptables -A INPUT -j REJECT  #&#65288;&#27880;&#24847;&#65306;&#22914;&#26524;22&#31471;&#21475;&#26410;&#21152;&#20837;&#20801;&#35768;&#35268;&#21017;&#65292;SSH&#38142;&#25509;&#20250;&#30452;&#25509;&#26029;&#24320;&#12290;&#65289;&#10;iptables -A FORWARD -j REJECT</span><br></pre></td></tr></table></figure>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/10/25/ubuntu-devenv-note/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[javascript 跨域问题小记]]></title>
+      <link>http://fyun.li/2015/05/15/js-cross-domain-request/</link>
+      <guid>http://fyun.li/2015/05/15/js-cross-domain-request/</guid>
+      <pubDate>Thu, 14 May 2015 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<h1 id="1、同源策略">1、同源策略</h1><p>同源策略是有 Netscape 提出的一个著名的安全策略，现在所有的支持 javascript 的浏览器都会使用这个策略。</p>
+<p>所谓同源是指主机名、协议、端口相同：</p>
+<ul>
+<li>相同的主机名</li>
+<li>相同的协议</li>
+<li>相同的端口</li>
+</ul>
+<p>三者必须同时满足，只要主机名、协议、端口三者其中之一不同，就为不同的源。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h1 id="1、同源策略">1、同源策略</h1><p>同源策略是有 Netscape 提出的一个著名的安全策略，现在所有的支持 javascript 的浏览器都会使用这个策略。</p>
+<p>所谓同源是指主机名、协议、端口相同：</p>
+<ul>
+<li>相同的主机名</li>
+<li>相同的协议</li>
+<li>相同的端口</li>
+</ul>
+<p>三者必须同时满足，只要主机名、协议、端口三者其中之一不同，就为不同的源。</p>
+<a id="more"></a>
+<p>同源策略限制了一个源中加载文本或者脚本与来自其他源中资源的交互方式，简而言之就是一个源上的 js 只能访问当前源的资源。</p>
+<p>同源策略以源为边界，把资源分隔开，从而保护用户的信息安全。</p>
+<h1 id="2、跨域的方式">2、跨域的方式</h1><p>那么，在如今微服务兴起的情况下，往往很多业务调用必须跨越同源限制。比如，某商城服务部署在 www.xmall.com，而其支付服务可能部署在 www.xpay.com，因此必须要有方式可以绕过同源策略这堵墙。</p>
+<p>常用的 js 跨域方式主要有：</p>
+<ul>
+<li>修改 document.domain 跨子域</li>
+<li>通过 jsonp 跨域</li>
+<li>通过 html5 的 window.postMessage 跨域</li>
+<li>通过 CORS 跨域</li>
+</ul>
+<p>另外，还可以通过 iframe + window.name 或者 iframe + window.location.hash 进行跨域。</p>
+<p>以下涉及示例均使用 <a href="http://www.aaa.com/a.html" target="_blank" rel="external">http://www.aaa.com/a.html</a> 跨域访问 <a href="http://www.bbb.com/b.html" target="_blank" rel="external">http://www.bbb.com/b.html</a> 的数据。</p>
+<h1 id="3、修改_document-domain_跨子域">3、修改 document.domain 跨子域</h1><p>www.aaa.com 和 pay.aaa.com 是不同域的，要使他们可以跨域访问，可以通过修改 document.domain 来实现。即在两个页面中都设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.domain = &#34;aaa.com&#34;;</span><br></pre></td></tr></table></figure>
+<p>这里有个限制就是，document.domain 只能向父域修改，也就是说 www.aaa.com 改为 aaa.com 是允许的，但 aaa.com 改为 www.abc.xyz 则是不被允许的。这也限制了修改 document.domain 方式只能用于跨子域访问。</p>
+<h1 id="4、通过_jsonp_跨域">4、通过 jsonp 跨域</h1><p>js 脚本的“源”与它存储的地址无关，而是取决于脚本被加载的页面。例如我们在 <a href="http://www.aaa.com/a.html" target="_blank" rel="external">http://www.aaa.com/a.html</a> 中引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script src=&#34;http://cdn.staticfile.org/jquery/1.11.1/jquery.min.js&#34;&#62;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+<p>那么脚本与 a.html 页面是同源的，也就是说，脚本的源是 <a href="http://www.aaa.com" target="_blank" rel="external">http://www.aaa.com</a>.</p>
+<p>PS: 除了 script, img, iframe, link 等都具有跨域加载资源的能力。</p>
+<p>jsonp 正是利用 script 标签没有跨域限制的特性，通过在 src 的 url 的参数上附加回调函数名字，然后服务器接收回调函数名字并返回一个包含数据的回调函数。</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script&#62;&#10;function callback(data) &#123;&#10;    alert(data.message);&#10;&#125;&#10;&#60;/script&#62;&#10;&#60;script src=&#34;http://www.bbb.com/b.html?callback=callback&#34;&#62;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+<p>我们只要服务器端 b.html 输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callback(&#123;&#34;message&#34;:&#34;test jsonp ok&#34;&#125;)</span><br></pre></td></tr></table></figure>
+<p>页面即会执行并弹出 “test jsonp ok”。</p>
+<p>jQuery 对此做了很好的支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;&#10;    url:&#39;http://www.bbb.com/b.html&#39;,&#10;    dataType:&#34;jsonp&#34;,&#10;    jsonp:&#34;callback&#34;,&#10;    success:function(data)&#123;&#10;        // callback logic&#10;    &#125;&#10;&#125;);&#10;&#10;// &#25110;&#32773;&#31616;&#21270;&#26041;&#24335;&#10;$.getJSON(&#34;http://www.bbb.com/b.html?callback=?&#34;, null, &#10;    function(data) &#123;&#10;        // callback logic&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong> <span style="color:red">需要特别强调的是，jsonp 方式只能用于 GET 方法！ </span></strong></p>
+<h1 id="5、通过html5_window-postMessage_进行跨域">5、通过html5 window.postMessage 进行跨域</h1><p>假设在a.html里嵌套个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;iframe src=&#34;http://www.bbbb.com/b.html&#34; frameborder=&#34;0&#34;&#62;&#60;/iframe&#62;</span><br></pre></td></tr></table></figure>
+<p>在这两个页面里互相通信</p>
+<p>a.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function() &#123;&#10;    window.addEventListener(&#34;message&#34;, function(e) &#123;&#10;        alert(e.data);&#10;    &#125;);&#10;&#10;    window.frames[0].postMessage(&#34;b data&#34;, &#34;http://www.b.com/b.html&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>b.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function() &#123;&#10;    window.addEventListener(&#34;message&#34;, function(e) &#123;&#10;        alert(e.data);&#10;    &#125;);&#10;    window.parent.postMessage(&#34;a data&#34;, &#34;http://www.a.com/a.html&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样打开 a.html 页面就先弹出 a data,再弹出 b data.</p>
+<h1 id="6、通过_CORS_进行跨域">6、通过 CORS 进行跨域</h1><p>CORS 是W3C XMLHttpRequest Level 2 里规定的一种跨域方式。CORS 规范请参考 <a href="http://www.w3.org/TR/cors/" target="_blank" rel="external">CORS 规范</a> </p>
+<p>CORS 旨在定义一种规范让浏览器在接收到从提供者获取的资源时能够正决定是否应该将此资源分发给消费者作进一步处理。CROS利用资源提供者的显式授权来决定目标资源是否应该与消费者共享。换句话说，浏览器需要得到提供者的授权之后才会将其提供的资源分发给消费者。那么，资源的提供者如何进行资源的授权，并将授权的结果告诉浏览器呢？</p>
+<p>一个 CORS 请求大致过程如下：</p>
+<p>（1）消费者发送一个 Origin 报头到提供者端：Origin: <a href="http://www.bbb.com；" target="_blank" rel="external">http://www.bbb.com；</a><br>（2）提供者发送一个 Access-Control-Allow-Origin 响应报头给消费者，如果值为 * 或 Origin 对应的站点，则表示同意共享资源给消费者，如果值为 null 或者不存在 Access-Control-Allow-Origin 报头，则表示不同意共享资源给消费者；<br>（3）浏览器根据提供者的响应报文判断是否允许消费者跨域访问到提供者源。</p>
+<p>CORS 是在支持这个规范的浏览器里，javascript 的写法和不跨域的 ajax 写法一模一样。</p>
+<h2 id="6-1、CORS_的浏览器支持">6.1、CORS 的浏览器支持</h2><p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1exdkvr5yw0j20se09ltby.jpg" alt="Cors Browser Support"></p>
+<h2 id="6-2、CORS_的服务器端配置">6.2、CORS 的服务器端配置</h2><h3 id="6-2-1_Apache">6.2.1 Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header set Access-Control-Allow-Origin &#34;*&#34;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-2_Nginx">6.2.2 Nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#10;# Wide-open CORS config for nginx&#10;#&#10;location / &#123;&#10;     if ($request_method = &#39;OPTIONS&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        #&#10;        # Om nom nom cookies&#10;        #&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        #&#10;        # Custom headers and headers various browsers *should* be OK with but aren&#39;t&#10;        #&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;        #&#10;        # Tell client that this pre-flight info is valid for 20 days&#10;        #&#10;        add_header &#39;Access-Control-Max-Age&#39; 1728000;&#10;        add_header &#39;Content-Type&#39; &#39;text/plain charset=UTF-8&#39;;&#10;        add_header &#39;Content-Length&#39; 0;&#10;        return 204;&#10;     &#125;&#10;     if ($request_method = &#39;POST&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;     &#125;&#10;     if ($request_method = &#39;GET&#39;) &#123;&#10;        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;&#10;        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;&#10;        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;&#10;        add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#10;     &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-3_ExpressJS">6.2.3 ExpressJS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(function(req, res, next) &#123;&#10;  res.header(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);&#10;  res.header(&#34;Access-Control-Allow-Headers&#34;, &#34;Origin, X-Requested-With, Content-Type, Accept&#34;);&#10;  next();&#10;&#125;);&#10;&#10;app.get(&#39;/&#39;, function(req, res, next) &#123;&#10;  // Handle the get for this route&#10;&#125;);&#10;&#10;app.post(&#39;/&#39;, function(req, res, next) &#123;&#10; // Handle the post for this route&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-4_Tomcat">6.2.4 Tomcat</h3><p>Tomcat 7.0.41 版本之后提供了一个 CorsFilter 以支持 CORS，详情猛击</p>
+<p><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#CORS_Filter" target="_blank" rel="external">http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#CORS_Filter</a></p>
+<p>下面是一段最简单的 CORS 配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;filter&#62;&#10;  &#60;filter-name&#62;CorsFilter&#60;/filter-name&#62;&#10;  &#60;filter-class&#62;org.apache.catalina.filters.CorsFilter&#60;/filter-class&#62;&#10;&#60;/filter&#62;&#10;&#60;filter-mapping&#62;&#10;  &#60;filter-name&#62;CorsFilter&#60;/filter-name&#62;&#10;  &#60;url-pattern&#62;/*&#60;/url-pattern&#62;&#10;&#60;/filter-mapping&#62;</span><br></pre></td></tr></table></figure>
+<p>如果希望自己实现一个 CORS 过滤器，可参考 tomcat 的实现或者下面这个链接：</p>
+<p><a href="https://github.com/eBay/cors-filter/blob/master/src/main/java/org/ebaysf/web/cors/CORSFilter.java" target="_blank" rel="external">https://github.com/eBay/cors-filter/blob/master/src/main/java/org/ebaysf/web/cors/CORSFilter.java</a></p>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/05/15/js-cross-domain-request/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Pentaho CDE生火指南]]></title>
+      <link>http://fyun.li/2015/05/02/pentaho-cde/</link>
+      <guid>http://fyun.li/2015/05/02/pentaho-cde/</guid>
+      <pubDate>Sat, 02 May 2015 09:39:59 GMT</pubDate>
+      <description>
+      <![CDATA[<h2 id="1、安装CDA、CDE插件">1、安装CDA、CDE插件</h2><p>登录BI Server后菜单Home - Marketplace</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-1.png" alt="MarketMenu"></p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h2 id="1、安装CDA、CDE插件">1、安装CDA、CDE插件</h2><p>登录BI Server后菜单Home - Marketplace</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-1.png" alt="MarketMenu"></p>
+<a id="more"></a>
+<p>连接server后，显示可安装的插件，选择安装CDA, CDE插件：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-2.png" alt="Marketplace"></p>
+<p>PS：最好是安装一个插件就重启一次BI Server，不然控制台有可能报错，：）</p>
+<h2 id="2、认识CDE">2、认识CDE</h2><p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-3.png" alt="CDE"></p>
+<p>右上角三个图标分别是布局、组件和数据源</p>
+<h2 id="3、创建Dashboard">3、创建Dashboard</h2><h3 id="3-1_Layout">3.1 Layout</h3><p>点击Layout图标，根据布局要求新建布局，如下图：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-4.png" alt="CDE Layout"></p>
+<p>CDE默认使用blueprint布局，blueprint采用24列网格化布局，如图panel2, panel3各占50%宽度，则设置span size均为12。</p>
+<h3 id="3-2_设置数据源">3.2 设置数据源</h3><p>点击Datasource图标，从左侧选择合适的数据源并填写参数和Query，下图以JDBC连接为例：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-5.png" alt="CDE Datasource"></p>
+<p>生产环境SQL连接建议采用JNDI。</p>
+<h3 id="3-3_创建组件">3.3 创建组件</h3><p>点击Components图标，点击左侧可用组件创建。</p>
+<p>下图为一个折线图组件设置：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-6.png" alt="Line Chart"></p>
+<p>设置的属性主要包括</p>
+<ul>
+<li>Name, Title, Width, Height</li>
+<li>Datasource: 使用的数据源，对应Datasource的定义名称</li>
+<li>HtmlObject：显示位置，对应Layout的区域名称</li>
+</ul>
+<p>以下分别为柱状图、饼图设置：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-7.png" alt="Bar Chart"></p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-8.png" alt="Pie Chart"></p>
+<p>驾驶舱稍复杂一些，需要先使用一个Query Componeng输出值到变量，然后驾驶舱组件引用该参数，如下图：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-9.png" alt="Query Component"></p>
+<p>注意这里应将Query Component的Priority设置为小于CGG Dial Chart的优先级值（默认5，修改为1或2即可）</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-10.png" alt="Dial Chart"></p>
+<p>如图所示：</p>
+<ul>
+<li>Intervals Arrays：设置驾驶舱值域范围</li>
+<li>Range Color Array: 设置每段对应的配色</li>
+<li>Parameter: 引用Query Component的数据变量设置驾驶舱指针值</li>
+</ul>
+<h2 id="4_预览Dashboard">4 预览Dashboard</h2><p>点击右上角预览图标：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-11.png" alt="Preview"></p>
+<h2 id="5_TroubleShooting">5 TroubleShooting</h2><ul>
+<li>CDE显示中文乱码</li>
+</ul>
+<p>修改Tomcat启动参数，将file.encoding的值由GBK改为utf-8。</p>
+<p>具体方法在Tomcat的catalina.bat(linux 为catalina.sh)的JAVA_OPTS中加入-Dfile.encoding 设置为</p>
+<pre><code>set JAV<span class="built_in">A_OPTS</span>=<span class="var_expand">%JAVA_OPTS%</span> -Dfile.encoding=UTF-<span class="number">8</span>
+</code></pre>]]></content:encoded>
+      <comments>http://fyun.li/2015/05/02/pentaho-cde/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Pentaho Report Designer生火指南]]></title>
+      <link>http://fyun.li/2015/05/02/pentaho-report-designer/</link>
+      <guid>http://fyun.li/2015/05/02/pentaho-report-designer/</guid>
+      <pubDate>Sat, 02 May 2015 09:31:54 GMT</pubDate>
+      <description>
+      <![CDATA[<h2 id="一、认识Pentaho_Report_Designer">一、认识Pentaho Report Designer</h2><p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-1.png" alt="Pentaho Report Designer"></p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h2 id="一、认识Pentaho_Report_Designer">一、认识Pentaho Report Designer</h2><p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-1.png" alt="Pentaho Report Designer"></p>
+<a id="more"></a>
+<h2 id="二、设计第一个报表">二、设计第一个报表</h2><h3 id="1、添加数据源">1、添加数据源</h3><p>1、点击右侧Data选项卡添加数据源：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-2.png" alt=""></p>
+<p>2、在打开的界面中创建一个新的连接：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-3.png" alt=""></p>
+<p>3、然后新建查询</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-4.png" alt=""></p>
+<p>点击Preview可预览数据</p>
+<h3 id="2、设计报表格式">2、设计报表格式</h3><h4 id="2-1_逐行数据显示">2.1 逐行数据显示</h4><p>将数据项拖动到Detail Body区块即可</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-5.png" alt=""></p>
+<h4 id="2-2_增加一个图表">2.2 增加一个图表</h4><p>1、从左侧工具栏将图表拖动到Report Header区域</p>
+<p>2、双击图表进去设置属性</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-6.png" alt=""></p>
+<h4 id="2-3_分组">2.3 分组</h4><p>右侧Structure选项卡右键点击Master Report，选择Add Group即可。</p>
+<h3 id="3、预览报表">3、预览报表</h3><p>点击预览设计区左上角预览图标进行预览：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-7.png" alt=""></p>
+<h2 id="三、为报表添加参数">三、为报表添加参数</h2><ul>
+<li>右侧Data选项卡下方Parameters - Add Parameter</li>
+</ul>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-8.png" alt=""></p>
+<ul>
+<li>打开的界面定义参数： </li>
+</ul>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-9.png" alt=""></p>
+<ul>
+<li>数据源中引用参数</li>
+</ul>
+<p>使用${param}格式嵌入Query中即可，如定义参数名称为category，则类似Query如下</p>
+<pre><code><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> product <span class="keyword">where</span> catagory = ${<span class="keyword">category</span>}</span>
+</code></pre><h2 id="四、函数与表达式">四、函数与表达式</h2><p>右侧Data选项卡Functions - Add Function</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-10.png" alt=""></p>
+<p>选择内置的函数，同行选择Running函数做一些聚合计算。</p>
+<p>然后点击新建的函数，在下方属性中定义名称及表达式：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-11.png" alt=""></p>
+<h2 id="五、发布报表">五、发布报表</h2><p>菜单选择File - Publish</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-12.png" alt=""></p>
+<p>然后输入Pentaho BI地址和用户名、密码：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-13.png" alt=""></p>
+<p>然后填写发布名称、路径等：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-14.png" alt=""></p>
+<p>点击”OK“等待发布完成。</p>
+<p>发布完成后即可在BI Server上浏览报表：</p>
+<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-15.png" alt=""></p>
+<h2 id="六、项目中引用报表">六、项目中引用报表</h2><ol>
+<li>使用Java API调用Pentaho Report Engine直接渲染输出</li>
+</ol>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">try &#123;&#10;&#9;URL urlToReport = new URL(&#34;file:&#34; + request.getServletContext().getRealPath(&#34;WEB-INF/report/&#34; + reportFile));&#10;&#10;&#9;ResourceManager manager = new ResourceManager();&#10;&#9;manager.registerDefaults();&#10;&#9;Resource res = manager.createDirectly(urlToReport, MasterReport.class);&#10;&#9;MasterReport report = (MasterReport) res.getResource();&#10;&#9;if (MapUtils.isNotEmpty(params)) &#123;&#10;&#9;&#9;for (String key : params.keySet()) &#123;&#10;&#9;&#9;&#9;report.getParameterValues().put(key, params.get(key));&#10;&#9;&#9;&#125;&#10;&#9;&#125;&#10;&#10;&#9;if (&#34;pdf&#34;.equalsIgnoreCase(rendererType)) &#123;&#10;&#9;&#9;response.setHeader(&#34;Content-disposition&#34;, &#34;filename=&#34; + System.currentTimeMillis() + &#34;.pdf&#34;);&#10;&#9;&#9;response.setContentType(&#34;application/pdf&#34;);&#10;&#9;&#9;PdfReportUtil.createPDF(report, response.getOutputStream());&#10;&#9;&#125; else &#123;&#10;&#9;&#9;response.getWriter().write(&#34;&#19981;&#25903;&#25345;&#30340;&#25253;&#34920;&#26684;&#24335;&#65281;&#34;);&#10;&#9;&#125;&#10;&#125; catch (Exception e) &#123;&#10;&#9;try &#123;&#10;&#9;&#9;e.printStackTrace();&#10;&#9;&#9;response.getWriter().write(&#34;&#25253;&#34920;&#29983;&#25104;&#22833;&#36133;&#65281;&#34;);&#10;&#9;&#125; catch (IOException e1) &#123;&#10;&#9;&#9;e1.printStackTrace();&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过BI Server的URL进行嵌入</li>
+</ol>
+<p>URL格式如下：</p>
+<pre><code><span class="symbol">http:</span>/<span class="regexp">/10.142.80.231:8080/pentaho</span><span class="regexp">/api/repos</span><span class="regexp">/%3Ademo%3Abtopic2.prpt/report</span>
+</code></pre><h2 id="七、TroubleShooting">七、TroubleShooting</h2><ul>
+<li>PDF格式中文乱码问题</li>
+</ul>
+<p>对中文元素使用设置为中文字体，如宋体等。</p>
+<ul>
+<li>引用Report地址，Pentaho BI Server弹出框要求输入用户名，密码</li>
+</ul>
+<p>修改pentaho-solutions/system/applicationContext-spring-context.xml，在filterChainProxy中api, plugin对应增加requestParameterProcessingFilter。修改后如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;bean id=&#34;filterChainProxy&#34; class=&#34;org.springframework.security.util.FilterChainProxy&#34;&#62;&#10;  &#60;property name=&#34;filterInvocationDefinitionSource&#34;&#62;&#10;    &#60;value&#62;&#10;      &#60;![CDATA[CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON&#10;      PATTERN_TYPE_APACHE_ANT&#10;      /webservices/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /api/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /plugin/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /**=securityContextHolderAwareRequestFilter,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,httpSessionReuseDetectionFilter,logoutFilter,authenticationProcessingFilter,basicProcessingFilter,requestParameterProcessingFilter,requestParameterProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor]]&#62;&#10;    &#60;/value&#62;&#10;  &#60;/property&#62;&#10;&#60;/bean&#62;</span><br></pre></td></tr></table></figure>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/05/02/pentaho-report-designer/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Pentaho BI Server 5.1生火指南]]></title>
+      <link>http://fyun.li/2015/05/02/pentaho-bi-server/</link>
+      <guid>http://fyun.li/2015/05/02/pentaho-bi-server/</guid>
+      <pubDate>Sat, 02 May 2015 08:58:14 GMT</pubDate>
+      <description>
+      <![CDATA[<h2 id="一、BI_SERVER安装">一、BI SERVER安装</h2><ol>
+<li><p>安装JDK 1.6+</p>
+</li>
+<li><p>解压biserver-ce-5.1.0.0-752</p>
+</li>
+<li><p>启动start-pentaho.bat</p>
+</li>
+<li><p>访问BI SERVER</p>
+<p> 启动界面出现Pentaho BI平台服务器就绪后，浏览器打开</p>
+<p> <a href="http://localhost:8080/pentaho">http://localhost:8080/pentaho</a></p>
+<p> <img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-server.png" alt="Pentaho BI Server"></p>
+</li>
+</ol>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h2 id="一、BI_SERVER安装">一、BI SERVER安装</h2><ol>
+<li><p>安装JDK 1.6+</p>
+</li>
+<li><p>解压biserver-ce-5.1.0.0-752</p>
+</li>
+<li><p>启动start-pentaho.bat</p>
+</li>
+<li><p>访问BI SERVER</p>
+<p> 启动界面出现Pentaho BI平台服务器就绪后，浏览器打开</p>
+<p> <a href="http://localhost:8080/pentaho" target="_blank" rel="external">http://localhost:8080/pentaho</a></p>
+<p> <img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-server.png" alt="Pentaho BI Server"></p>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="二、_迁移资料库到ORACLE">二、 迁移资料库到ORACLE</h2><p>Pentaho bi server默认资料库存放在HSQL数据库中，对于小型应用可使用默认配置，对于企业应用则建议迁移到MYSQL, ORACLE等数据库。</p>
+<p>PS: 以下文件目录以biserver-ce作为起始目录。</p>
+<h3 id="1、创建数据库">1、创建数据库</h3><ol>
+<li><p>新建ORACLE数据库，假设为pentaho</p>
+</li>
+<li><p>使用biserver-ce\data\oracle10g目录内的sql文件创建表空间、用户名及数据表</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus sys/password@pentaho as sysdba;&#10;START create_jcr_ora;&#10;&#10;conn sys/password as sysdba;&#10;START create_quartz_ora;&#10;&#10;conn sys/password as sysdba;&#10;START create_repository_ora</span><br></pre></td></tr></table></figure>
+<h3 id="2、将Oracle_JDBC驱动ojdbc6-11-2-0-3-jar_Copy到tomcat/lib目录">2、将Oracle JDBC驱动ojdbc6-11.2.0.3.jar Copy到tomcat/lib目录</h3><h3 id="3、修改配置文件">3、修改配置文件</h3><h4 id="3-1_配置Quartz">3.1 配置Quartz</h4><p>修改pentaho-solutions\system\quartz\quartz.properties</p>
+<p>将原有内容：</p>
+<pre><code>org<span class="class">.quartz</span><span class="class">.jobStore</span><span class="class">.driverDelegateClass</span> = org<span class="class">.quartz</span><span class="class">.impl</span><span class="class">.jdbcjobstore</span><span class="class">.PostgreSQLDelegate</span>
+</code></pre><p>替换成：</p>
+<pre><code>org<span class="class">.quartz</span><span class="class">.jobStore</span><span class="class">.driverDelegateClass</span> = org<span class="class">.quartz</span><span class="class">.impl</span><span class="class">.jdbcjobstore</span><span class="class">.oracle</span><span class="class">.OracleDelegate</span>
+</code></pre><h4 id="3-2_配置Hibernate">3.2 配置Hibernate</h4><h5 id="3-2-1_修改pentaho-solutions\system\applicationContext-spring-security-hibernate-properties">3.2.1 修改pentaho-solutions\system\applicationContext-spring-security-hibernate.properties</h5><p>将原有内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=org.hsqldb.jdbcDriver&#10;jdbc.url=jdbc:hsqldb:hsql://localhost:9001/hibernate&#10;jdbc.username=hibuser&#10;jdbc.password=password&#10;hibernate.dialect=org.hibernate.dialect.HSQLDialect</span><br></pre></td></tr></table></figure>
+<p>替换成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=oracle.jdbc.OracleDriver&#10;jdbc.url=jdbc:oracle:thin:@127.0.0.1:1521:PENTAHO&#10;jdbc.username=hibuser&#10;jdbc.password=password&#10;hibernate.dialect=org.hibernate.dialect.Oracle10gDialect</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-2_修改pentaho-solutions\system\hibernate\hibernate-settings-xml">3.2.2 修改pentaho-solutions\system\hibernate\hibernate-settings.xml</h5><p>将原有内容：</p>
+<pre><code>&lt;config-file&gt;system/hibernate/mysql5<span class="class">.hibernate</span><span class="class">.cfg</span><span class="class">.xml</span>&lt;/config-file&gt;
+</code></pre><p>替换成：</p>
+<pre><code>&lt;config-file&gt;system/hibernate/oracle10g<span class="class">.hibernate</span><span class="class">.cfg</span><span class="class">.xml</span>&lt;/config-file&gt;
+</code></pre><h5 id="3-2-3_修改pentaho-solutions\system\hibernate\oracle10g-hibernate-cfg-xml">3.2.3 修改pentaho-solutions\system\hibernate\oracle10g.hibernate.cfg.xml</h5><p>修改JDBC连接参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&#62;&#10;&#60;!DOCTYPE hibernate-configuration&#10;  PUBLIC &#34;-//Hibernate/Hibernate Configuration DTD//EN&#34;&#10;  &#34;http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd&#34;&#62;&#10;&#60;hibernate-configuration&#62;&#10;  &#60;session-factory&#62;&#10;  &#10;  &#9;&#60;property name=&#34;cache.provider_class&#34;&#62;net.sf.ehcache.hibernate.SingletonEhCacheProvider&#60;/property&#62;&#10;&#10;    &#60;property name=&#34;hibernate.generate_statistics&#34;&#62;true&#60;/property&#62;&#10;    &#60;property name=&#34;hibernate.cache.use_query_cache&#34;&#62;true&#60;/property&#62;&#10;&#10;    &#60;!--  Oracle 10g Configuration --&#62;&#10;    &#60;property name=&#34;connection.driver_class&#34;&#62;oracle.jdbc.OracleDriver&#60;/property&#62;&#10;    &#60;property name=&#34;connection.url&#34;&#62;jdbc:oracle:thin:@127.0.0.1:1521:PENTAHO&#60;/property&#62;&#10;    &#60;property name=&#34;dialect&#34;&#62;org.hibernate.dialect.Oracle10gDialect&#60;/property&#62;&#10;    &#60;property name=&#34;connection.username&#34;&#62;hibuser&#60;/property&#62;&#10;    &#60;property name=&#34;connection.password&#34;&#62;password&#60;/property&#62;&#10;    &#60;property name=&#34;connection.pool_size&#34;&#62;10&#60;/property&#62;&#10;    &#60;property name=&#34;show_sql&#34;&#62;false&#60;/property&#62;&#10;    &#60;property name=&#34;hibernate.jdbc.use_streams_for_binary&#34;&#62;true&#60;/property&#62;&#10;    &#60;!-- replaces DefinitionVersionManager --&#62;&#10;    &#60;property name=&#34;hibernate.hbm2ddl.auto&#34;&#62;update&#60;/property&#62;&#10;    &#60;!-- load resource from classpath --&#62;&#10;    &#60;mapping resource=&#34;hibernate/oracle10g.hbm.xml&#34; /&#62;&#10;  &#60;/session-factory&#62;&#10;&#60;/hibernate-configuration&#62;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3_替换默认Audit_Log">3.3 替换默认Audit Log</h4><p>用pentaho-solutions/system/dialects/oracle10g/audit_sql.xml 替换 pentaho-solutions/system/audit_sql.xml</p>
+<h4 id="3-4_配置JackRabbit">3.4 配置JackRabbit</h4><p>修改pentaho-solutions\system\jackrabbit\repository.xml</p>
+<p>将</p>
+<p>FileSystem、DataStore</p>
+<p>Workspace\FileSystem、Workspace\PersistenceManager</p>
+<p>Versioning\FileSystem、Versioning\PersistenceManager</p>
+<p>几节的配置参数对应修改为Oracle，并修改tablespace原值JACKRABBIT为pentaho_tablespace</p>
+<h4 id="3-5_修改JNDI">3.5 修改JNDI</h4><h4 id="3-5-1_tomcat\webapps\pentaho\META-INF\context-xml">3.5.1 tomcat\webapps\pentaho\META-INF\context.xml</h4><p>将原有内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&#62;&#10;&#60;Context path=&#34;/pentaho&#34; docbase=&#34;webapps/pentaho/&#34;&#62;&#10;&#9;&#60;Resource name=&#34;jdbc/Hibernate&#34; auth=&#34;Container&#34; type=&#34;javax.sql.DataSource&#34;&#10;&#9;&#9;factory=&#34;org.apache.commons.dbcp.BasicDataSourceFactory&#34; maxActive=&#34;20&#34; maxIdle=&#34;5&#34;&#10;&#9;&#9;maxWait=&#34;10000&#34; username=&#34;hibuser&#34; password=&#34;password&#34;&#10;&#9;&#9;driverClassName=&#34;org.hsqldb.jdbcDriver&#34; url=&#34;jdbc:hsqldb:hsql://localhost/hibernate&#34;&#10;&#9;&#9;validationQuery=&#34;select count(*) from INFORMATION_SCHEMA.SYSTEM_SEQUENCES&#34; /&#62;&#10;&#9;&#9;&#10;&#9;&#60;Resource name=&#34;jdbc/Quartz&#34; auth=&#34;Container&#34; type=&#34;javax.sql.DataSource&#34;&#10;&#9;&#9;factory=&#34;org.apache.commons.dbcp.BasicDataSourceFactory&#34; maxActive=&#34;20&#34; maxIdle=&#34;5&#34;&#10;&#9;&#9;maxWait=&#34;10000&#34; username=&#34;pentaho_user&#34; password=&#34;password&#34;&#10;&#9;&#9;driverClassName=&#34;org.hsqldb.jdbcDriver&#34; url=&#34;jdbc:hsqldb:hsql://localhost/quartz&#34;&#10;&#9;&#9;validationQuery=&#34;select count(*) from INFORMATION_SCHEMA.SYSTEM_SEQUENCES&#34;/&#62;&#10;&#10;&#60;/Context&#62;</span><br></pre></td></tr></table></figure>
+<p>替换成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&#62;&#10;&#60;Context path=&#34;/pentaho&#34; docbase=&#34;webapps/pentaho/&#34;&#62;&#10;&#9;&#60;Resource name=&#34;jdbc/Hibernate&#34; auth=&#34;Container&#34; type=&#34;javax.sql.DataSource&#34;&#10;&#9;&#9;factory=&#34;org.apache.commons.dbcp.BasicDataSourceFactory&#34; maxActive=&#34;20&#34; maxIdle=&#34;5&#34;&#10;&#9;&#9;maxWait=&#34;10000&#34; username=&#34;hibuser&#34; password=&#34;password&#34;&#10;&#9;&#9;driverClassName=&#34;oracle.jdbc.OracleDriver&#34; url=&#34;jdbc:oracle:thin:@127.0.0.1:1521:PENTAHO&#34;&#10;&#9;&#9;validationQuery=&#34;select 1 from dual&#34; /&#62;&#10;&#9;&#9;&#10;&#9;&#60;Resource name=&#34;jdbc/Quartz&#34; auth=&#34;Container&#34; type=&#34;javax.sql.DataSource&#34;&#10;&#9;&#9;factory=&#34;org.apache.commons.dbcp.BasicDataSourceFactory&#34; maxActive=&#34;20&#34; maxIdle=&#34;5&#34;&#10;&#9;&#9;maxWait=&#34;10000&#34; username=&#34;quartz&#34; password=&#34;password&#34;&#10;&#9;&#9;driverClassName=&#34;oracle.jdbc.OracleDriver&#34; url=&#34;jdbc:oracle:thin:@127.0.0.1:1521:PENTAHO&#34;&#10;&#9;&#9;validationQuery=&#34;select 1 from dual&#34;/&#62;&#10;&#10;&#60;/Context&#62;</span><br></pre></td></tr></table></figure>
+<h5 id="3-5-2_删除tomcat\conf\Catalina\localhost\pentaho-xml">3.5.2 删除tomcat\conf\Catalina\localhost\pentaho.xml</h5><h4 id="3-6_修改tomcat\webapps\pentaho\WEB-INF\web-xml，停止HSQL启动">3.6 修改tomcat\webapps\pentaho\WEB-INF\web.xml，停止HSQL启动</h4><p>注释掉以下两段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!-- [BEGIN HSQLDB DATABASES] --&#62;&#10;&#60;context-param&#62;&#10;  &#60;param-name&#62;hsqldb-databases&#60;/param-name&#62;&#10;  &#60;param-value&#62;sampledata@../../data/hsqldb/sampledata,hibernate@../../data/hsqldb/hibernate,quartz@../../data/hsqldb/quartz&#60;/param-value&#62;&#10;&#60;/context-param&#62;&#10;&#60;!-- [END HSQLDB DATABASES] --&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!-- [BEGIN HSQLDB STARTER] --&#62;&#10;&#60;listener&#62;&#10;  &#60;listener-class&#62;org.pentaho.platform.web.http.context.HsqldbStartupListener&#60;/listener-class&#62;&#10;&#60;/listener&#62;&#10;&#60;!-- [END HSQLDB STARTER] --&#62;</span><br></pre></td></tr></table></figure>
+<h4 id="3-7_其他">3.7 其他</h4><p>迁移到其他数据库步骤类似，详情可见</p>
+<p><a href="http://infocenter.pentaho.com/help/index.jsp?topic=%2Finstall_ziptar%2Ftask_prepare_rdbms_repository.html" target="_blank" rel="external">http://infocenter.pentaho.com/help/index.jsp?topic=%2Finstall_ziptar%2Ftask_prepare_rdbms_repository.html</a></p>
+<p><a href="http://infocenter.pentaho.com/help/index.jsp?topic=%2Finstall_manual%2Ftask_configure_rdbms_repository.html" target="_blank" rel="external">http://infocenter.pentaho.com/help/index.jsp?topic=%2Finstall_manual%2Ftask_configure_rdbms_repository.html</a>）</p>
+<h3 id="4、处理bi-server自带实例库">4、处理bi-server自带实例库</h3><p>Pentaho BI Server自带实例库数据存放在HSQL中，资料库转移后启动Pentaho BI Server因找不到数据会报错，只需删除实例库即可：</p>
+<ul>
+<li>删除pentaho_solutions\system\default_content内容</li>
+<li>删除pentaho_solutions\system\jackrabbit\repository目录</li>
+</ul>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/05/02/pentaho-bi-server/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[jQuery Plugin Scaffold]]></title>
+      <link>http://fyun.li/2012/04/27/jquery-plugin-scaffold/</link>
+      <guid>http://fyun.li/2012/04/27/jquery-plugin-scaffold/</guid>
+      <pubDate>Fri, 27 Apr 2012 06:21:13 GMT</pubDate>
+      <description>
+      <![CDATA[<p><strong>The First One:</strong></p>
+<pre lang="javascript">(function($) {
+    $.fn.joey = function(options) {
+        debug(this);
+
+        var opts = $.extend({}, $.fn.joey.defaults, options);
+
+        return this.each(function() {
+            $this = $(this);
+
+            // build element specific options
+            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+
+            // do something
+        });
+    };
+
+    // private function for debugging
+    function debug($obj) {
+        if (window.console &amp;&amp; window.console.log)
+            window.console.log('joey selection count: ' + $obj.size());
+    }
+    ;
+
+    // plugin defaults
+    $.fn.joey.defaults = {
+        // some options
+    };
+
+})(jQuery);</pre>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p><strong>The First One:</strong></p>
+<pre lang="javascript">(function($) {
+    $.fn.joey = function(options) {
+        debug(this);
+
+        var opts = $.extend({}, $.fn.joey.defaults, options);
+
+        return this.each(function() {
+            $this = $(this);
+
+            // build element specific options
+            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+
+            // do something
+        });
+    };
+
+    // private function for debugging
+    function debug($obj) {
+        if (window.console &amp;&amp; window.console.log)
+            window.console.log('joey selection count: ' + $obj.size());
+    }
+    ;
+
+    // plugin defaults
+    $.fn.joey.defaults = {
+        // some options
+    };
+
+})(jQuery);</pre>
+
+<a id="more"></a>
+<p><strong>The Other One:</strong></p>
+<pre lang="javascript">;(function($) {
+    $.fn.theplugin = function(options) {
+        debug(this);
+
+        var opts = $.extend({}, $.fn.theplugin.defaults, options);
+
+        if (this.length &gt; 1) {
+            this.each(function() {
+                $(this).theplugin(options)
+            });
+            return this;
+        }
+
+        this.initialize = function() {
+            $this = $(this);
+
+            // build element specific options
+            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+
+            // do something
+
+            return this;
+        };
+
+        // public function
+        this.foo = function() {
+            // do someting
+        }
+
+        // private fucntion
+        function debug($obj) {
+            if (window.console &amp;&amp; window.console.log)
+                window.console.log('theplugin selection count: ' + $obj.size());
+        }
+        ;
+
+        // plugin defaults
+        $.fn.theplugin.defaults = {
+            // options
+        };
+
+        return this.initialize();
+    }
+})(jQuery);</pre>]]></content:encoded>
+      <comments>http://fyun.li/2012/04/27/jquery-plugin-scaffold/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Macbook Pro精简安装记事]]></title>
+      <link>http://fyun.li/2011/06/06/macbook-pro-debut/</link>
+      <guid>http://fyun.li/2011/06/06/macbook-pro-debut/</guid>
+      <pubDate>Mon, 06 Jun 2011 04:49:15 GMT</pubDate>
+      <description>
+      <![CDATA[<p>进入微博时代，我的惰性越发泛滥，别说不写博客，几乎瞄都没瞄上两眼。这次借着MACBOOK PRO的新鲜劲儿涂鸦两笔，假装是应<a href="http://weibo.com/melthaw">@<em>dz</em>菠菜_</a>的要求，其实是秀秀装逼感。</p>
+<p>话说我上一个本子是T60 2007-FA6，港版的水货本，用到现在已经4岁了，跑起WIN7来跟个破车似地，尤其是动不动就会停顿住那么几十秒抗议我对它的摧残，即使我将内存奢侈地增加到了3G也于事无补。所以，我趁着有预算赶紧折腾着换个新本，基本上是在THINKPAD RW3和MBP MC721ZP之间选择，THINKPAD新款的T420那悲剧性的16：9屏幕和可耻的多点触控板让我毫无犹豫地把他放弃了，而MBP是多么的标致得适合装逼，虽然我加配后MBP要15400HKD，而水THINKPAD只要8200RMB，但是尼玛的MBP是行货，有木有！！！</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>进入微博时代，我的惰性越发泛滥，别说不写博客，几乎瞄都没瞄上两眼。这次借着MACBOOK PRO的新鲜劲儿涂鸦两笔，假装是应<a href="http://weibo.com/melthaw" target="_blank" rel="external">@<em>dz</em>菠菜_</a>的要求，其实是秀秀装逼感。</p>
+<p>话说我上一个本子是T60 2007-FA6，港版的水货本，用到现在已经4岁了，跑起WIN7来跟个破车似地，尤其是动不动就会停顿住那么几十秒抗议我对它的摧残，即使我将内存奢侈地增加到了3G也于事无补。所以，我趁着有预算赶紧折腾着换个新本，基本上是在THINKPAD RW3和MBP MC721ZP之间选择，THINKPAD新款的T420那悲剧性的16：9屏幕和可耻的多点触控板让我毫无犹豫地把他放弃了，而MBP是多么的标致得适合装逼，虽然我加配后MBP要15400HKD，而水THINKPAD只要8200RMB，但是尼玛的MBP是行货，有木有！！！</p>
+<a id="more"></a>
+<p>取回本子后真的有些爱不释手，绝对标致，多点触控板更是大爱，基本上可以抛弃鼠标愉快地完成一切操作了，操作细节我就不说，嘿嘿。因此，我也就放弃了再配一个Magic Mouse的念想，完全没有必要，顶多继续偶尔用下我那个灵敏度欠奉，时不时还掉线的罗技M555b就行了。</p>
+<p>开机初始化后自然是配置网络，配置VPN（我发誓我不经常翻墙的，体力不好），安装除IE外的各系浏览器，安装输入法——我选择的是FUN INPUT TOY。</p>
+<p>然后一顿狂找各种软件，MAC APP STORE的收费软件比IOS的要贵不少，看着都肉疼（我为自己说出这话小小地内疚一下），所以我只购买了不超过3款的价格在5刀以下的软件，其它的都是免费的或者破解的（再鄙视一下自己）。</p>
+<p>以下是软件列表，有比我更白痴的可以参考：</p>
+<p>aMule：电驴，你懂的；</p>
+<p>Brew：MAC的apt-get，免费；</p>
+<p>FileZilla：FTP客户端，为什么选它，因为它免费；</p>
+<p>uTorrent：BT客户端，还是免费；</p>
+<p>Speed Download：下载工具，传说是MAC下最好的，我尝试使用免费的folx，但是是在太烂了，而SD太他妈贵了，所以我盗版了——我真的觉得下载工具应该免费的，:P。</p>
+<p>iTerm：用以替换系统自带的终端，免费；</p>
+<p>CleanMyMac：系统清理，用以清理垃圾，卸载软件不错，盗版的；</p>
+<p>Disk Order：MAC下类似TC的工具，貌似盗版，但我好像不用KEY不用破解也能用；</p>
+<p>gfxCardStatus：显示显卡状态，并能用以切换集县或独显，免费；</p>
+<p>MiniUsage：在任务栏显示系统状况，信息很齐全并能显示占资源最多的十个进程，免费。之前装了个istat menu，搞得任务栏跟花一样，果断扔了；</p>
+<p>istat pro：Dashboard中的系统状况查看插件，免费；</p>
+<p>HyperDock：让Dock有WIN7一样的预览效果，可点击预览图激活或关闭窗口，我忘了是不是盗版了；</p>
+<p>iBackup：系统备份工具，免费；</p>
+<p>MyTunesControllerPlus：任务栏图标控制itunes，并能桌面显示歌词，免费；</p>
+<p>ntfsMounter：MAC默认只读NTFS格式，其实内置可写的，此工具就是打开写功能，运行后任务栏有个很丑的图表，将NTFS分区挂上去就OK了，免费；</p>
+<p>QuickSilver：神器，可以快速查找、启动、各种方式打开你需要的种种，功能和系统自带的Spotlight，Google Quick Search Box有些重叠，免费；</p>
+<p>smcFanControl：显示温度和风扇转速，可指令在正常和高转速之间切换，免费；</p>
+<p>The Unachiever：比自带的好用，免费；</p>
+<p>DropBox：你懂的；</p>
+<p>Balsamiq Mockups：原型绘制工具，我有KEY，不算盗版；</p>
+<p>Evernote：笔记本，资料管理，免费；</p>
+<p>FreeMind：思维导图工具，免费；</p>
+<p>iChm：看名字就知道了，免费；</p>
+<p>Stanza：看电子书的，免费；</p>
+<p>Xee：图片浏览，免费；</p>
+<p>MacVim：神器，免费；</p>
+<p>Office 2011 for Mac：盗版，不需要注册也能用；</p>
+<p>MPlayerX：播放器，免费；</p>
+<p>射手播放器：买的，2.99刀；</p>
+<p>QQ：不解释；</p>
+<p>Twitter for Mac：不解释；</p>
+<p>欧陆词典：带屏幕取词，免费；</p>
+<p>RDC：远程连接WINDOWS桌面，免费；</p>
+<p>Vmware Fusion：虚拟机软件，盗版的；</p>
+<p>开发方面安装JAVA、RUBY都很简单，系统有自带的，ECLIPSE直接下载就能用，安装插件和windows一样，就是Subclipse默认只能用SVNKIT，JAVAHL需要安装SVN才有，下载个<a href="http://downloads.open.collab.net/binaries.html" target="_blank" rel="external">openCollabNet</a>版安装就行；</p>
+<p>MySQL直接到官网下载安装即可。</p>
+<p>UML工具用惯了JUDE，现在改名叫Astah，还是用了这个，跨平台就是好，免费；</p>
+<p>其实MAC的软件安装真的超简单，基本上拖拽到应用程序文件夹就成了，package就直接双击安装；</p>
+<p>一不小心写了这么长，收工。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2011/06/06/macbook-pro-debut/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[修改历史记录]]></title>
+      <link>http://fyun.li/2010/06/12/hibernate-history/</link>
+      <guid>http://fyun.li/2010/06/12/hibernate-history/</guid>
+      <pubDate>Sat, 12 Jun 2010 13:31:28 GMT</pubDate>
+      <description>
+      <![CDATA[<p>要实现修改历史记录的功能，以前我们可以使用Hibernate Interceptor，hibernate 3.0之后，可以使用Event Listener。</p>
+<p>关于这个，已经有其他人阐述过了，请猛击这里：<a href="http://bit.ly/afOs8p]]>
+      </description>
+      <content:encoded><![CDATA[<p>要实现修改历史记录的功能，以前我们可以使用Hibernate Interceptor，hibernate 3.0之后，可以使用Event Listener。</p>
+<p>关于这个，已经有其他人阐述过了，请猛击这里：<a href="http://bit.ly/afOs8p" title="http://bit.ly/afOs8p" target="_blank" rel="external">http://bit.ly/afOs8p</a></p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/06/12/hibernate-history/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[AJAX Upload]]></title>
+      <link>http://fyun.li/2010/06/02/ajax-upload/</link>
+      <guid>http://fyun.li/2010/06/02/ajax-upload/</guid>
+      <pubDate>Wed, 02 Jun 2010 12:12:24 GMT</pubDate>
+      <description>
+      <![CDATA[<p>推荐一下这个<a href="http://valums.com/ajax-upload/">AJAX Upload</a>，基于JQuery，方便快捷，是居家旅行、杀人放火之利器。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>推荐一下这个<a href="http://valums.com/ajax-upload/" target="_blank" rel="external">AJAX Upload</a>，基于JQuery，方便快捷，是居家旅行、杀人放火之利器。</p>
+<a id="more"></a>
+<p><strong>用法：</strong></p>
+<p><pre lang="javascript">new AjaxUpload(‘upload_button_id’, {action: ‘upload.php’});</pre><br>前一参数是相应事件的页面元素ID，任何元素都可以，后一个参数是执行上传的URL。</p>
+<p><pre lang="javascript">new AjaxUpload(‘#upload_button_id’, {<br>    // 执行上传文件的URL<br>    action: ‘upload.php’,<br>    // 对应传统的input file的名称<br>    name: ‘userfile’,<br>    // 其它要同时post的数据<br>    data: {<br>        example_key1 : ‘example_value’,<br>        example_key2 : ‘example_value2’<br>    },<br>    // 选择文件后自动上传<br>    autoSubmit: true,<br>    // 文件被选择后触发<br>    // Useful when autoSubmit is disabled<br>    // You can return false to cancel upload<br>    // @param file basename of uploaded file<br>    // @param extension of that file<br>    onChange: function(file, extension){},<br>    // 文件被上传完成前触发<br>    // You can return false to cancel upload<br>    // @param file basename of uploaded file<br>    // @param extension of that file<br>    onSubmit: function(file, extension) {},<br>    // 文件上传完成后触发<br>    // @param file basename of uploaded file<br>    // @param response server response<br>    onComplete: function(file, response) {}<br>});</pre><br><strong>原理：</strong></p>
+<p>其实简单得要死，不过是偷偷的在背后生成一个iframe，构建一个表单，然后提交就是了。</p>
+<p>基本上就这样了，细节自己去官网看吧。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/06/02/ajax-upload/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Spring AOP Annotation生火指南]]></title>
+      <link>http://fyun.li/2010/05/23/spring-aop-annotation/</link>
+      <guid>http://fyun.li/2010/05/23/spring-aop-annotation/</guid>
+      <pubDate>Sun, 23 May 2010 10:41:08 GMT</pubDate>
+      <description>
+      <![CDATA[<p>一者好久没博了，所以写篇凑个数，二者顺便记录一下，催眠我自己的记忆。</p>
+<p>AOP，用我们的普通话说就是面向方面变成，实际上是OOP编程的一个补充。说简单点就是实现横切（crosscutting）的工具，可使代码更加模块化，被横切的被称之为关注点。OOP的基本单元是Class，而AOP的基本单元是Aspect。日志、安全、事务等都是一些典型的横切。比如我们最近的一个项目，为了了解程序的性能，就使用了AOP记录一些服务方法的执行时间。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>一者好久没博了，所以写篇凑个数，二者顺便记录一下，催眠我自己的记忆。</p>
+<p>AOP，用我们的普通话说就是面向方面变成，实际上是OOP编程的一个补充。说简单点就是实现横切（crosscutting）的工具，可使代码更加模块化，被横切的被称之为关注点。OOP的基本单元是Class，而AOP的基本单元是Aspect。日志、安全、事务等都是一些典型的横切。比如我们最近的一个项目，为了了解程序的性能，就使用了AOP记录一些服务方法的执行时间。</p>
+<a id="more"></a>
+<p><strong>一、概念</strong></p>
+<p>1、连接点(join point)：指程序执行过程中的一个特定点，比如方法调用、抛出异常、对象初始化等等，用来定义你的程序在什么地方加入新的逻辑。</p>
+<p>2、通知(advice)：特定的连接点出运行的代码称为通知。通知有很多种，比如前置通知、后置通知等。</p>
+<p>3、切入点(point cut)：指一个通知该何时执行的一组连接点，典型的切入点如对某个类所有方法调用的集合。</p>
+<p>4、方面(aspect)，通知和切入点的组合称为方面，也即定义了程序执行的逻辑以及何时应该被执行。</p>
+<p>5、织入(weaving)：方面被加入程序的过程，静态织入一般在编译时进行，而动态织入则在运行时进行，Spring AOP属于动态织入。</p>
+<p>6、目标(target)：也就是被aop的对象。</p>
+<p>7、引入(introduce)：就是向对象中加入新的属性或方法，比如可以修改它使之实现某个接口。</p>
+<p><strong>二、应用</strong></p>
+<p><strong>1、使程序支持@Aspect</strong>：</p>
+<p>在spring配置文件中加入：</p>
+<p>&lt;aop:aspectj-autoproxy/&gt;</p>
+<div><strong>2、定义一个方面</strong>：</div><br><pre lang="java">package org.xyz;<br>import org.aspectj.lang.annotation.Aspect;<br><br>@Aspect<br>public class SimpleAspect {<br><br>}</pre><br><div><strong>3、声明一个切入点：</strong></div><br><pre lang="java">@Pointcut(“execution(<em> transfer(..))”) // the pointcut expression<br>private void anyOldTransfer() {} // the pointcut signature</em></pre><br><div><strong>4、Spring AOP支持的切入点表达式</strong>：</div><br><div><br><br>1.  execution - 匹配方法执行连接点，也是使用Spring AOP最常用到的。<br>2.  within - 匹配特定类型，只是为了简化特定类型执行AOP的方法执行声明。<br>3.  this - 连接点必须是指定类型的实例。<br>4.  args - 连接点的参数必须是指定类型的实例。<br>5.  @target - 连接点执行对象类型必须有指定类型的注解(annotation)。<br>6.  @args - 连接点实参的运行时类型必须有指定类型的注解(annotation)。<br>7.  @within - 匹配具有指定注解(annotation)的类型<br>8.  @annotation - 连接点必须有指定的注解(annotaion)<br></div><br><div><strong>5、组合连接点表达式</strong></div><br><div id="_mcePaste">可以用&amp;&amp;, ||, !进行组合</div><br><div><strong>6、声明通知(advice)</strong></div><br><div><strong>1)、前置通知（Before advice）</strong></div><br><div><strong>
+
+</strong></div><br><div id="_mcePaste">一个切面里使用 @Before 注解声明前置通知：</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.Before;<br><br>@Aspect<br>public class BeforeExample {<br><br>    @Before(“com.xyz.myapp.SystemArchitecture.dataAccessOperation()”)<br>    public void doAccessCheck() {<br>        // …<br>    }<br><br>}</pre><br><div>如果使用一个in-place 的切入点表达式，我们可以把上面的例子换个写法：</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.Before;<br><br>@Aspect<br>public class BeforeExample {<br><br>    @Before(“execution( com.xyz.myapp.dao.<em>.</em>(..))”)<br>    public void doAccessCheck() {<br>        // …<br>    }<br>}</pre><br><div><strong>2)、返回后通知（After returning advice）</strong></div><br><div><strong>
+
+</strong></div><br><div id="_mcePaste">返回后通知通常在一个匹配的方法返回的时候执行。使用 @AfterReturning 注解来声明：</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.AfterReturning;<br><br>@Aspect<br>public class AfterReturningExample {<br><br>    @AfterReturning(“com.xyz.myapp.SystemArchitecture.dataAccessOperation()”)<br>    public void doAccessCheck() {<br>        // …<br>    }<br>}</pre><br><div id="_mcePaste">说明：你可以在同一个切面里定义多个通知，或者其他成员。我们只是在展示如何定义一个简单的通知。这些例子主要的侧重点是正在讨论的问题。</div><br><div id="_mcePaste">有时候你需要在通知体内得到返回的值。你可以使用以 @AfterReturning 接口的形式来绑定返回值：</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.AfterReturning;<br><br>@Aspect<br>public class AfterReturningExample {<br><br>    @AfterReturning(pointcut=”com.xyz.myapp.SystemArchitecture.dataAccessOperation()”, returning=”retVal”)<br>    public void doAccessCheck(Object retVal) {<br>        // …<br>    }<br>}</pre><br><div id="_mcePaste">在 returning 属性中使用的名字必须对应于通知方法内的一个参数名。 当一个方法执行返回后，返回值作为相应的参数值传入通知方法。 一个 returning 子句也限制了只能匹配到返回指定类型值的方法。 （在本例子中，返回值是 Object 类，也就是说返回任意类型都会匹配）</div><br><div><strong>3)、抛出后通知（After throwing advice）</strong></div><br><div><strong>
+
+</strong></div><br><div id="_mcePaste">抛出后通知在一个方法抛出异常后执行。使用 @AfterThrowing 注解来声明：</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.AfterThrowing;<br><br>@Aspect<br>public class AfterThrowingExample {<br><br>    @AfterThrowing(“com.xyz.myapp.SystemArchitecture.dataAccessOperation()”)<br>    public void doRecoveryActions() {<br>        // …<br>    }<br><br>}</pre><br><div id="_mcePaste">你通常会想要限制通知只在某种特殊的异常被抛出的时候匹配，你还希望可以在通知体内得到被抛出的异常。 使用 throwing 属性不光可以限制匹配的异常类型（如果你不想限制，请使用 Throwable 作为异常类型），还可以将抛出的异常绑定到通知的一个参数上。</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.AfterThrowing;<br><br>@Aspect<br>public class AfterThrowingExample {<br><br>    @AfterThrowing(pointcut=”com.xyz.myapp.SystemArchitecture.dataAccessOperation()”, throwing=”ex”)<br>    public void doRecoveryActions(DataAccessException ex) {<br>        // …<br>    }<br><br>}</pre><br><div id="_mcePaste">在 throwing 属性中使用的名字必须与通知方法内的一个参数对应。 当一个方法因抛出一个异常而中止后，这个异常将会作为那个对应的参数送至通知方法。 throwing 子句也限制了只能匹配到抛出指定异常类型的方法（上面的示例为 DataAccessException）。</div><br><div><strong>4)、后通知（After (finally) advice）</strong></div><br><div>不论一个方法是如何结束的，在它结束后（finally）后通知（After (finally) advice）都会运行。 使用 @After 注解来声明。这个通知必须做好处理正常返回和异常返回两种情况。通常用来释放资源。</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.After;<br><br>@Aspect<br>public class AfterFinallyExample {<br><br>    @After(“com.xyz.myapp.SystemArchitecture.dataAccessOperation()”)<br>    public void doReleaseLock() {<br>        // …<br>    }<br><br>}</pre><br><div><strong>5)、环绕通知（Around Advice</strong>）</div><br><div>最后一种通知是环绕通知。环绕通知在一个方法执行之前和之后执行。 它使得通知有机会既在一个方法执行之前又在执行之后运行。并且，它可以决定这个方法在什么时候执行，如何执行，甚至是否执行。 环绕通知经常在在某线程安全的环境下，你需要在一个方法执行之前和之后共享某种状态的时候使用。 请尽量使用最简单的满足你需求的通知。（比如如果前置通知（before advice）也可以适用的情况下不要使用环绕通知）。</div><br><div id="_mcePaste">环绕通知使用 @Around 注解来声明。通知的第一个参数必须是 ProceedingJoinPoint 类型。 在通知体内，调用 ProceedingJoinPoint 的 proceed() 方法将会导致潜在的连接点方法执行。 proceed 方法也可能会被调用并且传入一个 Object[] 对象-该数组将作为方法执行时候的参数。</div><br><div id="_mcePaste">当传入一个 Object[] 对象的时候，处理的方法与通过AspectJ编译器处理环绕通知略有不同。 对于使用传统AspectJ语言写的环绕通知来说，传入参数的数量必须和传递给环绕通知的参数数量匹配（不是后台的连接点接受的参数数量），并且特定顺序的传入参数代替了将要绑定给连接点的原始值（如果你看不懂不用担心）。 Spring采用的方法更加简单并且更好得和他的基于代理（proxy-based），只匹配执行的语法相适用。 如果你适用AspectJ的编译器和编织器来编译为Spring而写的@AspectJ切面和处理参数，你只需要了解这一区别即可。 有一种方法可以让你写出100%兼容Spring AOP和AspectJ的，我们将会在后续的通知参数（advice parameters）的章节中讨论它。</div><br><pre lang="java">import org.aspectj.lang.annotation.Aspect;<br>import org.aspectj.lang.annotation.Around;<br>import org.aspectj.lang.ProceedingJoinPoint;<br><br>@Aspect<br>public class AroundExample {<br><br>    @Around(“com.xyz.myapp.SystemArchitecture.businessService()”)<br>    public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable {<br>        // start stopwatch<br>        Object retVal = pjp.proceed();<br>        // stop stopwatch<br>        return retVal;<br>    }<br><br>}</pre><br><div id="_mcePaste">方法的调用者得到的返回值就是环绕通知返回的值。 例如：一个简单的缓存切面，如果缓存中有值，就返回该值，否则调用proceed()方法。 请注意proceed可能在通知体内部被调用一次，许多次，或者根本不被调用。</div><br><div><strong>7、通知参数（Advice parameters）</strong></div><br><div>Spring 2.0 提供了完整的通知类型 - 这意味着你可以在通知签名中声明所需的参数，（就像在以前的例子中我们看到的返回值和抛出异常一样）而不总是使用Object[]。 我们将会看到如何在通知体内访问参数和其他上下文相关的值。首先让我们看以下如何编写普通的通知以找出正在被通知的方法。</div><br><div><strong>1)、访问当前的连接点</strong></div><br><div id="_mcePaste">任何通知方法可以将第一个参数定义为 org.aspectj.lang.JoinPoint 类型 （环绕通知需要定义为 ProceedingJoinPoint 类型的， 它是 JoinPoint 的一个子类。） JoinPoint 接口提供了一系列有用的方法， 比如 getArgs()（返回方法参数）、getThis()（返回代理对象）、getTarget()（返回目标）、getSignature()（返回正在被通知的方法相关信息）和 toString()（打印出正在被通知的方法的有用信息）。</div><br><div><strong>2)、传递参数给通知（Advice）</strong></div><br><div id="_mcePaste">我们已经看到了如何绑定返回值或者异常（使用后置通知（after returning）和异常后通知（after throwing advice）。 为了可以在通知（adivce）体内访问参数，你可以使用 args 来绑定。 如果在一个参数表达式中应该使用类型名字的地方使用一个参数名字，那么当通知执行的时候对应的参数值将会被传递进来。 可能给出一个例子会更好理解。假使你想要通知（advise）接受某个Account对象作为第一个参数的DAO操作的执行，你想要在通知体内也能访问到account对象，你可以写如下的代码：</div><br><pre lang="java">@Before(“com.xyz.myapp.SystemArchitecture.dataAccessOperation() &amp;&amp; args(account,..)”)<br>public void validateAccount(Account account) {<br>    // …<br>}</pre><br><div id="_mcePaste">切入点表达式的 args(account,..) 部分有两个目的： 首先它保证了只会匹配那些接受至少一个参数的方法的执行，而且传入的参数必须是 Account 类型的实例， 其次它使得可以在通知体内通过 account 参数来访问那个account参数。</div><br><div id="_mcePaste">另外一个办法是定义一个切入点，这个切入点在匹配某个连接点的时候“提供”了一个Account对象， 然后直接从通知中访问那个命名的切入点。你可以这样写：</div><br><pre lang="java">@Pointcut(“com.xyz.myapp.SystemArchitecture.dataAccessOperation() &amp;&amp; args(account,..)”)<br>private void accountDataAccessOperation(Account account) {}<br><br>@Before(“accountDataAccessOperation(account)”)<br>public void validateAccount(Account account) {<br>  // ..<br>}</pre><br><div id="_mcePaste">如果想要知道更详细的内容，请参阅 AspectJ 编程指南。</div><br><div id="_mcePaste">代理对象（this）、目标对象（target） 和注解（@within, @target, @annotation, @args）都可以用一种简单格式绑定。 以下的例子展示了如何使用 @Auditable 注解来匹配方法执行，并提取AuditCode。</div><br><div id="_mcePaste">首先是 @Auditable 注解的定义：</div><br><pre lang="java">@Retention(RetentionPolicy.RUNTIME)<br>@Target(ElementType.METHOD)<br>public @interface Auditable {<br>    AuditCode value();<br>}</pre><br><div id="_mcePaste">然后是匹配 @Auditable 方法执行的通知：</div><br><pre lang="java">@Before(“com.xyz.lib.Pointcuts.anyPublicMethod() &amp;&amp;  @annotation(auditable)”)<br>public void audit(Auditable auditable) {<br>    AuditCode code = auditable.value();<br>    // …<br>}</pre><br><div><strong>3)、决定参数名</strong></div><br><div id="_mcePaste">绑定在通知上的参数依赖切入点表达式的匹配名，并借此在（通知（advice）和切入点（pointcut））的方法签名中声明参数名。 参数名 无法 通过Java反射来获取，所以Spring AOP使用如下的策略来决定参数名字：</div><br><div id="_mcePaste">如果参数名字已经被用户明确指定，则使用指定的参数名： 通知（advice）和切入点（pointcut）注解有一个额外的”argNames”属性，该属性用来指定所注解的方法的参数名 - 这些参数名在运行时是 可以 访问的。例子如下：</div><br><pre lang="java">@Before(value=”com.xyz.lib.Pointcuts.anyPublicMethod() &amp;&amp; @annotation(auditable)”, argNames=”auditable”)<br>public void audit(Auditable auditable) {<br>    AuditCode code = auditable.value();<br>    // …<br>}</pre><br><div id="_mcePaste">如果一个@AspectJ切面已经被AspectJ编译器（ajc）编译过了，那么就不需要再添加 argNames 参数了，因为编译器会自动完成这一工作。</div><br><div id="_mcePaste">使用 ‘argNames’ 属性有点不那么优雅，所以如果没有指定’argNames’ 属性， Spring AOP 会寻找类的debug信息，并且尝试从本地变量表（local variable table）中来决定参数名字。 只要编译的时候使用了debug信息（至少要使用 ‘-g:vars’ ），就可获得这些信息。 使用这个flag编译的结果是： (1)你的代码将能够更加容易的读懂（反向工程）</div><br><div>(2)生成的class文件会稍许大一些（不重要的）</div><br><div>(3)移除不被使用的本地变量的优化功能将会失效。 换句话说，你在使用这个flag的时候不会遇到任何困难。</div><br><div id="_mcePaste">如果不加上debug信息来编译的话，Spring AOP将会尝试推断参数的绑定。 （例如，要是只有一个变量被绑定到切入点表达式（pointcut expression）、通知方法（advice method）将会接受这个参数， 这是显而易见的）。 如果变量的绑定不明确，将会抛出一个 AmbiguousBindingException 异常。</div><br><div id="_mcePaste">如果以上所有策略都失败了，将会抛出一个 IllegalArgumentException 异常</div><br><div><strong>8、常用切入点表达式</strong></div><br><div><strong>
+
+</strong></div><br><div id="_mcePaste">execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern) throws-pattern?)</div><br><div id="_mcePaste">除了返回类型模式（上面代码片断中的ret-type-pattern），名字模式和参数模式以外，所有的部分都是可选的。 返回类型模式决定了方法的返回类型必须依次匹配一个连接点。 你会使用的最频繁的返回类型模式是 <em>，它代表了匹配任意的返回类型。 一个全称限定的类型名将只会匹配返回给定类型的方法。名字模式匹配的是方法名。 你可以使用 </em> 通配符作为所有或者部分命名模式。 参数模式稍微有点复杂：() 匹配了一个不接受任何参数的方法， 而 (..) 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 (<em>) 匹配了一个接受一个任何类型的参数的方法。 模式 (</em>,String) 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是String类型。</div><br><div id="_mcePaste">下面给出一些常见切入点表达式的例子。</div><br><div id="_mcePaste">任意公共方法的执行：</div><br><div id="_mcePaste">execution(public <em> </em>(..))</div><br><div id="_mcePaste">任何一个以“set”开始的方法的执行：</div><br><div id="_mcePaste">execution(<em> set</em>(..))</div><br><div id="_mcePaste">AccountService 接口的任意方法的执行：</div><br><div id="_mcePaste">execution(<em> com.xyz.service.AccountService.</em>(..))</div><br><div id="_mcePaste">定义在service包里的任意方法的执行：</div><br><div id="_mcePaste">execution(<em> com.xyz.service.</em>.<em>(..))</em></div><br><div id="_mcePaste">定义在service包或者子包里的任意方法的执行：</div><br><div id="_mcePaste">execution( com.xyz.service..<em>.</em>(..))</div><br><div id="_mcePaste">在service包里的任意连接点（在Spring AOP中只是方法执行） ：</div><br><div id="_mcePaste">within(com.xyz.service.<em>)</em></div><br><div id="_mcePaste">在service包或者子包里的任意连接点（在Spring AOP中只是方法执行） ：</div><br><div id="_mcePaste">within(com.xyz.service..)</div><br><div id="_mcePaste">实现了 AccountService 接口的代理对象的任意连接点（在Spring AOP中只是方法执行） ：</div><br><div id="_mcePaste">this(com.xyz.service.AccountService)</div><br><div id="_mcePaste">‘this’在binding form中用的更多：- 请常见以下讨论通知的章节中关于如何使得代理对象可以在通知体内访问到的部分。</div><br><div id="_mcePaste">实现了 AccountService 接口的目标对象的任意连接点（在Spring AOP中只是方法执行） ：</div><br><div id="_mcePaste">target(com.xyz.service.AccountService)</div><br><div>任何一个只接受一个参数，且在运行时传入的参数实现了 Serializable 接口的连接点 （在Spring AOP中只是方法执行）</div><br><div id="_mcePaste">args(java.io.Serializable)</div><br><div id="_mcePaste">请注意在例子中给出的切入点不同于 execution(<em> </em>(java.io.Serializable))： args只有在动态运行时候传入参数是可序列化的（Serializable）才匹配，而execution 在传入参数的签名声明的类型实现了 Serializable 接口时候匹配。</div><br><div id="_mcePaste">有一个 @Transactional 注解的目标对象中的任意连接点（在Spring AOP中只是方法执行）</div><br><div id="_mcePaste">@target(org.springframework.transaction.annotation.Transactional)</div><br><div id="_mcePaste">任何一个目标对象声明的类型有一个 @Transactional 注解的连接点（在Spring AOP中只是方法执行）</div><br><div id="_mcePaste">@within(org.springframework.transaction.annotation.Transactional)</div><br><div id="_mcePaste">任何一个执行的方法有一个 @Transactional annotation的连接点（在Spring AOP中只是方法执行）</div><br><div id="_mcePaste">@annotation(org.springframework.transaction.annotation.Transactional)</div><br><div id="_mcePaste">任何一个接受一个参数，并且传入的参数在运行时的类型实现了 @Classified annotation的连接点（在Spring AOP中只是方法执行）</div><br><div id="_mcePaste">@args(com.xyz.security.Classified)</div><br><div><strong>9、参考并抄袭自</strong></div>
+
+<p><a href="http://static.springsource.org/spring/docs/2.5.x/reference/aop.html" target="_blank" rel="external">http://static.springsource.org/spring/docs/2.5.x/reference/aop.html</a></p>
+<p><a href="http://hi.baidu.com/wangyongjin87/blog/item/c9cf2cec4e19de232df534cb.html" target="_blank" rel="external">http://hi.baidu.com/wangyongjin87/blog/item/c9cf2cec4e19de232df534cb.html</a></p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/05/23/spring-aop-annotation/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[xfire两则]]></title>
+      <link>http://fyun.li/2010/05/12/xfire-tips-2010/</link>
+      <guid>http://fyun.li/2010/05/12/xfire-tips-2010/</guid>
+      <pubDate>Wed, 12 May 2010 11:09:57 GMT</pubDate>
+      <description>
+      <![CDATA[<p>1、生成客户端stub时：Thrown by JAXB : undefined element declaration ‘s:schema’</p>
+<p>解决方法：</p>
+<p>删除</p>
+<p>&lt;s:import namespace=”<a href="http://www.w3.org/2001/XMLSchema&quot;/&amp;gt">http://www.w3.org/2001/XMLSchema&quot;/&amp;gt</a>;</p>
+<p>and</p>
+<p>&lt;s:element ref=”s:schema” /&gt;</p>
+<p>不要手软，全部格杀勿论。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>1、生成客户端stub时：Thrown by JAXB : undefined element declaration ‘s:schema’</p>
+<p>解决方法：</p>
+<p>删除</p>
+<p>&lt;s:import namespace=”<a href="http://www.w3.org/2001/XMLSchema&quot;/&amp;gt" target="_blank" rel="external">http://www.w3.org/2001/XMLSchema&quot;/&amp;gt</a>;</p>
+<p>and</p>
+<p>&lt;s:element ref=”s:schema” /&gt;</p>
+<p>不要手软，全部格杀勿论。</p>
+<a id="more"></a>
+<p>2、XFireFault: Could not marshall type</p>
+<p>namespace相同的两个webservice生成stub时，会覆盖ObjectFactory.java</p>
+<p>解决办法：</p>
+<p>备份，合并，还有其它办法吗？好像没有了。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/05/12/xfire-tips-2010/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[JQuery Tools]]></title>
+      <link>http://fyun.li/2010/04/28/jquery-tools/</link>
+      <guid>http://fyun.li/2010/04/28/jquery-tools/</guid>
+      <pubDate>Wed, 28 Apr 2010 05:25:31 GMT</pubDate>
+      <description>
+      <![CDATA[<p>这几天我折腾起了前端，因为我想让应用的体验稍微好那么一点，在茫茫网络世界中，我上了JQuery的贼船。</p>
+<p>理所当然地，我首先选择了官方性质的jquery ui库，但是其臃肿的体型，杯具的性能以及难缠的界面定制（官方有themeroller工具，但是除了配色你能改变它那个骚样吗？而且圆角在IE上并不支持）让我只好努力寻找其他的替代者。最终我相中了<a href="http://flowplayer.org/tools">JQuery Tools</a>，主要包括最常用的几个组件：Tabs(Accordion, Slideshow), Tooltips，Overlay（Box），Expose, Scrollable, Flashembed。怎么用俺就不说了，因为我懒，上官网吧，文档还是很齐全的。另外这里有个中文链接：</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>这几天我折腾起了前端，因为我想让应用的体验稍微好那么一点，在茫茫网络世界中，我上了JQuery的贼船。</p>
+<p>理所当然地，我首先选择了官方性质的jquery ui库，但是其臃肿的体型，杯具的性能以及难缠的界面定制（官方有themeroller工具，但是除了配色你能改变它那个骚样吗？而且圆角在IE上并不支持）让我只好努力寻找其他的替代者。最终我相中了<a href="http://flowplayer.org/tools" target="_blank" rel="external">JQuery Tools</a>，主要包括最常用的几个组件：Tabs(Accordion, Slideshow), Tooltips，Overlay（Box），Expose, Scrollable, Flashembed。怎么用俺就不说了，因为我懒，上官网吧，文档还是很齐全的。另外这里有个中文链接：</p>
+<a id="more"></a>
+<p><a href="http://css9.net/flexible-ui-library-jquery-tools/" target="_blank" rel="external">http://css9.net/flexible-ui-library-jquery-tools/</a></p>
+<p>JQuery Tools让我爽的地方是：</p>
+<p>1、小巧，真正做到了传说中的精悍；</p>
+<p>2、js, html, css的分工很明确，侵入性很低，不会因为使用个库就强行甩给你一个垃圾模样，当然你也可以很懒，照抄官网示例的样式吧。</p>
+<p>3、扩展性很好；</p>
+<p>比如Accordion，我们客户希望能增加全部展开/关闭功能，只要增加这两个方法即可：</p>
+<p><pre lang="javascript">expandAll: function() {<br>    tabs.each(function() {<br>        $(this).next().slideDown();<br>    });<br>    tabs.addClass(conf.current);<br>    current = -1;<br>},</pre></p>
+<p>collapseAll: function() {<br>    tabs.each(function() {<br>        $(this).next().slideUp();<br>    });<br>    tabs.removeClass(conf.current);<br>    current = -1;<br>}<br>最后，再推荐一个地方：<a href="http://leigeber.com" target="_blank" rel="external">leigeber.com</a>，好几个tinyx的组件真的不错。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/04/28/jquery-tools/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[java:取得汉字拼音]]></title>
+      <link>http://fyun.li/2010/04/21/java-hans/</link>
+      <guid>http://fyun.li/2010/04/21/java-hans/</guid>
+      <pubDate>Tue, 20 Apr 2010 16:09:44 GMT</pubDate>
+      <description>
+      <![CDATA[<p>请看这个开源项目：<a href="http://pinyin4j.sf.net" target="_blank" rel="external">pinyin4j</a></p>
+<p>不多说了，上代码。</p>
+<pre lang="java">import net.so]]>
+      </description>
+      <content:encoded><![CDATA[<p>请看这个开源项目：<a href="http://pinyin4j.sf.net" target="_blank" rel="external">pinyin4j</a></p>
+<p>不多说了，上代码。</p>
+<pre lang="java">import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+/**
+ * @author Fyun Li
+ */
+public class PinyinTest {
+
+    public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination {
+        HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
+        format.setVCharType(HanyuPinyinVCharType.WITH_V);
+        format.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+        format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+        String[] ss = PinyinHelper.toHanyuPinyinStringArray('吕', format);
+        for (String s : ss) {
+            System.out.println(s);
+        }
+    }
+
+}</pre>]]></content:encoded>
+      <comments>http://fyun.li/2010/04/21/java-hans/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Eclipse Code Review Plugins]]></title>
+      <link>http://fyun.li/2010/04/13/eclipse-code-review-plugins/</link>
+      <guid>http://fyun.li/2010/04/13/eclipse-code-review-plugins/</guid>
+      <pubDate>Tue, 13 Apr 2010 13:50:11 GMT</pubDate>
+      <description>
+      <![CDATA[<p>我预备在Eclipse中通过插件来进行代码走查。</p>
+<p>起初我想用<a href="http://code.google.com/p/jupiter-eclipse-plugin/">Jupiter</a>，一者这个名头比较响，二者看介绍我觉得还不错。Install –&gt; Create Review ID –&gt; Add Review Issue，一切似乎都很顺利。然而杯具的是，刷新之后一切都消失了。反复折腾几次之后，我终于发现就是不能让我保存走查结果，于是我无奈地放弃了。这个问题应该是我的Eclipse环境引起的，但是我没有时间也不想去解决这个冲突。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>我预备在Eclipse中通过插件来进行代码走查。</p>
+<p>起初我想用<a href="http://code.google.com/p/jupiter-eclipse-plugin/" target="_blank" rel="external">Jupiter</a>，一者这个名头比较响，二者看介绍我觉得还不错。Install –&gt; Create Review ID –&gt; Add Review Issue，一切似乎都很顺利。然而杯具的是，刷新之后一切都消失了。反复折腾几次之后，我终于发现就是不能让我保存走查结果，于是我无奈地放弃了。这个问题应该是我的Eclipse环境引起的，但是我没有时间也不想去解决这个冲突。</p>
+<a id="more"></a>
+<p>然后我找到<a href="http://www.inso.tuwien.ac.at/projects/reviewclipse/" target="_blank" rel="external">ReviewClipse</a>这个插件，但我不喜欢它跟SVN这么紧密的耦合，所以也放弃了。</p>
+<p>最后我找到<a href="http://www.alphaworks.ibm.com/tech/ccrt" target="_blank" rel="external">CCRT（Collaborative Code Review Tool）</a>,用法其实很简单，建一个Review，然后往里加走查条目就行了，结果跟Jupiter一样会保存在一个xml文件中。团队用的时候将xml文件上传到svn即可。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/04/13/eclipse-code-review-plugins/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[清明]]></title>
+      <link>http://fyun.li/2010/04/08/qing-ming/</link>
+      <guid>http://fyun.li/2010/04/08/qing-ming/</guid>
+      <pubDate>Thu, 08 Apr 2010 13:41:06 GMT</pubDate>
+      <description>
+      <![CDATA[<p>提及清明，杜牧童靴的《清明》是很有名的，但是我今天不是要讲这个，我只是念想一下小时的清明记忆。</p>
+<p>小时候，清明在我们那儿，算是传统上一个比较隆重的节日，甚至规格还强过中秋，因为只有春节和清明能把老老小小各式人等召集齐了。对于我们最开心的是，只有清明，家里准许我们公然逃课。当然，仅限于自家祭拜私募那天。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>提及清明，杜牧童靴的《清明》是很有名的，但是我今天不是要讲这个，我只是念想一下小时的清明记忆。</p>
+<p>小时候，清明在我们那儿，算是传统上一个比较隆重的节日，甚至规格还强过中秋，因为只有春节和清明能把老老小小各式人等召集齐了。对于我们最开心的是，只有清明，家里准许我们公然逃课。当然，仅限于自家祭拜私募那天。</p>
+<a id="more"></a>
+<p>一般扫墓并不在清明那天，家里会根据黄历挑个日子。到了祭扫那天，爷娘儿女七姑八姨孝子贤孙等汇聚一堂，选个时辰出发。而我们就可以嚣张地跑出课堂去赶这个时间。赶回家后，扔下书包，拿上各种香烛鞭炮祭品，砍刀锄头镰刀等就巡山去袅。</p>
+<p>要去祭扫的墓地有好些——在我这辈都难得能说得上来，我甚至怀疑等父辈那些人过世之后，还有没人能想到某地还有个祖坟呢，反正现在祭扫的风气也淡了，大家都嫌麻烦——在我爷爷的带领下，一个个依次祭扫过去，重复着一样的动作：除去坟上的杂草，把坟前明堂的泥土铲平了，把坟头重新修葺一二，砍掉坟前高叉叉的树Y以免挡了祖宗们的实现，然后摆上猪、鸡、鱼这所谓的三牲，点上香烛，敬上水酒，烧上纸钱，响串鞭炮。凡此种种动作做完后就奔上下一个目标，而我们这些小孩不过是觉得有趣，并喜欢趁此在山上瞎闹。</p>
+<p>祭扫的坟墓也各式各样，有些有砖头水泥的高大坟头，宽敞的明堂用水泥抹的非常平坦，坟头上祭祀的神龛非常漂亮；而有些就是一个土堆立着一块墓碑；还有些干脆就是某个面向空旷的半坡上摆着的几块方砖。</p>
+<p>祭扫完后，一彪人马折返回家，然后全家就趁此饕餮一顿，该醉的醉，该闹的闹，然后就等待下一个清明。</p>
+<p>这是自家祭扫私募的情况，更热闹的是族里祭扫公墓，那些平时被骂做老不死的老头们这时候就威风了，领着壮丁们浩浩荡荡就山上去了，成群的小屁孩在在人群中钻进钻出。山上七万八绕了半响之后，很有可能就是老人们说这就是我们XX祖的墓地，结果不过是个小土包子，放着几块石头做标记。然后壮丁们就开始做规定动作，祭扫完毕就开始发米果——一种类似年糕的东西，蘸糖或者炒了吃，味道还可以，不过我不太喜欢——小屁孩们就是去凑数领米果的。完事了，大家就回去，然后宗祠就会忙活着张罗酒席，老人们以及各家代表（一家派一个，在宗祠帮忙的可以多去一个）就可以公款吃喝了，不过钱呢，族里是按人头摊派的。</p>
+<p>这些记忆都是很多年前的事情了，后来爷爷去世了，我们祭扫的地方又多了一个，但是我好多年都难得回去一次，我很想念我的爷爷。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/04/08/qing-ming/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[你的背包 - 《在云端》]]></title>
+      <link>http://fyun.li/2010/02/11/up-in-the-air/</link>
+      <guid>http://fyun.li/2010/02/11/up-in-the-air/</guid>
+      <pubDate>Thu, 11 Feb 2010 03:16:47 GMT</pubDate>
+      <description>
+      <![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/movie-up-in-ther-air.jpg" alt=""> </p>
+<p>老帅哥克鲁尼扮演的RYAN是个炒鱿鱼专家，每天以云中穿梭唾沫横飞精妙地将一批批苦命人送往彼岸为生。其生活不着家不着调自私理性单身自爽拒绝一切负担。</p>
+<p>老帅哥在差旅欢宴之余经常做做演讲，兜售他的背包理论。他说你想啊，你把你的衬衫领带仔裤短裙臭鞋子臭袜子臭味道以及亲爹亲娘兄弟姐妹七姑八姨狐朋狗友小三炮灰都塞进去，背上这样的背包行走人生那将是怎样难堪的重负。想想都后怕啊，所以要轻装上阵，自娱自乐，管他娘的人情冷暖春花秋开。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/movie-up-in-ther-air.jpg" alt=""> </p>
+<p>老帅哥克鲁尼扮演的RYAN是个炒鱿鱼专家，每天以云中穿梭唾沫横飞精妙地将一批批苦命人送往彼岸为生。其生活不着家不着调自私理性单身自爽拒绝一切负担。</p>
+<p>老帅哥在差旅欢宴之余经常做做演讲，兜售他的背包理论。他说你想啊，你把你的衬衫领带仔裤短裙臭鞋子臭袜子臭味道以及亲爹亲娘兄弟姐妹七姑八姨狐朋狗友小三炮灰都塞进去，背上这样的背包行走人生那将是怎样难堪的重负。想想都后怕啊，所以要轻装上阵，自娱自乐，管他娘的人情冷暖春花秋开。</p>
+<a id="more"></a>
+<p>讲这话的时候老帅哥是得意飞扬的，毕竟人家是成功人士嘛，长得也不像酵母那么猥琐，可谓英俊多金，虽然年纪大点但那叫成熟那叫魅力，不是说男人四十一枝花嘛。所以人家有资本站在台上牛哄哄地跟你说生活应该这样应该那样，对比一下你自己寒碜的生活，你都不好意思长在这世上。</p>
+<p>可是，有一天老帅哥讲了个开头却讲不下去落跑了。因为他寂寞了，想找些沉重的东西填充他的背包。可是生活总是那么有幽默感，被老帅哥非礼了大半辈子，想换频道可没那么容易。那个女人说我们都是成年人了，有事来电，完事分手，留低男人失落无助，芝加哥的雪花那个飘啊。</p>
+<p>开始的开始，最后的最后，都是一样的，依然高高在上云来雾去，依然茕茕孑立形影相吊，一部电影就是一个轮回。</p>
+<p>生活需要一个副驾驶，可是老帅哥爱上的美女家中红旗不到，依然在外灿烂，这就是生活。NB的时候喜欢独自寻欢，寂寞的时候无人理会，这就是生活。</p>
+<p>———————- 无耻的分割线 ———————-</p>
+<p>总觉得RYAN的转变很突兀，被自己理论武装实践经年而志满意得的生活方式被一黄毛丫头冲撞几下就土崩瓦解，这也太过分了嘛。可能的解释就是他其实一直就很寂寞，潜意识里尤其希望温暖，因此出差还是要ONS找点慰藉，回到单调无比的窝还想女邻居晚上来玩，不情愿还是带上假人模拍照。娜塔莉只是给本已潜藏的汹涌助推了一把。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/02/11/up-in-the-air/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[吃狗肉]]></title>
+      <link>http://fyun.li/2010/01/28/chi-gou-rou/</link>
+      <guid>http://fyun.li/2010/01/28/chi-gou-rou/</guid>
+      <pubDate>Thu, 28 Jan 2010 13:24:49 GMT</pubDate>
+      <description>
+      <![CDATA[<p>据说贵国正在酝酿出台《反虐待动物法》，还据说该法将会规定违法食用或者销售狗肉将会被处于最高罚款五千或者拘留十五天的处罚。</p>
+<p>我觉得如果这些据说属实，那么只能证明贵国有相当一部分的人确实很闲很无聊，而且脑子都因为经常洗桑拿而导致进水过多。在如今合法公民都被以各种名义虐待的时候居然有空关心动物，我对如此的博爱胸襟只能感佩万分。感佩之余我想弄明白什么是违法食用，又为什么是狗肉而不是猪肉牛肉，或者兔子肉老鼠肉什么的。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>据说贵国正在酝酿出台《反虐待动物法》，还据说该法将会规定违法食用或者销售狗肉将会被处于最高罚款五千或者拘留十五天的处罚。</p>
+<p>我觉得如果这些据说属实，那么只能证明贵国有相当一部分的人确实很闲很无聊，而且脑子都因为经常洗桑拿而导致进水过多。在如今合法公民都被以各种名义虐待的时候居然有空关心动物，我对如此的博爱胸襟只能感佩万分。感佩之余我想弄明白什么是违法食用，又为什么是狗肉而不是猪肉牛肉，或者兔子肉老鼠肉什么的。</p>
+<a id="more"></a>
+<p>之所以我会唠叨起这个问题是因为我是喜欢吃狗肉的，我想只要不偷不抢不吃你家的狗，恐怕我吃多少狗肉犯不着人管。至于爱狗人士的那些调调，我认为因为养些奇形怪状的宠物狗就反对别人吃狗肉是流氓行为。你喜欢养狗尽可以养去，我喜欢吃狗肉也于卿无干，正如我不喜欢养狗，觉得无聊而脏，但我也不会扯着嗓子说养狗扰邻，或者抡着棒子去扑杀那些奇形怪状的阿猫阿狗。养狗还是吃狗肉，这个只是个人喜好问题，没必要将自己的意志强加于人或者上升为法，我估计再NC的政府也不至于会真正出台这样的法。</p>
+<p>还有一些动辄喜欢代表全人类的东西，说些狗是人类的朋友什么的屁话。我还是以为这只是个人选择问题，你可以把狗当做你的朋友或者伴侣（只要你家不反对），我也有权把狗视作美味，仅此而已。</p>
+<p>垃圾话说了一大堆，其实我是想说我真的喜欢狗肉，如果现在有一碗热腾腾狗肉我会感动得要哭。</p>
+<p>我很小的时候就吃狗肉，这个是拜我父母所赐，因为我小时候可能某方面功能失调直到上幼儿园还经常尿床，这是一个如今提及很囧的事情。也正是因为这个囧毛病使得我小时候美食了相当一些数量的狗肉，因为据我们那地方传言吃小狗（大约半岁到一岁，约摸十斤左右）可以治这种尿床的毛病。当然我们那村子当时是没有现在这些五花八门的狗的，有的只是一些黑的或者黄的比较朴素的土狗，但美味的也就是这一类型的，虽然我没吃过哈巴狗狮子狗贵宾狗什么的，但我想肯定不会好吃，我也不会想要去吃。</p>
+<p>我中学的时候，有个同学上到初中就认为念书没前途（现在看来还是有道理的）跑去学厨师去了，那年暑假我们弄了一条十来斤的小狗（我保证不是违法获得的）在他家测试了一下他的厨艺，至今让我想念，虽然想来做法不算华丽佐料不够丰富。</p>
+<p>大二暑假放假回家，老爹难得地大发慈悲弄了一锅狗肉，做法跟一般的焖、烧、炖有很大区别，用我们客家话念起来类似“歇”，弄完之后狗肉还是白白嫩嫩的，但是相当的香滑，我认为是我吃过的最好的一顿狗肉。</p>
+<p>再扯下去我非要垂涎三尺不可，还是就此打住吧，择日去莲塘一饱口福可也。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/01/28/chi-gou-rou/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[SUN的纪念]]></title>
+      <link>http://fyun.li/2010/01/22/sun-memorial/</link>
+      <guid>http://fyun.li/2010/01/22/sun-memorial/</guid>
+      <pubDate>Fri, 22 Jan 2010 11:02:43 GMT</pubDate>
+      <description>
+      <![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2010/01/SunRIPsmall2.jpg" alt=""> </p>
+<p>看图不说话</p>
+]]>
+      </description>
+      <content:encoded><![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2010/01/SunRIPsmall2.jpg" alt=""> </p>
+<p>看图不说话</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/01/22/sun-memorial/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Google退出中国]]></title>
+      <link>http://fyun.li/2010/01/13/google-quit/</link>
+      <guid>http://fyun.li/2010/01/13/google-quit/</guid>
+      <pubDate>Wed, 13 Jan 2010 06:48:37 GMT</pubDate>
+      <description>
+      <![CDATA[<p>今天，<a href="http://googleblog.blogspot.com/2010/01/new-approach-to-china.html">Google在英文的官方博客</a>声称，Google已经做出决定，重新检讨在中国开展业务的可行性，不愿再审查google.cn上的搜索结果。Google将在未来几周时间和中国政府谈判，要求能够在中国法律框架内运营未经过滤审查的搜索引擎。Google承认这很可能意味着必须关闭google.cn，撤出Google在中国的办公室。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p>今天，<a href="http://googleblog.blogspot.com/2010/01/new-approach-to-china.html" target="_blank" rel="external">Google在英文的官方博客</a>声称，Google已经做出决定，重新检讨在中国开展业务的可行性，不愿再审查google.cn上的搜索结果。Google将在未来几周时间和中国政府谈判，要求能够在中国法律框架内运营未经过滤审查的搜索引擎。Google承认这很可能意味着必须关闭google.cn，撤出Google在中国的办公室。</p>
+<a id="more"></a>
+<p>我们也知道，在贵国这个谈判没有成功的可能，因此，这个声明意味着Google即将退出中国，而且很快就会成为事实。从谷歌的声明可以看出，双方对于网络自由的认知差距是巨大的，贵国对于网络的管制已经到了令人发指的地步。这份声明，只能是彻底摊牌，我党震怒，从此不仅是google.cn, google.com也将被拒于墙外。</p>
+<p>对于Google来说也许是个艰难的决定，但不会影响其全球业务，毕竟谷歌中国营收在其全球营收当中只有1.x个百分点。而对于像我这样的人，则是痛苦的。几年以来，已经习惯于用Google搜索，Gmail收发邮件, Google Reader阅读内容, Google Canlendar安排日程，一旦Google退出，我只能翻山越岭，远蹈重洋来使用这些服务。</p>
+<p>Tor, Puff, VPN，苦练翻墙绝技才是硬道理。</p>
+<p>Google, Twitter, Fackbook, Blogger, Wordpress…………，这一幢长串伟大的互联网服务都绝迹贵国，不知道是我等草民的悲哀还是贵国的悲哀。</p>
+<p>假以时日，大部分网民终将在贵国局域网内被愚民，然后驯服地在墙内自娱自乐。但求真知的渴望是不会泯灭的，总有一天，这些墙会轰然倒坍，从此，国人会有不被管制不被阉割的真正的互联网。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/01/13/google-quit/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Jack归来，YY无敌 - 《阿凡达》]]></title>
+      <link>http://fyun.li/2010/01/08/avatar/</link>
+      <guid>http://fyun.li/2010/01/08/avatar/</guid>
+      <pubDate>Fri, 08 Jan 2010 06:43:55 GMT</pubDate>
+      <description>
+      <![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/movie-avatar.jpg" alt=""> </p>
+<p>十多年前，卡大神用一艘牛逼哄哄的游轮及俊男Jack和美女Rose炮制了一出烂得掉渣的爱情，结果赚回了无数痴男怨女的眼泪，不过赚得更多的是票子，那叫一个盆满钵满。但是，我愣是看不得这片，实在看不下去，当时曾经有位同学到我们宿舍炫耀说看了七遍，结果被我好一顿羞辱。</p>
+<p>然后，卡大神消失了，据说埋头在炮制一个叫做潘多拉的新世界，那个片子叫做《神之化身》，化到最后我国伟大的翻译家告诉我这个叫做《阿凡达》，猛一听我以为是讲述新疆某位兄弟的传奇。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/movie-avatar.jpg" alt=""> </p>
+<p>十多年前，卡大神用一艘牛逼哄哄的游轮及俊男Jack和美女Rose炮制了一出烂得掉渣的爱情，结果赚回了无数痴男怨女的眼泪，不过赚得更多的是票子，那叫一个盆满钵满。但是，我愣是看不得这片，实在看不下去，当时曾经有位同学到我们宿舍炫耀说看了七遍，结果被我好一顿羞辱。</p>
+<p>然后，卡大神消失了，据说埋头在炮制一个叫做潘多拉的新世界，那个片子叫做《神之化身》，化到最后我国伟大的翻译家告诉我这个叫做《阿凡达》，猛一听我以为是讲述新疆某位兄弟的传奇。</p>
+<a id="more"></a>
+<p>好吧，这么烂的译名我忍了，Y也终于上演了，那是叫好又叫座啊，无数粉丝摇旗呐喊，奔走相告卡大神天神回归了，阿凡达那是跟IPHONE一样领先影史N多年，其它电影都没法玩了。（我记得2012也有好多童靴这么叫过，今次这么再叫，让我很以为是我国政府宣布N年一遇的洪水或者历史最什么）</p>
+<p>看着这些铺天盖地的评论，我动摇了，我相信群众的眼睛是雪亮的，而且有个狂热爱好电影的朋友（品味跟我还有些接近）大力推荐，所以我去山地爱马克思了一把，然后，我觉得我对不起我花出去那时间和金钱，我可是辛辛苦苦跑香港去看的啊。</p>
+<p>又见Jack，十多年过去了，居然还是Y，只不过卡大神要Y给我们来一段真人加长版《风中奇缘》。（N年前科林法瑞尔的真人版风中奇缘《新世界》已经让我倒足了胃口）。看着看着，我觉醒了，卡大神不就是活跃在起点的么，从铁达尼到阿凡达，从未改变。SY强身，YY强国，果不其然。</p>
+<p>话说某年某日，地球已经被折腾得不行袅，然而人类总是有办法的，在一个叫潘多拉的星球上找到袅一种灰矿石。不幸的是，有这种矿石的地方恰恰是类人智慧生物Navi人的栖息地。怎么办呢？在我泱泱大国文化光辉之下，老美也觉得拆迁是个好办法。</p>
+<p>我们知道一定要两手抓，两手都要硬。说久了那声震寰宇，震得老美也知道这是个真理，于是想出了两个解决方案：</p>
+<p>1、武装暴力</p>
+<p>2、和平解决</p>
+<p>武装暴力那是很简单的，我们地球那已经文明到掉渣了，Navi人还原始得不得了，干掉他们简直是易如反掌。不过，我们泱泱大球，怎么能只有一手呢，但问题是怎么和平解决呢？</p>
+<p>我们说过，人类总是有办法的，于是想出了让人类打入Navi人组织，劝说他们搬迁，于是Jack童靴闪亮登场了。</p>
+<p>不过，这位仁兄是个二愣子，而且是被临时拉过来凑数的。曾经是位海军航空兵，结果因为愣，把自己腿给废了（导演没说，不过我充分相信这个判断）。政府以完成任务让他能重新站立行走诱惑他接受了这个看起来很危险的任务，我们的反派BOSS说了，到潘多拉可比委内瑞拉死球多了。</p>
+<p>然而，YY的力量是伟大的，于是二愣子童靴不管干出多么傻愣的事情，比如在被定为危险的陌生环境乱窜，挑衅怪兽等等，都不过是热身而已。目的不过是让他有不那么充分的理由遇上美女，而且还是个公主，未来精神领袖的继承人。套路至此，YY强文根骨已现。</p>
+<p>然后就是你侬我侬，郎情妾意，间或穿插一下情敌愤怒而无奈的眼神，然后就是在某一浪漫的地方行那注定的苟且之事，这个套路大家太熟了，不扯了。</p>
+<p>但是二愣子童靴忘了自己是有使命的，他忘了别人可不会忘，于是没办法，为了小美人儿只好逼上梁山去袅。这时候得到宇宙博爱人品大爆发的童靴相助，牛逼哄哄的成为魅影骑士什么的都是YY文必然套路，也不扯了。</p>
+<p>但是二愣子终归是二愣子，面对我洋洋大球的凶猛武装，本来也算是知根知底的，却也愣没想到个好办法，不过就是召集人马来当炮灰，居然在自家地盘用骑兵正面冲锋，连个迂回啊伏击啊什么的都不会来一两下。</p>
+<p>不过YY是不需要成本的，于是圣母怒了，地球人完了，二愣子在诡异的仪式下成为袅真正的Navi愣，过上了幸福快乐的生活。</p>
+<p>不过我很担心，这次失败的最大BOSS不过是个上校，我洋洋大球肯定还是要回去的，到时候不知道Jack兄怎么抵抗。</p>
+<p>这么3个小时YY下来，让我很有种想哭的感觉，要不是某个原因，我会坚定地给它甩上一颗星。</p>
+<p>原因？那就是效果真的没的说，看得我很过瘾，技术分析控请绕道，我根本不会扯这个。</p>
+<p>然而说卡大神多有想象力那就是胡扯，潘多拉星球上的生物也就是地球上的物种稍稍做点手脚而已，比如那跟烤猪一样的豺狗，冷不丁来个直升机表演的昆虫，水母或者蒲公英一样的圣树卵子。不服气的人去玩玩魔兽或者看看我国古老的山海经，甚至那纠结N年的九州里边那专犁，那朱颜海都比卡大神想象力好多了。</p>
+<p>卡大神出彩的地方就是用技术把潘多拉展现在了你的面前。</p>
+<p>如果这是《请您欣赏》，我给五星，不过因为YY得我有些恶心，减掉一颗，再因为想象力还是不够，减掉半刻，再因为心疼我的钱和折腾，又减半刻，最后我想：</p>
+<p>三颗星。</p>
+<p>最后再加一句，说这部片子有什么人文情怀，什么勇气，什么自由，什么环保的鸟人统统见鬼去吧，卡大神不过怀着十多年前的霉烂爱情回来YY了一把。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2010/01/08/avatar/#disqus_thread</comments>
+    </item>
+    
+  </channel>
+</rss>
