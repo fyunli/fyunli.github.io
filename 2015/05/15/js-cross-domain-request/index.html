@@ -199,7 +199,16 @@
 <h1 id="6、通过_CORS_进行跨域">6、通过 CORS 进行跨域</h1><p>CORS 是W3C XMLHttpRequest Level 2 里规定的一种跨域方式。CORS 规范请参考 <a href="http://www.w3.org/TR/cors/" target="_blank" rel="external">CORS 规范</a> </p>
 <p>CORS 旨在定义一种规范让浏览器在接收到从提供者获取的资源时能够正决定是否应该将此资源分发给消费者作进一步处理。CROS利用资源提供者的显式授权来决定目标资源是否应该与消费者共享。换句话说，浏览器需要得到提供者的授权之后才会将其提供的资源分发给消费者。那么，资源的提供者如何进行资源的授权，并将授权的结果告诉浏览器呢？</p>
 <p>一个 CORS 请求大致过程如下：</p>
-<p>（1）消费者发送一个 Origin 报头到提供者端：Origin: <a href="http://www.bbb.com；" target="_blank" rel="external">http://www.bbb.com；</a><br>（2）提供者发送一个 Access-Control-Allow-Origin 响应报头给消费者，如果值为 * 或 Origin 对应的站点，则表示同意共享资源给消费者，如果值为 null 或者不存在 Access-Control-Allow-Origin 报头，则表示不同意共享资源给消费者；<br>（3）浏览器根据提供者的响应报文判断是否允许消费者跨域访问到提供者源。</p>
+<ol>
+<li><p>消费者发送一个 Origin 报头到提供者端：Origin: <a href="http://www.bbb.com；" target="_blank" rel="external">http://www.bbb.com；</a></p>
+</li>
+<li><p>提供者发送一个 Access-Control-Allow-Origin 响应报头给消费者，如果值为 * 或 Origin 对应的站点，则表示同意共享资源给消费者，如果值为 null 或者不存在 Access-Control-Allow-Origin 报头，则表示不同意共享资源给消费者；</p>
+</li>
+<li><p>浏览器根据提供者的响应报文判断是否允许消费者跨域访问到提供者源。</p>
+</li>
+</ol>
+<p>例如，一个Servlet C0RS响应图示如下：</p>
+<p><img src="http://ww4.sinaimg.cn/large/620f1e7egw1exdpypjjvbj20pr0h8wl4.jpg" alt=""></p>
 <p>CORS 是在支持这个规范的浏览器里，javascript 的写法和不跨域的 ajax 写法一模一样。</p>
 <h2 id="6-1、CORS_的浏览器支持">6.1、CORS 的浏览器支持</h2><p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1exdkvr5yw0j20se09ltby.jpg" alt="Cors Browser Support"></p>
 <h2 id="6-2、CORS_的服务器端配置">6.2、CORS 的服务器端配置</h2><h3 id="6-2-1_Apache">6.2.1 Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header set Access-Control-Allow-Origin &#34;*&#34;</span><br></pre></td></tr></table></figure>
