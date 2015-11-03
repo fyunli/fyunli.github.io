@@ -7,8 +7,42 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Tue, 03 Nov 2015 06:50:52 GMT</pubDate>
+    <pubDate>Tue, 03 Nov 2015 06:53:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[JRE 导入 StartSSL 根证书]]></title>
+      <link>http://fyun.li/2015/11/03/import%20startssl%20into%20jre/</link>
+      <guid>http://fyun.li/2015/11/03/import%20startssl%20into%20jre/</guid>
+      <pubDate>Tue, 03 Nov 2015 06:51:18 GMT</pubDate>
+      <description>
+      <![CDATA[<h1 id="0x00_绪言">0x00 绪言</h1><p>通过 java 执行 https 请求时可能出现以下错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h1 id="0x00_绪言">0x00 绪言</h1><p>通过 java 执行 https 请求时可能出现以下错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>
+<a id="more"></a>
+<p>最近我们有个项目使用了沃通的免费 SSL 证书，因其根证书属于 StartSSL 并不在 JRE 默认信任列表中，因此简单记录下导入过程。</p>
+<h1 id="0x01_导入跟帧数到_JRE">0x01 导入跟帧数到 JRE</h1><p>首先，我们需要获取根证书：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/tmp&#10;cd ~/tmp&#10;&#10;curl http://www.startssl.com/certs/ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class1.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class2.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class3.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class4.server.ca.crt -O</span><br></pre></td></tr></table></figure>
+<p>然后，将证书导入到 JRE 信任列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca -file ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class1 -file sub.class1.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class2 -file sub.class2.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class3 -file sub.class3.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class4 -file sub.class4.server.ca.crt</span><br></pre></td></tr></table></figure>
+<p>别奇怪，”changeit” 只是个默认密码而已。</p>
+<p>最后，验证一下导入是否成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -keystore &#34;/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts&#34; -storepass changeit -list | grep start</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startcom.ca, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class4, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class3, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class2, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class1, 2015-11-3, trustedCertEntry,</span><br></pre></td></tr></table></figure>
+<p>It’s OK!</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/11/03/import%20startssl%20into%20jre/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[Ubuntu环境配置速记]]></title>
@@ -58,40 +92,6 @@
 <h1 id="八、配置iptables开放指定的端口">八、配置iptables开放指定的端口</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20801;&#35768;&#26412;&#22320;&#22238;&#29615;&#25509;&#21475;(&#21363;&#36816;&#34892;&#26412;&#26426;&#35775;&#38382;&#26412;&#26426;)&#10;iptables -A INPUT -i lo -j ACCEPT&#10;# &#20801;&#35768;&#24050;&#24314;&#31435;&#30340;&#25110;&#30456;&#20851;&#36830;&#30340;&#36890;&#34892;&#10;iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT&#10;#&#20801;&#35768;&#25152;&#26377;&#26412;&#26426;&#21521;&#22806;&#30340;&#35775;&#38382;&#10;iptables -A OUTPUT -j ACCEPT&#10;# &#20801;&#35768;&#35775;&#38382;22&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 22 -j ACCEPT&#10;#&#20801;&#35768;&#35775;&#38382;80&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 80 -j ACCEPT&#10;#&#20801;&#35768;FTP&#26381;&#21153;&#30340;21&#21644;20&#31471;&#21475;&#10;iptables -A INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -A INPUT -p tcp --dport 20 -j ACCEPT&#10;#&#22914;&#26524;&#26377;&#20854;&#20182;&#31471;&#21475;&#30340;&#35805;&#65292;&#35268;&#21017;&#20063;&#31867;&#20284;&#65292;&#31245;&#24494;&#20462;&#25913;&#19978;&#36848;&#35821;&#21477;&#23601;&#34892;&#10;#&#20801;&#35768;ping&#10;iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT&#10;#&#31105;&#27490;&#20854;&#20182;&#26410;&#20801;&#35768;&#30340;&#35268;&#21017;&#35775;&#38382;&#10;iptables -A INPUT -j REJECT  #&#65288;&#27880;&#24847;&#65306;&#22914;&#26524;22&#31471;&#21475;&#26410;&#21152;&#20837;&#20801;&#35768;&#35268;&#21017;&#65292;SSH&#38142;&#25509;&#20250;&#30452;&#25509;&#26029;&#24320;&#12290;&#65289;&#10;iptables -A FORWARD -j REJECT</span><br></pre></td></tr></table></figure>
 ]]></content:encoded>
       <comments>http://fyun.li/2015/09/22/ubuntu-devenv-note/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[JRE 导入 StartSSL 根证书]]></title>
-      <link>http://fyun.li/2015/09/22/import%20startssl%20into%20jre/</link>
-      <guid>http://fyun.li/2015/09/22/import%20startssl%20into%20jre/</guid>
-      <pubDate>Tue, 22 Sep 2015 06:51:18 GMT</pubDate>
-      <description>
-      <![CDATA[<h1 id="0x00_绪言">0x00 绪言</h1><p>通过 java 执行 https 请求时可能出现以下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
-<p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
-<p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<h1 id="0x00_绪言">0x00 绪言</h1><p>通过 java 执行 https 请求时可能出现以下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
-<p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
-<p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>
-<a id="more"></a>
-<p>最近我们有个项目使用了沃通的免费 SSL 证书，因其根证书属于 StartSSL 并不在 JRE 默认信任列表中，因此简单记录下导入过程。</p>
-<h1 id="0x01_导入跟帧数到_JRE">0x01 导入跟帧数到 JRE</h1><p>首先，我们需要获取根证书：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/tmp&#10;cd ~/tmp&#10;&#10;curl http://www.startssl.com/certs/ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class1.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class2.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class3.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class4.server.ca.crt -O</span><br></pre></td></tr></table></figure>
-<p>然后，将证书导入到 JRE 信任列表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca -file ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class1 -file sub.class1.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class2 -file sub.class2.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class3 -file sub.class3.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class4 -file sub.class4.server.ca.crt</span><br></pre></td></tr></table></figure>
-<p>别奇怪，”changeit” 只是个默认密码而已。</p>
-<p>最后，验证一下导入是否成功：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -keystore &#34;/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts&#34; -storepass changeit -list | grep start</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startcom.ca, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class4, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class3, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class2, 2015-11-3, trustedCertEntry,&#10;startcom.ca.sub.class1, 2015-11-3, trustedCertEntry,</span><br></pre></td></tr></table></figure>
-<p>It’s OK!</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2015/09/22/import%20startssl%20into%20jre/#disqus_thread</comments>
     </item>
     
     <item>
