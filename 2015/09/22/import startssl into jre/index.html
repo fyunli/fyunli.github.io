@@ -158,6 +158,7 @@
 <p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
 <p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>
+<a id="more"></a>
 <p>最近我们有个项目使用了沃通的免费 SSL 证书，因其根证书属于 StartSSL 并不在 JRE 默认信任列表中，因此简单记录下导入过程。</p>
 <h1 id="0x01_导入跟帧数到_JRE">0x01 导入跟帧数到 JRE</h1><p>首先，我们需要获取根证书：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/tmp&#10;cd ~/tmp&#10;&#10;curl http://www.startssl.com/certs/ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class1.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class2.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class3.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class4.server.ca.crt -O</span><br></pre></td></tr></table></figure>
