@@ -15,7 +15,7 @@
 <meta property="og:description" content="0x00 开始开始以最无趣的 “Hello World” 开始吧。
 1public class Hello &amp;#123;&amp;#10;&amp;#9;&amp;#10;&amp;#9;public String greeting()&amp;#123;&amp;#10;&amp;#9;&amp;#9;return &amp;#34;Hello World.&amp;#34;;&amp;#10;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#10;&amp;#125;
 然后在 TextView">
-<meta property="og:updated_time" content="2015-11-22T14:06:22.000Z">
+<meta property="og:updated_time" content="2015-11-22T14:11:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dagger2 小记">
 <meta name="twitter:description" content="0x00 开始开始以最无趣的 “Hello World” 开始吧。
@@ -218,6 +218,7 @@
 <p>然后在 TextView 中显示，常规的方法是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello hello = new Hello();&#10;textViewHello.setText(hello.greeting());</span><br></pre></td></tr></table></figure>
 <p>那么，如果使用 Dagger2 进行依赖注入，我们使用 @Inject 将 Hello 实例注入：</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Inject Hello hello;&#10;&#10;...&#10;&#10;textViewHello.setText(hello.greeting());</span><br></pre></td></tr></table></figure>
 <p>这里存在一个问题：要怎么实例化 Hello 呢? Dagger2 提供 @Inject 标注，在构造函数中标注后，当需要实例化时，Dagger2 就会调用这个构造函数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Singleton&#10;public class Hello &#123;&#10;&#10;&#9;@Inject public Hello() &#123;&#125;&#10;&#9;&#10;&#9;public String greeting()&#123;&#10;&#9;&#9;return &#34;Hello World.&#34;;&#10;&#9;&#125;&#10;&#9;&#10;&#125;</span><br></pre></td></tr></table></figure>
@@ -230,7 +231,7 @@
 <p>打完收工！</p>
 <p>当然，你还需要通过 gradle 引入 Dagger2:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;apply plugin: &#39;com.neenbedankt.android-apt&#39;&#10;&#10;buildscript &#123;&#10;    repositories &#123;&#10;        jcenter()&#10;    &#125;&#10;&#10;    dependencies &#123;&#10;        classpath &#39;com.neenbedankt.gradle.plugins:android-apt:1.4&#39;&#10;    &#125;&#10;&#125;&#10;&#10;...&#10;&#10;dependencies &#123;&#10;&#9;...&#10;    provided &#39;javax.annotation:javax.annotation-api:1.2&#39;&#10;    apt &#39;com.google.dagger:dagger-compiler:2.0.2&#39;&#10;    compile &#39;com.google.dagger:dagger:2.0.2&#39;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="0X01_进阶">0X01 进阶</h1><p>如上所述，我们自己写的代码可以通过 @Inject 实例化并注入，但若是第三方库提供的类呢？</p>
+<h1 id="0x01_进阶">0x01 进阶</h1><p>如上所述，我们自己写的代码可以通过 @Inject 实例化并注入，但若是第三方库提供的类呢？</p>
 <p>这时需要用到 @Module, @Provide:</p>
 <p>@Module</p>
 <p>Module 是拥有可以提供依赖的函数的类，我们定义一个类，标注为 @Module,然后 Dagger2 就知道哪里可以找到构建一个对象所需要的依赖啦。而且 Module 被设计为可以被分割和组合的模式，有益于模块的划分。</p>
@@ -247,7 +248,7 @@
 <p>@Qualifier</p>
 <p>当类的类型不足以鉴别一个依赖的时候，我们就可以使用这个注解标示。</p>
 <p>例如：在Android中，我们会需要不同类型的 Context，所以我们就可以定义 Qualifier 注解 @ForApplication 和 @ForActivity，这样当注入一个 Context 的时候，我们就可以告诉 Dagger 我们想要哪种类型的 Context。</p>
-<h1 id="0X02_参考">0X02 参考</h1><p><a href="http://google.github.io/dagger/" target="_blank" rel="external">Dagger 2</a></p>
+<h1 id="0x02_参考">0x02 参考</h1><p><a href="http://google.github.io/dagger/" target="_blank" rel="external">Dagger 2</a></p>
 <p><a href="http://fernandocejas.com/2015/04/11/tasting-dagger-2-on-android/" target="_blank" rel="external">Tasting Dagger 2 on Android</a></p>
 <p><a href="http://frogermcs.github.io/dependency-injection-with-dagger-2-the-api/" target="_blank" rel="external">Dependency injection with Dagger 2 - the API</a></p>
 
