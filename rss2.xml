@@ -7,8 +7,58 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Tue, 03 Nov 2015 06:53:09 GMT</pubDate>
+    <pubDate>Sun, 22 Nov 2015 14:06:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Dagger2 小记]]></title>
+      <link>http://fyun.li/2015/11/22/dagger2-get-start/</link>
+      <guid>http://fyun.li/2015/11/22/dagger2-get-start/</guid>
+      <pubDate>Sun, 22 Nov 2015 14:05:00 GMT</pubDate>
+      <description>
+      <![CDATA[<h1 id="0x00_开始">0x00 开始</h1><p>开始以最无趣的 “Hello World” 开始吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span clas]]>
+      </description>
+      <content:encoded><![CDATA[<h1 id="0x00_开始">0x00 开始</h1><p>开始以最无趣的 “Hello World” 开始吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Hello &#123;&#10;&#9;&#10;&#9;public String greeting()&#123;&#10;&#9;&#9;return &#34;Hello World.&#34;;&#10;&#9;&#125;&#10;&#9;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 TextView 中显示，常规的方法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello hello = new Hello();&#10;textViewHello.setText(hello.greeting());</span><br></pre></td></tr></table></figure>
+<p>那么，如果使用 Dagger2 进行依赖注入，我们使用 @Inject 将 Hello 实例注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Inject Hello hello;&#10;&#10;...&#10;&#10;textViewHello.setText(hello.greeting());</span><br></pre></td></tr></table></figure>
+<p>这里存在一个问题：要怎么实例化 Hello 呢? Dagger2 提供 @Inject 标注，在构造函数中标注后，当需要实例化时，Dagger2 就会调用这个构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Singleton&#10;public class Hello &#123;&#10;&#10;&#9;@Inject public Hello() &#123;&#125;&#10;&#9;&#10;&#9;public String greeting()&#123;&#10;&#9;&#9;return &#34;Hello World.&#34;;&#10;&#9;&#125;&#10;&#9;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>PS: 加入 Hello 也需要注入其他类呢？ @Inject 同样轻松搞定，构造函数参数以及类成员属性均可轻松注入。</p>
+<p>这时依然无法工作，如果你运行程序，会产生悲伤的 NullPointerException，那么还差什么呢？</p>
+<p>我们需要创建一个Component，Component是Provider和Injector之间的桥梁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Singleton&#10;@Component&#10;public interface DemoComponent &#123;&#10;&#10;    void inject(MainActivity activity);&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Dagger2 会自动生成一个 DaggerDemoComponent，在 Activity 中调用注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DaggerDemoComponent.create().inject(this);</span><br></pre></td></tr></table></figure>
+<p>打完收工！</p>
+<p>当然，你还需要通过 gradle 引入 Dagger2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;apply plugin: &#39;com.neenbedankt.android-apt&#39;&#10;&#10;buildscript &#123;&#10;    repositories &#123;&#10;        jcenter()&#10;    &#125;&#10;&#10;    dependencies &#123;&#10;        classpath &#39;com.neenbedankt.gradle.plugins:android-apt:1.4&#39;&#10;    &#125;&#10;&#125;&#10;&#10;...&#10;&#10;dependencies &#123;&#10;&#9;...&#10;    provided &#39;javax.annotation:javax.annotation-api:1.2&#39;&#10;    apt &#39;com.google.dagger:dagger-compiler:2.0.2&#39;&#10;    compile &#39;com.google.dagger:dagger:2.0.2&#39;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="0X01_进阶">0X01 进阶</h1><p>如上所述，我们自己写的代码可以通过 @Inject 实例化并注入，但若是第三方库提供的类呢？</p>
+<p>这时需要用到 @Module, @Provide:</p>
+<p>@Module</p>
+<p>Module 是拥有可以提供依赖的函数的类，我们定义一个类，标注为 @Module,然后 Dagger2 就知道哪里可以找到构建一个对象所需要的依赖啦。而且 Module 被设计为可以被分割和组合的模式，有益于模块的划分。</p>
+<p>@Provide</p>
+<p>在标注为 @Module 的类中的函数可以标注为 @Provide, 标示可以提供相应的依赖，函数的前缀必须为 provides.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Module&#10;public class DemoModule &#123;&#10;&#10;    @Provides @Singleton&#10;    public GithubService provideGithubService() &#123;&#10;        return new GithubService();&#10;    &#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们要告知 Component 使用这个 Module: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Singleton&#10;@Component(modules = &#123;DemoModule.class&#125;)&#10;public interface DemoComponent &#123;&#10;&#10;    void inject(MainActivity activity);&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>@Component 可以通过 dependencies 申明依赖依他的 @Component。</p>
+<p>@Singleton</p>
+<p>这是标示一个单例的注释，可以和 @Provide 共同标注一个函数，标示这个函数返回的对象都是单例的，也可以和 @Component 一起标注一个Component，标示这个 Component 的 Scope 是全局的。</p>
+<p>@Scope</p>
+<p>Scopes 非常的有用，Dagger2 可以通过自定义注解限定注解作用域。</p>
+<p>@Qualifier</p>
+<p>当类的类型不足以鉴别一个依赖的时候，我们就可以使用这个注解标示。</p>
+<p>例如：在Android中，我们会需要不同类型的 Context，所以我们就可以定义 Qualifier 注解 @ForApplication 和 @ForActivity，这样当注入一个 Context 的时候，我们就可以告诉 Dagger 我们想要哪种类型的 Context。</p>
+<h1 id="0X02_参考">0X02 参考</h1><p><a href="http://google.github.io/dagger/" target="_blank" rel="external">Dagger 2</a></p>
+<p><a href="http://fernandocejas.com/2015/04/11/tasting-dagger-2-on-android/" target="_blank" rel="external">Tasting Dagger 2 on Android</a></p>
+<p><a href="http://frogermcs.github.io/dependency-injection-with-dagger-2-the-api/" target="_blank" rel="external">Dependency injection with Dagger 2 - the API</a></p>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/11/22/dagger2-get-start/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[JRE 导入 StartSSL 根证书]]></title>
@@ -856,26 +906,6 @@ public class PinyinTest {
 <p>看图不说话</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2010/01/22/sun-memorial/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[Google退出中国]]></title>
-      <link>http://fyun.li/2010/01/13/google-quit/</link>
-      <guid>http://fyun.li/2010/01/13/google-quit/</guid>
-      <pubDate>Wed, 13 Jan 2010 06:48:37 GMT</pubDate>
-      <description>
-      <![CDATA[<p>今天，<a href="http://googleblog.blogspot.com/2010/01/new-approach-to-china.html">Google在英文的官方博客</a>声称，Google已经做出决定，重新检讨在中国开展业务的可行性，不愿再审查google.cn上的搜索结果。Google将在未来几周时间和中国政府谈判，要求能够在中国法律框架内运营未经过滤审查的搜索引擎。Google承认这很可能意味着必须关闭google.cn，撤出Google在中国的办公室。</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<p>今天，<a href="http://googleblog.blogspot.com/2010/01/new-approach-to-china.html" target="_blank" rel="external">Google在英文的官方博客</a>声称，Google已经做出决定，重新检讨在中国开展业务的可行性，不愿再审查google.cn上的搜索结果。Google将在未来几周时间和中国政府谈判，要求能够在中国法律框架内运营未经过滤审查的搜索引擎。Google承认这很可能意味着必须关闭google.cn，撤出Google在中国的办公室。</p>
-<a id="more"></a>
-<p>我们也知道，在贵国这个谈判没有成功的可能，因此，这个声明意味着Google即将退出中国，而且很快就会成为事实。从谷歌的声明可以看出，双方对于网络自由的认知差距是巨大的，贵国对于网络的管制已经到了令人发指的地步。这份声明，只能是彻底摊牌，我党震怒，从此不仅是google.cn, google.com也将被拒于墙外。</p>
-<p>对于Google来说也许是个艰难的决定，但不会影响其全球业务，毕竟谷歌中国营收在其全球营收当中只有1.x个百分点。而对于像我这样的人，则是痛苦的。几年以来，已经习惯于用Google搜索，Gmail收发邮件, Google Reader阅读内容, Google Canlendar安排日程，一旦Google退出，我只能翻山越岭，远蹈重洋来使用这些服务。</p>
-<p>Tor, Puff, VPN，苦练翻墙绝技才是硬道理。</p>
-<p>Google, Twitter, Fackbook, Blogger, Wordpress…………，这一幢长串伟大的互联网服务都绝迹贵国，不知道是我等草民的悲哀还是贵国的悲哀。</p>
-<p>假以时日，大部分网民终将在贵国局域网内被愚民，然后驯服地在墙内自娱自乐。但求真知的渴望是不会泯灭的，总有一天，这些墙会轰然倒坍，从此，国人会有不被管制不被阉割的真正的互联网。</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2010/01/13/google-quit/#disqus_thread</comments>
     </item>
     
   </channel>
