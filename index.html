@@ -167,6 +167,65 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-android-databinding-bug" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/15/android-databinding-bug/" class="article-date">
+  	<time datetime="2015-12-15T12:14:14.000Z" itemprop="datePublished">2015-12-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/15/android-databinding-bug/">Fix Android Studio DataBinding cannot resolve symbol &#39;databinding&#39; bug</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android DataBinding 使起来还是蛮有趣的，但是 Android Studio 总是不时莫名其貌的出状况，找不着生成的 databinding classes。构建的时候会出现如下提示：</p>
+<p><img src="http://ww2.sinaimg.cn/large/620f1e7egw1ez0lt0wuf8j20v005fjsh.jpg" alt="构建提示"></p>
+<p>Google 了一些方法都不灵。最后只有以下这样将生成的 java 文件 copy 到正确位置解决问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// fix for dataBinder: Source folders generated at incorrect location&#10;android.applicationVariants.all &#123; variant -&#62;&#10;    def variantName = variant.name.capitalize()&#10;    def inputDir    = &#34;$&#123;buildDir&#125;/intermediates/classes/$&#123;variant.dirName&#125;&#34;&#10;    def sourceDir   = &#34;$&#123;buildDir&#125;/generated/source/dataBinding/$&#123;variant.dirName&#125;&#34;&#10;    def copyTask    = tasks.create(name: &#34;dataBindingFix$&#123;variantName&#125;&#34;, type: Copy) &#123;&#10;        from inputDir&#10;        into sourceDir&#10;        include &#39;**/*.java&#39;&#10;    &#125;&#10;    tasks[&#34;generate$&#123;variantName&#125;Sources&#34;].dependsOn copyTask&#10;    variant.addJavaSourceFoldersToModel new File(sourceDir)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>遇上同样问题的同学，将以下脚本加到 app build.gralde 就可以了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-dagger2-get-start" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -761,62 +820,6 @@
         <p class="article-more-link">
           <a  href="/2011/06/06/macbook-pro-debut/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hibernate-history" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2010/06/12/hibernate-history/" class="article-date">
-  	<time datetime="2010-06-12T13:31:28.000Z" itemprop="datePublished">2010-06-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/12/hibernate-history/">修改历史记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要实现修改历史记录的功能，以前我们可以使用Hibernate Interceptor，hibernate 3.0之后，可以使用Event Listener。</p>
-<p>关于这个，已经有其他人阐述过了，请猛击这里：<a href="http://bit.ly/afOs8p" title="http://bit.ly/afOs8p" target="_blank" rel="external">http://bit.ly/afOs8p</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
       
       <div class="clearfix"></div>
     </div>

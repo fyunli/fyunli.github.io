@@ -7,8 +7,26 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Sun, 22 Nov 2015 14:11:43 GMT</pubDate>
+    <pubDate>Tue, 15 Dec 2015 12:29:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Fix Android Studio DataBinding cannot resolve symbol 'databinding' bug]]></title>
+      <link>http://fyun.li/2015/12/15/android-databinding-bug/</link>
+      <guid>http://fyun.li/2015/12/15/android-databinding-bug/</guid>
+      <pubDate>Tue, 15 Dec 2015 12:14:14 GMT</pubDate>
+      <description>
+      <![CDATA[<p>Android DataBinding 使起来还是蛮有趣的，但是 Android Studio 总是不时莫名其貌的出状况，找不着生成的 databinding classes。构建的时候会出现如下提示：</p>
+<p><img src="http://ww2.sinaimg]]>
+      </description>
+      <content:encoded><![CDATA[<p>Android DataBinding 使起来还是蛮有趣的，但是 Android Studio 总是不时莫名其貌的出状况，找不着生成的 databinding classes。构建的时候会出现如下提示：</p>
+<p><img src="http://ww2.sinaimg.cn/large/620f1e7egw1ez0lt0wuf8j20v005fjsh.jpg" alt="构建提示"></p>
+<p>Google 了一些方法都不灵。最后只有以下这样将生成的 java 文件 copy 到正确位置解决问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// fix for dataBinder: Source folders generated at incorrect location&#10;android.applicationVariants.all &#123; variant -&#62;&#10;    def variantName = variant.name.capitalize()&#10;    def inputDir    = &#34;$&#123;buildDir&#125;/intermediates/classes/$&#123;variant.dirName&#125;&#34;&#10;    def sourceDir   = &#34;$&#123;buildDir&#125;/generated/source/dataBinding/$&#123;variant.dirName&#125;&#34;&#10;    def copyTask    = tasks.create(name: &#34;dataBindingFix$&#123;variantName&#125;&#34;, type: Copy) &#123;&#10;        from inputDir&#10;        into sourceDir&#10;        include &#39;**/*.java&#39;&#10;    &#125;&#10;    tasks[&#34;generate$&#123;variantName&#125;Sources&#34;].dependsOn copyTask&#10;    variant.addJavaSourceFoldersToModel new File(sourceDir)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>遇上同样问题的同学，将以下脚本加到 app build.gralde 就可以了。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/12/15/android-databinding-bug/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[Dagger2 小记]]></title>
@@ -895,22 +913,6 @@ public class PinyinTest {
 <p>再扯下去我非要垂涎三尺不可，还是就此打住吧，择日去莲塘一饱口福可也。</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2010/01/28/chi-gou-rou/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[SUN的纪念]]></title>
-      <link>http://fyun.li/2010/01/22/sun-memorial/</link>
-      <guid>http://fyun.li/2010/01/22/sun-memorial/</guid>
-      <pubDate>Fri, 22 Jan 2010 11:02:43 GMT</pubDate>
-      <description>
-      <![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2010/01/SunRIPsmall2.jpg" alt=""> </p>
-<p>看图不说话</p>
-]]>
-      </description>
-      <content:encoded><![CDATA[<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2010/01/SunRIPsmall2.jpg" alt=""> </p>
-<p>看图不说话</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2010/01/22/sun-memorial/#disqus_thread</comments>
     </item>
     
   </channel>
