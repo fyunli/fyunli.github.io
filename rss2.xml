@@ -7,8 +7,33 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Tue, 15 Dec 2015 12:32:46 GMT</pubDate>
+    <pubDate>Sat, 19 Dec 2015 11:38:23 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Ubuntu 搭建 shadowsocks]]></title>
+      <link>http://fyun.li/2015/12/19/ubuntu-ss/</link>
+      <guid>http://fyun.li/2015/12/19/ubuntu-ss/</guid>
+      <pubDate>Sat, 19 Dec 2015 11:30:21 GMT</pubDate>
+      <description>
+      <![CDATA[<p>在Ubuntu下安装ss很简单。只需要依次执行下面3条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pr]]>
+      </description>
+      <content:encoded><![CDATA[<p>在Ubuntu下安装ss很简单。只需要依次执行下面3条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update&#10;apt-get install python-pip&#10;pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<p>pip 是 python 下的方便安装的工具，类似 apt-get。</p>
+<p>全部执行完毕且没有报错的话，我们的 shadowsocks 就算是装完了。接下来就是配置部署了。</p>
+<p>写一个配置文件保存为etc/shadowsocks.json，文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;server&#34;:&#34;my_server_ip&#34;,&#10;    &#34;server_port&#34;:8388,&#10;    &#34;local_address&#34;: &#34;127.0.0.1&#34;,&#10;    &#34;local_port&#34;:1080,&#10;    &#34;password&#34;:&#34;mypassword&#34;,&#10;    &#34;timeout&#34;:300,&#10;    &#34;method&#34;:&#34;aes-256-cfb&#34;,&#10;    &#34;fast_open&#34;: false&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>server, server_port, password 需要自行根据自己的实际情况修改。</p>
+<p>配置文件编辑完成后，接下来就可以部署运行了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
+<p>当然，我们可不希望每次重启服务器都手动启动 SS, 因此我们要把这条命令放到这个文件下：/etc/rc.d/rc.local，这样以后就能开机自动运行了。</p>
+<p>好了，打开客户端呼吸墙外的空气吧！</p>
+<p><a href="https://shadowsocks.com/client.html" target="_blank" rel="external">客户端下载链接</a></p>
+]]></content:encoded>
+      <comments>http://fyun.li/2015/12/19/ubuntu-ss/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[Fix Android Studio DataBinding cannot resolve symbol 'databinding' bug]]></title>
@@ -889,30 +914,6 @@ public class PinyinTest {
 <p>总觉得RYAN的转变很突兀，被自己理论武装实践经年而志满意得的生活方式被一黄毛丫头冲撞几下就土崩瓦解，这也太过分了嘛。可能的解释就是他其实一直就很寂寞，潜意识里尤其希望温暖，因此出差还是要ONS找点慰藉，回到单调无比的窝还想女邻居晚上来玩，不情愿还是带上假人模拍照。娜塔莉只是给本已潜藏的汹涌助推了一把。</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2010/02/11/up-in-the-air/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[吃狗肉]]></title>
-      <link>http://fyun.li/2010/01/28/chi-gou-rou/</link>
-      <guid>http://fyun.li/2010/01/28/chi-gou-rou/</guid>
-      <pubDate>Thu, 28 Jan 2010 13:24:49 GMT</pubDate>
-      <description>
-      <![CDATA[<p>据说贵国正在酝酿出台《反虐待动物法》，还据说该法将会规定违法食用或者销售狗肉将会被处于最高罚款五千或者拘留十五天的处罚。</p>
-<p>我觉得如果这些据说属实，那么只能证明贵国有相当一部分的人确实很闲很无聊，而且脑子都因为经常洗桑拿而导致进水过多。在如今合法公民都被以各种名义虐待的时候居然有空关心动物，我对如此的博爱胸襟只能感佩万分。感佩之余我想弄明白什么是违法食用，又为什么是狗肉而不是猪肉牛肉，或者兔子肉老鼠肉什么的。</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<p>据说贵国正在酝酿出台《反虐待动物法》，还据说该法将会规定违法食用或者销售狗肉将会被处于最高罚款五千或者拘留十五天的处罚。</p>
-<p>我觉得如果这些据说属实，那么只能证明贵国有相当一部分的人确实很闲很无聊，而且脑子都因为经常洗桑拿而导致进水过多。在如今合法公民都被以各种名义虐待的时候居然有空关心动物，我对如此的博爱胸襟只能感佩万分。感佩之余我想弄明白什么是违法食用，又为什么是狗肉而不是猪肉牛肉，或者兔子肉老鼠肉什么的。</p>
-<a id="more"></a>
-<p>之所以我会唠叨起这个问题是因为我是喜欢吃狗肉的，我想只要不偷不抢不吃你家的狗，恐怕我吃多少狗肉犯不着人管。至于爱狗人士的那些调调，我认为因为养些奇形怪状的宠物狗就反对别人吃狗肉是流氓行为。你喜欢养狗尽可以养去，我喜欢吃狗肉也于卿无干，正如我不喜欢养狗，觉得无聊而脏，但我也不会扯着嗓子说养狗扰邻，或者抡着棒子去扑杀那些奇形怪状的阿猫阿狗。养狗还是吃狗肉，这个只是个人喜好问题，没必要将自己的意志强加于人或者上升为法，我估计再NC的政府也不至于会真正出台这样的法。</p>
-<p>还有一些动辄喜欢代表全人类的东西，说些狗是人类的朋友什么的屁话。我还是以为这只是个人选择问题，你可以把狗当做你的朋友或者伴侣（只要你家不反对），我也有权把狗视作美味，仅此而已。</p>
-<p>垃圾话说了一大堆，其实我是想说我真的喜欢狗肉，如果现在有一碗热腾腾狗肉我会感动得要哭。</p>
-<p>我很小的时候就吃狗肉，这个是拜我父母所赐，因为我小时候可能某方面功能失调直到上幼儿园还经常尿床，这是一个如今提及很囧的事情。也正是因为这个囧毛病使得我小时候美食了相当一些数量的狗肉，因为据我们那地方传言吃小狗（大约半岁到一岁，约摸十斤左右）可以治这种尿床的毛病。当然我们那村子当时是没有现在这些五花八门的狗的，有的只是一些黑的或者黄的比较朴素的土狗，但美味的也就是这一类型的，虽然我没吃过哈巴狗狮子狗贵宾狗什么的，但我想肯定不会好吃，我也不会想要去吃。</p>
-<p>我中学的时候，有个同学上到初中就认为念书没前途（现在看来还是有道理的）跑去学厨师去了，那年暑假我们弄了一条十来斤的小狗（我保证不是违法获得的）在他家测试了一下他的厨艺，至今让我想念，虽然想来做法不算华丽佐料不够丰富。</p>
-<p>大二暑假放假回家，老爹难得地大发慈悲弄了一锅狗肉，做法跟一般的焖、烧、炖有很大区别，用我们客家话念起来类似“歇”，弄完之后狗肉还是白白嫩嫩的，但是相当的香滑，我认为是我吃过的最好的一顿狗肉。</p>
-<p>再扯下去我非要垂涎三尺不可，还是就此打住吧，择日去莲塘一饱口福可也。</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2010/01/28/chi-gou-rou/#disqus_thread</comments>
     </item>
     
   </channel>
