@@ -9,11 +9,11 @@
 1javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExcept">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JRE 导入 StartSSL 根证书">
-<meta property="og:url" content="http://fyun.li/2015/11/03/import startssl into jre/index.html">
+<meta property="og:url" content="http://fyun.li/2015/11/03/import-startssl-into-jre/index.html">
 <meta property="og:site_name" content="雲之彼岸">
 <meta property="og:description" content="0x00 绪言通过 java 执行 https 请求时可能出现以下错误:
 1javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExcept">
-<meta property="og:updated_time" content="2015-11-03T06:53:09.000Z">
+<meta property="og:updated_time" content="2015-12-26T11:13:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JRE 导入 StartSSL 根证书">
 <meta name="twitter:description" content="0x00 绪言通过 java 执行 https 请求时可能出现以下错误:
@@ -169,10 +169,10 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-import startssl into jre" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-import-startssl-into-jre" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/03/import startssl into jre/" class="article-date">
+      <a href="/2015/11/03/import-startssl-into-jre/" class="article-date">
   	<time datetime="2015-11-03T06:51:18.000Z" itemprop="datePublished">2015-11-03</time>
 </a>
     </div>
@@ -217,7 +217,7 @@
 <p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>
 <a id="more"></a>
 <p>最近我们有个项目使用了沃通的免费 SSL 证书，因其根证书属于 StartSSL 并不在 JRE 默认信任列表中，因此简单记录下导入过程。</p>
-<h1 id="0x01_导入跟帧数到_JRE">0x01 导入跟帧数到 JRE</h1><p>首先，我们需要获取根证书：</p>
+<h1 id="0x01_导入根证书到_JRE">0x01 导入根证书到 JRE</h1><p>首先，我们需要获取根证书：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/tmp&#10;cd ~/tmp&#10;&#10;curl http://www.startssl.com/certs/ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class1.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class2.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class3.server.ca.crt -O&#10;curl http://www.startssl.com/certs/sub.class4.server.ca.crt -O</span><br></pre></td></tr></table></figure>
 <p>然后，将证书导入到 JRE 信任列表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca -file ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class1 -file sub.class1.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class2 -file sub.class2.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class3 -file sub.class3.server.ca.crt&#10;&#10;sudo keytool -import -trustcacerts -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class4 -file sub.class4.server.ca.crt</span><br></pre></td></tr></table></figure>
