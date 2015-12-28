@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="雲之彼岸">
 <meta property="og:description" content="一、安装 openssh1sudo apt-get install openssh-server
 二、安装 mysql1sudo apt-get install mysql-server mysql-client">
-<meta property="og:updated_time" content="2015-12-24T04:33:29.000Z">
+<meta property="og:updated_time" content="2015-12-28T08:09:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu环境配置速记">
 <meta name="twitter:description" content="一、安装 openssh1sudo apt-get install openssh-server
@@ -210,12 +210,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
-<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+        <h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="三、安装_java">三、安装 java</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties&#10;sudo add-apt-repository ppa:webupd8team/java&#10;sudo apt-get update&#10;sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
-<h1 id="四、安装_Tomcat">四、安装 Tomcat</h1><h2 id="1、创建_tomcat_用户">1、创建 tomcat 用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd tomcat&#10;sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat</span><br></pre></td></tr></table></figure>
-<h2 id="2、下载_tomcat_并解压">2、下载 tomcat 并解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt&#10;sudo wget http://www.apache.org/dist/tomcat/tomcat-8/v8.0.26/bin/apache-tomcat-8.0.26.tar.gz&#10;sudo tar -xvf apache-tomcat-8.0.26.tar.gz</span><br></pre></td></tr></table></figure>
+<h1 id="三、安装_java">三、安装 java</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties&#10;sudo add-apt-repository ppa:webupd8team/java&#10;sudo apt-get update&#10;sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+<h1 id="四、安装_Tomcat">四、安装 Tomcat</h1><h2 id="1、创建_tomcat_用户">1、创建 tomcat 用户</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd tomcat&#10;sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat</span><br></pre></td></tr></table></figure>
+<h2 id="2、下载_tomcat_并解压">2、下载 tomcat 并解压</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt&#10;sudo wget http://www.apache.org/dist/tomcat/tomcat-8/v8.0.26/bin/apache-tomcat-8.0.26.tar.gz&#10;sudo tar -xvf apache-tomcat-8.0.26.tar.gz</span><br></pre></td></tr></table></figure>
 <h2 id="3、修改_tomcat_目录权限">3、修改 tomcat 目录权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R tomcat:tomcat /opt/apache-tomcat-8.0.26</span><br></pre></td></tr></table></figure>
 <h2 id="4、设置环境变量">4、设置环境变量</h2><p>编辑 /etc/environment，在末尾添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=&#34;/usr/lib/jvm/java-8-oracle&#34;&#10;CATALINA_HOME=&#34;/opt/apache-tomcat-8.0.26&#34;</span><br></pre></td></tr></table></figure>

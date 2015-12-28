@@ -758,9 +758,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="0x00_绪言">0x00 绪言</h1><p>通过 java 执行 https 请求时可能出现以下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
 <p>这是因为 java 在执行 SSL/TLS 通讯时使用特定的数据识别 Certificate Authorities(CA)，如果你试图发起的 SSL/TLS 连接使用不属于这些根证书机构所颁发的证书，就会抛出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SunCertPathBuilderException: unable to find valid certification path to requested target</span><br></pre></td></tr></table></figure>
 <p>因此，如果你使用自签名证书，或者根证书机构不在 JRE 默认信任列表中，则需要向 JRE 导入根证书。</p>
       
     </div>
@@ -823,8 +823,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
-<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+        <h1 id="一、安装_openssh">一、安装 openssh</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+<h1 id="二、安装_mysql">二、安装 mysql</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
       
     </div>
     
