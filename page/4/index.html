@@ -1,830 +1,1288 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
 <head>
-  <meta charset="utf-8">
   
-  <title>雲之彼岸</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="雲之彼岸">
-<meta property="og:url" content="http://fyun.li/page/4/index.html">
-<meta property="og:site_name" content="雲之彼岸">
-<meta property="og:description">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="雲之彼岸">
-<meta name="twitter:description">
-  
-    <link rel="alternative" href="/atom.xml" title="雲之彼岸" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="雲之彼岸" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="http://fyun.li/images/ilogo.png" />
+
+
+
+
+  <title> 雲之彼岸 </title>
 </head>
+
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			
-		</a>
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">fyunli</a></h1>
-		</hgroup>
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">雲之彼岸</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
 
-		
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-					        
-								<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
-					</div>
-				</section>
-				
-				
-				
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">静若流光，空如此生</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
-</div>
+      </div>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">fyunli</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">fyunli</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-			        
-						<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap">
-  
-    <article id="post-cube" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/12/05/cube/" class="article-date">
-  	<time datetime="2009-12-05T15:08:18.000Z" itemprop="datePublished">2009-12-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <div id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/12/05/cube/">
+                我想要更黑暗 - 《异次元杀阵》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-12-05
+        </span>
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/12/05/cube/">我想要更黑暗 - 《异次元杀阵》</a>
-    </h1>
-  
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/浮光掠影/">浮光掠影</a>
 
-      </header>
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/12/05/cube/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/12/05/cube/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
       
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image14.png" alt=""> </p>
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/12/image14.png" alt=""> </p>
 <p>很老很有名的一部片子，但我一直没看过，而且我一直以为是一部惊悚片。片头也神神叨叨地诱惑我往惊悚片上想，长得那么有特点的人愣给切片了。</p>
 <p>但是后面的剧情完全不是那么回事，这电影相当神奇。六个不同身份不同性格的人被莫名其妙地关进了一坨立方体格子组成的迷宫中，莫名其妙地聚首了，然后要寻找莫名其妙的出路。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/12/05/cube/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-http-headers-for-dummies" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/12/03/http-headers-for-dummies/" class="article-date">
-  	<time datetime="2009-12-03T12:39:12.000Z" itemprop="datePublished">2009-12-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/12/05/cube/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/12/03/http-headers-for-dummies/">为菜鸟准备的HTTP头教程</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>原文链接：<a href="http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/">http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/</a></p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/12/03/http-headers-for-dummies/">
+                为菜鸟准备的HTTP头教程
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-12-03
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/12/03/http-headers-for-dummies/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/12/03/http-headers-for-dummies/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>原文链接：<a href="http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/">http://net.tutsplus.com/tutorials/other/http-headers-for-dummies/</a></p>
 <p>作者：Burak Guzel</p>
 <p>无论你是不是程序员，你看到它在网络上无所不在。这会儿你的浏览器地址栏就显示以”<a href="http://”开头的东西。甚至你的第一个hello">http://”开头的东西。甚至你的第一个hello</a> world脚本就在你无意识下发送了HTTP头。本文中，我们会学习HTTP头的基础知识，以及我们如何在web应用中使用它们。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/12/03/http-headers-for-dummies/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-tian-dao-lun-wang" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/12/02/tian-dao-lun-wang/" class="article-date">
-  	<time datetime="2009-12-02T12:40:01.000Z" itemprop="datePublished">2009-12-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/12/03/http-headers-for-dummies/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/12/02/tian-dao-lun-wang/">天道沦亡</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>两千多年前，我们老李家的杰出代表，伟大的老人家老子说过：</p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/12/02/tian-dao-lun-wang/">
+                天道沦亡
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-12-02
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/东拉西扯/">东拉西扯</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/12/02/tian-dao-lun-wang/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/12/02/tian-dao-lun-wang/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>两千多年前，我们老李家的杰出代表，伟大的老人家老子说过：</p>
 <p>“天之道，损有余而补不足。人之道则不然，损不足以奉有余。”（《道德经》第77章） </p>
 <p>意思是说：天道是取多余的，补不足的。人则相反，专们剥夺本来就不足的，以奉承强大的。</p>
 <p>所谓天道沦亡，古来如此，今日种种不过令人更有切肤之感而已。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/东拉西扯/">东拉西扯</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-yuan-xing" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/29/yuan-xing/" class="article-date">
-  	<time datetime="2009-11-29T07:57:14.000Z" itemprop="datePublished">2009-11-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/29/yuan-xing/">远行的梦</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/02.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/29/yuan-xing/">
+                远行的梦
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/简单生活/">简单生活</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/29/yuan-xing/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/29/yuan-xing/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/02.jpg" alt=""> </p>
 <p>我常常梦想如果突然发了一笔，不要太多，勉勉强强够下半辈子生活，比如在深圳有两三套房子，出租收入大概也可以应付简单的生活了，那时不再像现在这么工作，我会背上行囊，浪迹于那些神往已久的地方。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/简单生活/">简单生活</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/29/yuan-xing/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-shou-xin-kuai-le" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/25/shou-xin-kuai-le/" class="article-date">
-  	<time datetime="2009-11-25T02:54:47.000Z" itemprop="datePublished">2009-11-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/29/yuan-xing/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/25/shou-xin-kuai-le/">收信快乐</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/2008331121853128_2.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/25/shou-xin-kuai-le/">
+                收信快乐
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-25
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/简单生活/">简单生活</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/25/shou-xin-kuai-le/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/25/shou-xin-kuai-le/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/2008331121853128_2.jpg" alt=""> </p>
 <p>觉得招行的“我爱深圳城市卡”非常漂亮，于是心血来潮决定申请一张，在网上填完资料，最后要求打印签名并寄回招行信用卡总部。问了几个报亭和小店都没有信封邮票卖的，通过Google搜索了一个附近的邮政代办所才邮寄出去。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/简单生活/">简单生活</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/25/shou-xin-kuai-le/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-2012" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/20/2012/" class="article-date">
-  	<time datetime="2009-11-20T09:52:53.000Z" itemprop="datePublished">2009-11-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/25/shou-xin-kuai-le/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/20/2012/">让灾难来得更猛烈些吧 - 《2012》</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3964805.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/20/2012/">
+                让灾难来得更猛烈些吧 - 《2012》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-20
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/浮光掠影/">浮光掠影</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/20/2012/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/20/2012/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3964805.jpg" alt=""> </p>
 <p>我很鄙视我自己，为了省一半的票价，我硬是憋住不去赶集，结果还非常不凑巧地因事错过了晚上蹭半价的机会，只好无耻地白天跑去捞个半价。</p>
 <p>如果不是因为导演玩儿得太开心，还在那儿执着地跟个垃圾方舟门作斗争，我会更满足；如果最后把几艘破船就这么扔到茫茫的海面上如蝼蚁一般挣扎，我想自己会爽翻。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/20/2012/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ba-shi-jian-dan-zuo-peng-you" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/" class="article-date">
-  	<time datetime="2009-11-19T05:40:15.000Z" itemprop="datePublished">2009-11-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/20/2012/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/">知易行难 - 《把时间当做朋友》</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3959143.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/">
+                知易行难 - 《把时间当做朋友》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-19
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/读书写字/">读书写字</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/19/ba-shi-jian-dan-zuo-peng-you/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3959143.jpg" alt=""> </p>
 <p>很多人推荐的一本书，昨天睡前花了两个小时一口气读完。</p>
 <p>书中其实没什么高深的道理，甚至可以说其实是很多人都知道的，只是作者能给你掰出道道来。我也没有醍醐灌顶的感觉，只是感觉冷汗涔涔。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/读书写字/">读书写字</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-mary-and-max" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/19/mary-and-max/" class="article-date">
-  	<time datetime="2009-11-19T05:09:32.000Z" itemprop="datePublished">2009-11-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/19/mary-and-max/">我们并不完美 - 《玛丽与马克思》</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s4034827.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/19/mary-and-max/">
+                我们并不完美 - 《玛丽与马克思》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-19
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/浮光掠影/">浮光掠影</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/19/mary-and-max/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/19/mary-and-max/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s4034827.jpg" alt=""> </p>
 <p>《Mary and Max》，画面非常粗陋的动画，据说是改编自导演真人故事。全片都是灰沉沉的，夹杂些淡彩与诡异的颜色，大段大段的旁白，然而却看得人心襟摇荡。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/19/mary-and-max/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-sui-tang" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/16/sui-tang/" class="article-date">
-  	<time datetime="2009-11-16T06:44:01.000Z" itemprop="datePublished">2009-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/19/mary-and-max/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/16/sui-tang/">隋唐那些好汉</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/suitang.jpg" alt=""></p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/16/sui-tang/">
+                隋唐那些好汉
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-16
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/东拉西扯/">东拉西扯</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/16/sui-tang/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/16/sui-tang/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/suitang.jpg" alt=""></p>
 <p>山东台这几天可劲地播放《隋唐英雄传》，据说是个很老的剧集了，制作业相当地粗糙，几十上百号人就当千军万马排阵，太丢我国人多势众的脸面了。一如既往地，只要是演义或者历史什么的被搬上屏幕必然面目全非，我也没兴趣讨论这破烂电视剧，只是想缅怀一下隋唐那个演义。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/东拉西扯/">东拉西扯</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2009/11/16/sui-tang/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-qie-ting-feng-yun" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2009/11/15/qie-ting-feng-yun/" class="article-date">
-  	<time datetime="2009-11-15T03:17:12.000Z" itemprop="datePublished">2009-11-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/16/sui-tang/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2009/11/15/qie-ting-feng-yun/">还是逼出来的 - 《窃听风云》</a>
-    </h1>
-  
+      
+    </div>
 
-      </header>
+    <div class="post-footer">
       
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3860318.jpg" alt=""> </p>
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2009/11/15/qie-ting-feng-yun/">
+                还是逼出来的 - 《窃听风云》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2009-11-15
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/浮光掠影/">浮光掠影</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2009/11/15/qie-ting-feng-yun/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/11/15/qie-ting-feng-yun/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3860318.jpg" alt=""> </p>
 <p>昨天一口气看了N部片子，看得我都有点晕菜了。我说《地铁惊魂》<a href="http://fyunli.me/archives/168">都是逼出来的</a>，推而广之，窃听风云还是逼出来的。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2009/11/15/qie-ting-feng-yun/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
       
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
 
+    <div class="post-footer">
+      
 
       
-        <p class="article-more-link">
-          <a  href="/2009/11/15/qie-ting-feng-yun/#more">more >></a>
-        </p>
+
       
-      <div class="clearfix"></div>
+      
+        <div class="post-eof"></div>
+      
     </div>
+  </div>
+
+
     
   </div>
-  
-</article>
-
-
-
-
-
-
 
   
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">&raquo;</a>
+  </div>
+
+
+        </div>
+      </div>
+
+      
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
-    </nav>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="http://fyun.li/images/avatar.png" alt="fyunli" />
+          <p class="site-author-name">fyunli</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/fyunli" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/fyunli" target="_blank">twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/fyunli" target="_blank">weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://douban.com/people/fyun" target="_blank">douban</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
   
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">fyunli</span>
 </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2015 fyunli
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
     </div>
+
+    <div class="back-to-top"></div>
   </div>
-</footer>
-    </div>
-    
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
 
 
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
 
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
     }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
 </script>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
-  </div>
+
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'fyunli';
+      var disqus_identifier = 'page/4/index.html';
+      var disqus_url = '';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
+
+  
 </body>
 </html>
