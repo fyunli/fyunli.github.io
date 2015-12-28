@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/620f1e7egw1ezfrhbu45vj20x40nn76a.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/620f1e7egw1ezfsu424xbj20er0mo3zi.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/620f1e7egw1ezftpbqvk1j20er0mojsi.jpg">
-<meta property="og:updated_time" content="2015-12-28T16:16:55.000Z">
+<meta property="og:updated_time" content="2015-12-28T16:27:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVVM 和 Android Data Binding 续">
 <meta name="twitter:description" content="上一篇文章我们回顾了 MVVM 模式并了解了 Android Data Binding 的相关知识。那么这一章我们来实际做一个简单的基于 Android Data Binding 的 MVVM 架构的 app。
@@ -263,7 +263,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">    outState.putParcelable(USER_MODEL, userModel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 onRestoreInstanceState(Bundle savedInstanceState) 或者 onCreate(Bundle savedInstanceState) 方法中取回保存的数据即可：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    binding = DataBindingUtil.setContentView(<span class="keyword">this</span>, R.layout.activity_main);</span><br><span class="line">    <span class="keyword">if</span>(savedInstanceState == <span class="keyword">null</span>) &#123;</span><br><span class="line">        userModel = UserModel.laodUser();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        userModel = savedInstanceState.getParcelable(USER_MODEL);</span><br><span class="line">    &#125;</span><br><span class="line">    binding.setUser(userModel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="打完，收工！">打完，收工！</h1>
+<h1 id="打完，收工！">打完，收工！</h1><p>源代码在 <a href="https://github.com/fyunli/android-mvvm-sample" target="_blank" rel="external">Github</a> 可找到。</p>
+
       
     </div>
     
