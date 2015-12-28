@@ -28,155 +28,183 @@ min-height属性并非所有浏览器都兼容，主要问题还是出现在IE�
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
 </head>
 <body>
   <div id="container">
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">fyunli</a></h1>
-		</hgroup>
+        <hgroup>
+          <h1 class="header-author"><a href="/">fyunli</a></h1>
+        </hgroup>
 
-		
+        
+                
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-					        
-								<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
-					</div>
-				</section>
-				
-				
-				
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">静若流光，空如此生</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="/#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
 </div>
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">fyunli</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">fyunli</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-			        
-						<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">fyunli</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img lazy-src="/img/avatar.png" class="js-avatar">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">fyunli</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="/#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
 </nav>
       <div class="body-wrap"><article id="post-cssmin-height" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/03/cssmin-height/" class="article-date">
-  	<time datetime="2009-11-03T08:21:43.000Z" itemprop="datePublished">2009-11-03</time>
+      <time datetime="2009-11-03T08:21:43.000Z" itemprop="datePublished">2009-11-03</time>
 </a>
     </div>
   
@@ -197,18 +225,19 @@ min-height属性并非所有浏览器都兼容，主要问题还是出现在IE�
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+    </div>
+
+
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
         <div class="clearfix"></div>
       </div>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>最小高度min-height是一个非常有用的属性，当容器内的内容较少时，能保持一个最小的高度，不破坏布局，而当内容增加的时候，容器能够自动的伸展以适应内容的变化。</p>
 <p>min-height属性并非所有浏览器都兼容，主要问题还是出现在IE。IE对于overflow的特殊实现，给我们实现min-height提供了一个思路，以下是兼容IE6、IE7、FF的min-height写法：</p>
 <pre lang="css">#test-min-height {
@@ -223,42 +252,102 @@ min-height属性并非所有浏览器都兼容，主要问题还是出现在IE�
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2009/11/03/fu-jian/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2009/11/03/cssmin-height/">CSS:min-height</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 fyunli 的个人博客">fyunli</a></p>
+        <p><span>发布时间:</span>2009年11月03日 - 16时21分</p>
+        <p><span>最后更新:</span>2015年05月02日 - 10时28分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2009/11/03/cssmin-height/" title="CSS:min-height">http://fyun.li/2009/11/03/cssmin-height/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://fyun.li/2009/11/03/cssmin-height/　　作者: fyunli" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
         
-          苻坚
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2009/11/03/fu-jian/">
+                    苻坚
+                </a>
+            </div>
         
-      </div>
-    </a>
-  
-  
-    <a href="/2009/11/02/kong-que-dong-nan-fei/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">孔雀东南飞</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2009/11/02/kong-que-dong-nan-fei/">
+                    孔雀东南飞
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
 
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
+
 
 <div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
 </div>
 
 
@@ -281,41 +370,116 @@ min-height属性并非所有浏览器都兼容，主要问题还是出现在IE�
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </section>
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2009/11/03/fu-jian/" title="上一篇: 苻坚">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2009/11/02/kong-que-dong-nan-fei/" title="下一篇: 孔雀东南飞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/android-data-binding-2/">MVVM 和 Android Data Binding 续</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/26/android-data-binding/">MVVM 与 Android Data Binding</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/ubuntu-ss/">Ubuntu 搭建 shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/android-databinding-bug/">Fix Android Studio DataBinding cannot resolve symbol 'databinding' bug</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/22/dagger2-get-start/">Dagger2 小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/03/import-startssl-into-jre/">JRE 导入 StartSSL 根证书</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/22/ubuntu-devenv-note/">Ubuntu环境配置速记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/15/js-cross-domain-request/">javascript 跨域问题小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/02/pentaho-cde/">Pentaho CDE生火指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/02/pentaho-report-designer/">Pentaho Report Designer生火指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/02/pentaho-bi-server/">Pentaho BI Server 5.1生火指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/04/27/jquery-plugin-scaffold/">jQuery Plugin Scaffold</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/06/macbook-pro-debut/">Macbook Pro精简安装记事</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/06/12/hibernate-history/">修改历史记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/06/02/ajax-upload/">AJAX Upload</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/05/23/spring-aop-annotation/">Spring AOP Annotation生火指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/05/12/xfire-tips-2010/">xfire两则</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/04/28/jquery-tools/">JQuery Tools</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/04/21/java-hans/">java:取得汉字拼音</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/04/13/eclipse-code-review-plugins/">Eclipse Code Review Plugins</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/04/08/qing-ming/">清明</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/02/11/up-in-the-air/">你的背包 - 《在云端》</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/01/28/chi-gou-rou/">吃狗肉</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/01/22/sun-memorial/">SUN的纪念</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/01/13/google-quit/">Google退出中国</a></li><li class="post-list-item"><a class="post-list-link" href="/2010/01/08/avatar/">Jack归来，YY无敌 - 《阿凡达》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/27/yui-grids-css/">YUI Grids CSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/18/shi-yue-wei-cheng/">纠结，无标题 - 《十月围城》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/13/not-my-college/">不是我的的少年</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/06/da-tao-sha/">生存游戏 - 《大逃杀》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/05/cube/">我想要更黑暗 - 《异次元杀阵》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/03/http-headers-for-dummies/">为菜鸟准备的HTTP头教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/12/02/tian-dao-lun-wang/">天道沦亡</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/29/yuan-xing/">远行的梦</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/25/shou-xin-kuai-le/">收信快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/20/2012/">让灾难来得更猛烈些吧 - 《2012》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/19/ba-shi-jian-dan-zuo-peng-you/">知易行难 - 《把时间当做朋友》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/19/mary-and-max/">我们并不完美 - 《玛丽与马克思》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/16/sui-tang/">隋唐那些好汉</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/15/qie-ting-feng-yun/">还是逼出来的 - 《窃听风云》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/15/moon/">我就是胡说 - 《月球》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/15/di-tie-jing-hun/">都是逼出来的 - 《地铁惊魂》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/13/orphan/">其实这是部爱情片 - 《孤儿》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/13/build-a-twitter-like-site-with-jquery/">翻译：如何用jquery建立类Twitter站点</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/12/pai-xi-gua/">拍西瓜</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/11/26-hints-for-agile-software-development/">翻译：给敏捷软件开发的26条建议</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/09/na-lan/">抄几首纳兰词</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/05/closure/">闭包Closure</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/04/dreaming-in-code/">遥远的天国 - 乱弹《梦断代码》</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/04/hong-dou/">红豆</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/03/fu-jian/">苻坚</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/03/cssmin-height/">CSS:min-height</a></li><li class="post-list-item"><a class="post-list-link" href="/2009/11/02/kong-que-dong-nan-fei/">孔雀东南飞</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2015 fyunli
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2015 fyunli
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >本站到访数: 
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, 本页阅读量: 
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div>
     </div>
-  </div>
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
 
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/js/main.js" type="text/javascript"></script>
 
-
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
 
 
 
@@ -341,6 +505,22 @@ MathJax.Hub.Queue(function() {
 </script>
 
 
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
   </div>
 </body>
 </html>

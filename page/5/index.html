@@ -21,149 +21,180 @@
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
+  
 </head>
 <body>
   <div id="container">
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">fyunli</a></h1>
-		</hgroup>
+        <hgroup>
+          <h1 class="header-author"><a href="/">fyunli</a></h1>
+        </hgroup>
 
-		
+        
+                
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-					        
-								<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
-					</div>
-				</section>
-				
-				
-				
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">静若流光，空如此生</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="/#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
 </div>
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">fyunli</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="http://ww3.sinaimg.cn/large/620f1e7egw1ey8bjsbmr2j20b40b475e.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">fyunli</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/fyunli" title="github">github</a>
-			        
-						<a class="twitter" target="_blank" href="https://twitter.com/fyunli" title="twitter">twitter</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/fyunli" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="http://fyun.li/rss2.xml" title="rss">rss</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">fyunli</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img lazy-src="/img/avatar.png" class="js-avatar">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">fyunli</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="/#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
 </nav>
       <div class="body-wrap">
   
@@ -171,7 +202,7 @@
   
     <div class="article-meta">
       <a href="/2009/11/15/moon/" class="article-date">
-  	<time datetime="2009-11-15T02:28:27.000Z" itemprop="datePublished">2009-11-15</time>
+      <time datetime="2009-11-15T02:28:27.000Z" itemprop="datePublished">2009-11-15</time>
 </a>
     </div>
   
@@ -193,21 +224,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s4048415.jpg" alt=""> </p>
+          
+              <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s4048415.jpg" alt=""> </p>
 <p>独立制作嘛，总要探讨点文化，我这种没太多文化的人就不瞎掺和了，探讨这方面问题的专家一大坨，我不能去丢人现眼。</p>
 <p>影片讲述的故事其实不复杂，装逼犯看的其实也不是故事，而是寂寞。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/15/moon/#more">more >></a>
@@ -226,12 +259,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-di-tie-jing-hun" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/15/di-tie-jing-hun/" class="article-date">
-  	<time datetime="2009-11-15T02:24:34.000Z" itemprop="datePublished">2009-11-15</time>
+      <time datetime="2009-11-15T02:24:34.000Z" itemprop="datePublished">2009-11-15</time>
 </a>
     </div>
   
@@ -253,20 +306,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s38390951.jpg" alt=""> </p>
+          
+              <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s38390951.jpg" alt=""> </p>
 <p>约翰屈伏塔饰演的劫匪莱德曾是一名华尔街精英，也曾挥斥方遒，泡臀模如反掌，结果把社保基金亏了2000万美刀，锒铛入狱。好不容易熬出来后，心里还惦记着社保基金，可是到哪里去弄那么多美刀呢？精英不愧是精英，居然能想到这么好的主意。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/15/di-tie-jing-hun/#more">more >></a>
@@ -285,12 +340,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-orphan" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/13/orphan/" class="article-date">
-  	<time datetime="2009-11-13T07:31:44.000Z" itemprop="datePublished">2009-11-13</time>
+      <time datetime="2009-11-13T07:31:44.000Z" itemprop="datePublished">2009-11-13</time>
 </a>
     </div>
   
@@ -312,21 +387,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3663082.jpg" alt=""> </p>
+          
+              <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3663082.jpg" alt=""> </p>
 <p>这片子在豆瓣电影口碑榜上停留甚久，更重要的是，它还是部惊悚片，然而最重要的是，这海报太震撼了。所以，我以惯用的自由消费作风，BT搞定之。</p>
 <p>消磨我两个小时之后，我愤怒地认为舆论误导了我，这怎么可能是一部惊悚片？画面常常是那么纯净，时时还有悠扬的琴声，帅哥靓女萝莉可爱幼童一个不缺。这不足以成为非惊悚片的证据，好吧，那么我要说这片子不够阴暗，不够刺激，不够血腥，不够残暴。导演其实根本没和你玩惊悚，他要讲的就是一个爱情故事。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/13/orphan/#more">more >></a>
@@ -345,12 +422,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-build-a-twitter-like-site-with-jquery" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/13/build-a-twitter-like-site-with-jquery/" class="article-date">
-  	<time datetime="2009-11-13T05:22:00.000Z" itemprop="datePublished">2009-11-13</time>
+      <time datetime="2009-11-13T05:22:00.000Z" itemprop="datePublished">2009-11-13</time>
 </a>
     </div>
   
@@ -372,6 +469,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>请移步译言：<a href="http://article.yeeyan.org/view/fyunli/68077" target="_blank" rel="external">http://article.yeeyan.org/view/fyunli/68077</a></p>
 
       
@@ -380,12 +478,12 @@
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
       
       <div class="clearfix"></div>
     </div>
@@ -400,12 +498,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-pai-xi-gua" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/12/pai-xi-gua/" class="article-date">
-  	<time datetime="2009-11-12T14:28:00.000Z" itemprop="datePublished">2009-11-12</time>
+      <time datetime="2009-11-12T14:28:00.000Z" itemprop="datePublished">2009-11-12</time>
 </a>
     </div>
   
@@ -427,20 +545,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在天虹闲逛，看到居然还有西瓜在卖，虽然价格不算厚道，奈何经不起诱惑。</p>
+          
+              <p>在天虹闲逛，看到居然还有西瓜在卖，虽然价格不算厚道，奈何经不起诱惑。</p>
 <p>西瓜是个好东西，在夏天像日本鬼子一样残暴的酷热下，西瓜是我们比较喜爱的水果，就算是冬天，那股沁凉吱溜而下的感觉也是很爽的。如果你喜欢YY，还可以用以体会大刀向鬼子头上砍去的快感。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/简单生活/">简单生活</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/简单生活/">简单生活</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/12/pai-xi-gua/#more">more >></a>
@@ -459,12 +579,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-26-hints-for-agile-software-development" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/11/26-hints-for-agile-software-development/" class="article-date">
-  	<time datetime="2009-11-10T16:48:31.000Z" itemprop="datePublished">2009-11-11</time>
+      <time datetime="2009-11-10T16:48:31.000Z" itemprop="datePublished">2009-11-11</time>
 </a>
     </div>
   
@@ -486,21 +626,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>原文链接：<a href="http://www.pmhut.com/26-hints-for-agile-software-development" title="http://www.pmhut.com/26-hints-for-agile-software-development">http://www.pmhut.com/26-hints-for-agile-software-development</a></p>
+          
+              <p>原文链接：<a href="http://www.pmhut.com/26-hints-for-agile-software-development" title="http://www.pmhut.com/26-hints-for-agile-software-development">http://www.pmhut.com/26-hints-for-agile-software-development</a></p>
 <p>我经常收集各种各样的至理名言，最近我重温敏捷软件开发；真正的问题是什么？下面是一份26条关键原则的清单，以指引敏捷软件开发团队。</p>
 <p><strong>1、完整地干完一件事后在开始另一件事</strong>：用厨房比喻来说就是：“先上这道菜，再开始做下一道”。软件开发的最大问题就是同时开始几件事情，这将不可避免的造成某些工作被废弃，从而造成浪费。专注于一件事；完整地实现其功能；运行测试；编写文档；签入所有，把这当做一项工作完成，然后再开始下一件事。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/11/26-hints-for-agile-software-development/#more">more >></a>
@@ -519,12 +661,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-na-lan" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/09/na-lan/" class="article-date">
-  	<time datetime="2009-11-09T04:52:23.000Z" itemprop="datePublished">2009-11-09</time>
+      <time datetime="2009-11-09T04:52:23.000Z" itemprop="datePublished">2009-11-09</time>
 </a>
     </div>
   
@@ -546,20 +708,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在看安意如的书《当时只道是寻常》，内容不过是品评纳兰容若的词。安意如貌似很钟爱纳兰容若，其第一本书名《当时只道是寻常》也取自纳兰词。不过安意如的品评诗词矫情太甚，看久了相当的腻味。</p>
+          
+              <p>最近在看安意如的书《当时只道是寻常》，内容不过是品评纳兰容若的词。安意如貌似很钟爱纳兰容若，其第一本书名《当时只道是寻常》也取自纳兰词。不过安意如的品评诗词矫情太甚，看久了相当的腻味。</p>
 <p>我们小的时候，家长往往不乐意自家孩子看闲书，但教科书往往并不能给我们什么，反而是各种各样的闲书让我们获得更多的知识。小时那些伟大的教科书收录的诗词都是思想正确的，或赞美祖国大好河山，或同情劳苦大众，或鞭笞封建腐朽。似纳兰这种缠绵于个人情绪与回忆之中的，是没有资格被收录到教科书中的。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/东拉西扯/">东拉西扯</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/东拉西扯/">东拉西扯</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/09/na-lan/#more">more >></a>
@@ -578,12 +742,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-closure" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/05/closure/" class="article-date">
-  	<time datetime="2009-11-05T13:09:34.000Z" itemprop="datePublished">2009-11-05</time>
+      <time datetime="2009-11-05T13:09:34.000Z" itemprop="datePublished">2009-11-05</time>
 </a>
     </div>
   
@@ -605,21 +789,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>闭包对于从函数式编程启蒙的童靴估计会很好理解，但是对于从JAVA这类纯粹OO启蒙的童靴，估计会比较困难。对于支持闭包的多数语言来说，函数都是作为第一级的对象，这就意味着：闭包可以被当做参数传递给函数，可以存储到变量中，也可以作为返回值。</p>
+          
+              <p>闭包对于从函数式编程启蒙的童靴估计会很好理解，但是对于从JAVA这类纯粹OO启蒙的童靴，估计会比较困难。对于支持闭包的多数语言来说，函数都是作为第一级的对象，这就意味着：闭包可以被当做参数传递给函数，可以存储到变量中，也可以作为返回值。</p>
 <p>那么什么是闭包？</p>
 <p>闭包的定义是这样的：可以包含自由（未绑定）变量的代码块，这些变量不是在这个代码块或者任何全局上下文中定义的，而是在定义代码块的环境中定义。闭包一词来源于以下两者的结合：要执行的代码块（由于自由变量的存在，相关变量引用没有释放）和为自由变量提供绑定的计算环境（作用域）。</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/05/closure/#more">more >></a>
@@ -638,12 +824,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-dreaming-in-code" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/04/dreaming-in-code/" class="article-date">
-  	<time datetime="2009-11-04T12:23:02.000Z" itemprop="datePublished">2009-11-04</time>
+      <time datetime="2009-11-04T12:23:02.000Z" itemprop="datePublished">2009-11-04</time>
 </a>
     </div>
   
@@ -665,20 +871,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3196124.jpg" alt="s3196124"></p>
+          
+              <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2009/11/s3196124.jpg" alt="s3196124"></p>
 <p>从任何角度，Chandler项目开始时都是值得羡慕的，充足的资金，舒适的环境，激动人心的愿景，高手云集的团队，专业睿智的老板，然而如同大多数项目一样，Chandler在历时多年之后，依然泥足深陷，至今没有一个能真正工作的版本。    </p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/04/dreaming-in-code/#more">more >></a>
@@ -697,12 +905,32 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-hong-dou" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2009/11/04/hong-dou/" class="article-date">
-  	<time datetime="2009-11-04T12:11:23.000Z" itemprop="datePublished">2009-11-04</time>
+      <time datetime="2009-11-04T12:11:23.000Z" itemprop="datePublished">2009-11-04</time>
 </a>
     </div>
   
@@ -724,20 +952,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>红豆 - 王菲</p>
+          
+              <p>红豆 - 王菲</p>
 <p>还没好好的感受雪花绽放的气候<br>我们一起颤抖会更明白 什么是温柔<br>还没跟你牵著手走过荒芜的沙丘<br>可能从此以後 学会珍惜天长和地久</p>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
+    </div>
+
+
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
       
         <p class="article-more-link">
           <a  href="/2009/11/04/hong-dou/#more">more >></a>
@@ -756,6 +986,26 @@
 
 
 
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
   
     <nav id="page-nav">
@@ -764,39 +1014,73 @@
   
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2015 fyunli
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2015 fyunli
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >本站到访数: 
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, 本页阅读量: 
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div>
     </div>
-  </div>
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+    <script>
+        var yiliaConfig = {
+            fancybox: false,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+        }
+    </script>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/js/main.js" type="text/javascript"></script>
 
-
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
 
 
 
@@ -822,6 +1106,22 @@ MathJax.Hub.Queue(function() {
 </script>
 
 
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
   </div>
 </body>
 </html>
