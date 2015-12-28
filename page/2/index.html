@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pentaho/" style="font-size: 20px;">pentaho</a> <a href="/tags/report/" style="font-size: 15px;">report</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/墙你妹/" style="font-size: 10px;">墙你妹</a>
 					</div>
 				</section>
 				
@@ -166,6 +166,93 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-jquery-plugin-scaffold" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/27/jquery-plugin-scaffold/" class="article-date">
+  	<time datetime="2012-04-27T06:21:13.000Z" itemprop="datePublished">2012-04-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/27/jquery-plugin-scaffold/">jQuery Plugin Scaffold</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>The First One:</strong></p>
+<pre lang="javascript">(function($) {
+    $.fn.joey = function(options) {
+        debug(this);
+
+        var opts = $.extend({}, $.fn.joey.defaults, options);
+
+        return this.each(function() {
+            $this = $(this);
+
+            // build element specific options
+            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+
+            // do something
+        });
+    };
+
+    // private function for debugging
+    function debug($obj) {
+        if (window.console &amp;&amp; window.console.log)
+            window.console.log('joey selection count: ' + $obj.size());
+    }
+    ;
+
+    // plugin defaults
+    $.fn.joey.defaults = {
+        // some options
+    };
+
+})(jQuery);</pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/相对挨踢/">相对挨踢</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2012/04/27/jquery-plugin-scaffold/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-macbook-pro-debut" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -703,66 +790,6 @@ public class PinyinTest {
       
         <p class="article-more-link">
           <a  href="/2010/04/08/qing-ming/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-up-in-the-air" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2010/02/11/up-in-the-air/" class="article-date">
-  	<time datetime="2010-02-11T03:16:47.000Z" itemprop="datePublished">2010-02-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/02/11/up-in-the-air/">你的背包 - 《在云端》</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/movie-up-in-ther-air.jpg" alt=""> </p>
-<p>老帅哥克鲁尼扮演的RYAN是个炒鱿鱼专家，每天以云中穿梭唾沫横飞精妙地将一批批苦命人送往彼岸为生。其生活不着家不着调自私理性单身自爽拒绝一切负担。</p>
-<p>老帅哥在差旅欢宴之余经常做做演讲，兜售他的背包理论。他说你想啊，你把你的衬衫领带仔裤短裙臭鞋子臭袜子臭味道以及亲爹亲娘兄弟姐妹七姑八姨狐朋狗友小三炮灰都塞进去，背上这样的背包行走人生那将是怎样难堪的重负。想想都后怕啊，所以要轻装上阵，自娱自乐，管他娘的人情冷暖春花秋开。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/浮光掠影/">浮光掠影</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2010/02/11/up-in-the-air/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
