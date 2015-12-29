@@ -285,6 +285,7 @@ img {
   max-width: 100%;
   height: auto;
 }
+h1,
 h2,
 h3,
 h4,
@@ -1373,6 +1374,7 @@ input.menu-search-input {
 .posts-expand .post-meta .post-category-list-link {
   color: #999;
 }
+.posts-expand .post-body h1,
 .posts-expand .post-body h2,
 .posts-expand .post-body h3,
 .posts-expand .post-body h4,
