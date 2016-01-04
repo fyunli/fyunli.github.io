@@ -185,6 +185,16 @@
 <p>这是标示一个单例的注释，可以和 @Provide 共同标注一个函数，标示这个函数返回的对象都是单例的，也可以和 @Component 一起标注一个Component，标示这个 Component 的 Scope 是全局的。</p>
 <p>@Scope</p>
 <p>Scopes 非常的有用，Dagger2 可以通过自定义注解限定注解作用域。</p>
+<p>下面我们定义一个生命周期和 Activity 一致的组件。</p>
+<p>首先我们要申明一个 @Scope:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Scope&#10;@Retention(RetentionPolicy.RUNTIME)&#10;public @interface ActivityScope &#123;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后是 ActivityModule, 这个和前面 @Module 一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Module&#10;public class ActivityModule &#123;&#10;    private final Activity activity;&#10;&#10;    public ActivityModule(Activity activity) &#123;&#10;        this.activity = activity;&#10;    &#125;&#10;&#10;    @Provides&#10;    @ActivityScope&#10;    Activity activity() &#123;&#10;        return this.activity;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>接着声明 ActivityComponent 为 @ActivityScope:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@ActivityScope&#10;@Component(dependencies = AppComponent.class, modules = ActivityModule.class)&#10;public interface ActivityComponent &#123;&#10;    inject(MainActivity activity);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Activity 中注入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Override&#10;protected void onCreate(Bundle savedInstanceState) &#123;&#10;    super.onCreate(savedInstanceState);&#10;    getActivityComponent().inject(this);&#10;&#125;&#10;&#10;...&#10;// &#24314;&#35758;&#22312;&#22522;&#31867; Activity &#20013;&#22768;&#26126;&#26041;&#27861;&#10;protected ActivityComponent getActivityComponent() &#123;&#10;    return DaggerActivityComponent.builder()&#10;            .appComponent(DaggerAppComponent.create())&#10;            .activityModule(getActivityModule())&#10;            .build();&#10;&#125;&#10;&#10;protected ActivityModule getActivityModule() &#123;&#10;    return new ActivityModule(this);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>最后 @Provides 方法或者可以直接注入的类中标注 @ActivityScope 即可让注入的实例与 Activity 声明周期保持一致。</p>
 <p>@Qualifier</p>
 <p>当类的类型不足以鉴别一个依赖的时候，我们就可以使用这个注解标示。</p>
 <p>例如：在Android中，我们会需要不同类型的 Context，所以我们就可以定义 Qualifier 注解 @ForApplication 和 @ForActivity，这样当注入一个 Context 的时候，我们就可以告诉 Dagger 我们想要哪种类型的 Context。</p>
