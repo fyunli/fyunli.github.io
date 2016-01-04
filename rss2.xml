@@ -472,7 +472,7 @@
 <p>当类的类型不足以鉴别一个依赖的时候，我们就可以使用这个注解标示。</p>
 <p>例如：在Android中，我们会需要不同类型的 Context，所以我们就可以定义 Qualifier 注解 @ForApplication 和 @ForActivity，这样当注入一个 Context 的时候，我们就可以告诉 Dagger 我们想要哪种类型的 Context。</p>
 <h1 id="0x02_参考">0x02 参考</h1><p><a href="http://google.github.io/dagger/" target="_blank" rel="external">Dagger 2</a></p>
-<p><a href="http://fernandocejas.com/2015/04/11/tasting-dagger-2-on-android/" target="_blank" rel="external">Tasting Dagger 2 on Android</a></p>
+<p><a href="http://fernandocejas.com/2015/04/11/tasting-dagger-2-on-android/" target="_blank" rel="external">Tasting Dagger 2 on Android</a> 中文翻译版本：<a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0519/2892.html" target="_blank" rel="external">详解Dagger2</a></p>
 <p><a href="http://frogermcs.github.io/dependency-injection-with-dagger-2-the-api/" target="_blank" rel="external">Dependency injection with Dagger 2 - the API</a></p>
 ]]></content:encoded>
       <comments>http://fyun.li/2015/11/22/dagger2-get-start/#disqus_thread</comments>
