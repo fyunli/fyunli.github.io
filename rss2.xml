@@ -7,7 +7,7 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Mon, 28 Dec 2015 16:27:00 GMT</pubDate>
+    <pubDate>Sat, 09 Jan 2016 06:24:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -17,11 +17,14 @@
       <pubDate>Mon, 28 Dec 2015 14:49:00 GMT</pubDate>
       <description>
       <![CDATA[<p>上一篇文章我们回顾了 MVVM 模式并了解了 Android Data Binding 的相关知识。那么这一章我们来实际做一个简单的基于 Android Data Binding 的 MVVM 架构的 app。</p>
-<h1 id="创建一个_Android_项目">创建]]>
+<h1 id="创建一个_Android_项目">创建一个 Android 项目</h1><p>我们先用 Android Studio 创建一个带有 Empty Activity 的项目：</p>
+<p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1ezfrgg2x75j20x40nn41v.jpg" alt="new android project"></p>]]>
+      
       </description>
       <content:encoded><![CDATA[<p>上一篇文章我们回顾了 MVVM 模式并了解了 Android Data Binding 的相关知识。那么这一章我们来实际做一个简单的基于 Android Data Binding 的 MVVM 架构的 app。</p>
 <h1 id="创建一个_Android_项目">创建一个 Android 项目</h1><p>我们先用 Android Studio 创建一个带有 Empty Activity 的项目：</p>
 <p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1ezfrgg2x75j20x40nn41v.jpg" alt="new android project"></p>
+<a id="more"></a>
 <p><img src="http://ww4.sinaimg.cn/large/620f1e7egw1ezfrhbu45vj20x40nn76a.jpg" alt="new android 2"></p>
 <p>自动生成的 MainActivity 如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> li.fyun.mvvm.view;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> li.fyun.mvvm.R;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -67,10 +70,13 @@
       <guid>http://fyun.li/2015/12/26/android-data-binding/</guid>
       <pubDate>Sat, 26 Dec 2015 12:02:00 GMT</pubDate>
       <description>
-      <![CDATA[<p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。]]>
+      <![CDATA[<p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。Activity/Fragment 实际上成了 View 和 Controller 的混合体，既要承担 View 的显示功能，又要承担 Controller 的控制功能。承担的功能过多，膨胀成繁芜的巨类也就不足为怪了。</p>
+<h1 id="UI_界面设计模式">UI 界面设计模式</h1><p>在传统的 UI 设计模式中，MVC 已经实践中证明了其价值，并在漫长的使用过程中（（MVC最早出现于 1970 年代）演化出 MVP 和 MVVM 多个变种。</p>]]>
+      
       </description>
       <content:encoded><![CDATA[<p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。Activity/Fragment 实际上成了 View 和 Controller 的混合体，既要承担 View 的显示功能，又要承担 Controller 的控制功能。承担的功能过多，膨胀成繁芜的巨类也就不足为怪了。</p>
 <h1 id="UI_界面设计模式">UI 界面设计模式</h1><p>在传统的 UI 设计模式中，MVC 已经实践中证明了其价值，并在漫长的使用过程中（（MVC最早出现于 1970 年代）演化出 MVP 和 MVVM 多个变种。</p>
+<a id="more"></a>
 <h2 id="MVC">MVC</h2><p>MVC 我们都知道是 Model-View-Controller，为了使得程序的各个部分分离降低耦合性，MVC 除了把应用程序分成 View、Model 层，还额外的加了一个 Controller 层，它的职责为进行 Model 和 View 之间的协作（路由、输入预处理等）的应用逻辑；Model 进行处理业务逻辑。</p>
 <p><img src="http://ww4.sinaimg.cn/large/620f1e7egw1ezf5hz0emcj20ao04kt8t.jpg" alt="MVC Pattern"></p>
 <p>MVC 通常的处理时序如下：</p>

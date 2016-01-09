@@ -155,6 +155,7 @@
       
         <p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。Activity/Fragment 实际上成了 View 和 Controller 的混合体，既要承担 View 的显示功能，又要承担 Controller 的控制功能。承担的功能过多，膨胀成繁芜的巨类也就不足为怪了。</p>
 <h1 id="UI_界面设计模式">UI 界面设计模式</h1><p>在传统的 UI 设计模式中，MVC 已经实践中证明了其价值，并在漫长的使用过程中（（MVC最早出现于 1970 年代）演化出 MVP 和 MVVM 多个变种。</p>
+<a id="more"></a>
 <h2 id="MVC">MVC</h2><p>MVC 我们都知道是 Model-View-Controller，为了使得程序的各个部分分离降低耦合性，MVC 除了把应用程序分成 View、Model 层，还额外的加了一个 Controller 层，它的职责为进行 Model 和 View 之间的协作（路由、输入预处理等）的应用逻辑；Model 进行处理业务逻辑。</p>
 <p><img src="http://ww4.sinaimg.cn/large/620f1e7egw1ezf5hz0emcj20ao04kt8t.jpg" alt="MVC Pattern"></p>
 <p>MVC 通常的处理时序如下：</p>
