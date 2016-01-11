@@ -7,7 +7,7 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Mon, 11 Jan 2016 04:42:11 GMT</pubDate>
+    <pubDate>Mon, 11 Jan 2016 04:44:17 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -16,11 +16,15 @@
       <guid>http://fyun.li/2016/01/11/eventbus/</guid>
       <pubDate>Sun, 10 Jan 2016 16:00:00 GMT</pubDate>
       <description>
-      <![CDATA[<p><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a> 是一款针对 Android 端优化的 publish/subscribe 消息总线。</]]>
+      <![CDATA[<p><a href="https://github.com/greenrobot/EventBus">EventBus</a> 是一款针对 Android 端优化的 publish/subscribe 消息总线。</p>
+<p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1ezvd8hhf99j20zk0dbabt.jpg" alt="eventbus arch"></p>
+<p>主要目的是替代Intent, Handler,BroadCast 在 Fragment，Activity，Service，线程之间传递消息，优点是开销小，代码优雅。将发送者和接收者解耦。</p>]]>
+      
       </description>
       <content:encoded><![CDATA[<p><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a> 是一款针对 Android 端优化的 publish/subscribe 消息总线。</p>
 <p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1ezvd8hhf99j20zk0dbabt.jpg" alt="eventbus arch"></p>
 <p>主要目的是替代Intent, Handler,BroadCast 在 Fragment，Activity，Service，线程之间传递消息，优点是开销小，代码优雅。将发送者和接收者解耦。</p>
+<a id="more"></a>
 <h1 id="基本用法">基本用法</h1><p>引入 eventbus:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'de.greenrobot:eventbus:2.4.0'</span></span><br></pre></td></tr></table></figure>
 <p>定义事件:</p>
