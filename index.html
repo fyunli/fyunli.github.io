@@ -112,6 +112,133 @@
           
           
             
+              <a class="post-title-link" href="/2016/01/11/eventbus/">
+                EventBus 使用
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-10
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/01/11/eventbus/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/11/eventbus/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a> 是一款针对 Android 端优化的 publish/subscribe 消息总线。</p>
+<p><img src="http://ww3.sinaimg.cn/large/620f1e7egw1ezvd8hhf99j20zk0dbabt.jpg" alt="eventbus arch"></p>
+<p>主要目的是替代Intent, Handler,BroadCast 在 Fragment，Activity，Service，线程之间传递消息，优点是开销小，代码优雅。将发送者和接收者解耦。</p>
+<h1 id="基本用法">基本用法</h1><p>引入 eventbus:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'de.greenrobot:eventbus:2.4.0'</span></span><br></pre></td></tr></table></figure>
+<p>定义事件:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageEvent</span> </span>&#123; <span class="comment">/* Additional fields if needed */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>注册事件接收者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.register(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>发送事件:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.post(event)</span><br></pre></td></tr></table></figure>
+<p>接收消息并处理:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onEvent</span><span class="params">(MessageEvent event)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>注销事件接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.unregister(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>最后，proguard 需要做一些额外处理:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># EventBus</span><br><span class="line">-keepclassmembers class ** &#123;</span><br><span class="line">    public void onEvent*(**);</span><br><span class="line">    void onEvent*(**);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="基本概念">基本概念</h1><p>作为一个消息总线，有三个主要的元素：</p>
+<ul>
+<li>Event：事件。可以是任意类型的对象</li>
+<li>Subscriber：事件订阅者，接收特定的事件。在EventBus中，使用约定来指定事件订阅者以简化使用。即所有事件订阅都都是以onEvent开头的函数，具体来说，函数的名字是onEvent，onEventMainThread，onEventBackgroundThread，onEventAsync这四个，这个和ThreadMode有关</li>
+<li>Publisher：事件发布者，用于通知 Subscriber 有事件发生。可以在任意线程任意位置发送事件，直接调用 eventBus.post(Object) 方法，可以自己实例化 EventBus 对象，但一般使用默认的单例就好了：EventBus.getDefault()， 根据 post 函数参数的类型，会自动调用订阅相应类型事件的函数。</li>
+</ul>
+<h1 id="指定处理线程">指定处理线程</h1><p>默认情况下，onEvent 方法会在 post(Event) 的方法的线程中执行，但是可能会 post(Event) 是一个非UI线程，而 onEvent 方法需要更新UI，需要在主线程运行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onEventMainThread</span><span class="params">(MessageEvent event)</span> </span>&#123;</span><br><span class="line">    textField.setText(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为每个事件订阅函数都是和一个 ThreadMode 相关联的，ThreadMode 指定了会调用的函数。有以下四个 ThreadMode：</p>
+<ul>
+<li>PostThread：事件的处理在和事件的发送在相同的进程，所以事件处理时间不应太长，不然影响事件的发送线程，而这个线程可能是UI线程。对应的函数名是 onEvent。</li>
+<li>MainThread: 事件的处理会在UI线程中执行。事件处理时间不能太长，这个不用说的，长了会ANR的，对应的函数名是onEventMainThread。</li>
+<li>BackgroundThread：事件的处理会在一个后台线程中执行，对应的函数名是 onEventBackgroundThread，虽然名字是 BackgroundThread，事件处理是在后台线程，但事件处理时间还是不应该太长，因为如果发送事件的线程是后台线程，会直接执行事件，如果当前线程是 UI 线程，事件会被加到一个队列中，由一个线程依次处理这些事件，如果某个事件处理时间太长，会阻塞后面的事件的派发或处理。</li>
+<li>Async：事件处理会在单独的线程中执行，主要用于在后台线程中执行耗时操作，每个事件会开启一个线程（有线程池），但最好限制线程的数目。</li>
+</ul>
+<h1 id="使用_Sticky_Events">使用 Sticky Events</h1><p>某些时候，我们并不希望发布出来的Event立即被消费掉，而是等到时机成熟。比如说，在一个详情页点赞之后，产生一个VoteEvent，VoteEvent并不立即被消费，而是等用户退出详情页回到商品列表之后，接收到该事件，然后刷新Adapter等。其实这就是之前我们用startActivityForResult和onActivityResult做的事情。</p>
+<p>那么怎么用EventBus来模拟这样的情况呢？这就需要另外一个强大的机制，Sticky Event.</p>
+<p>和普通的Event不同，当发布一个Sticky Event，需要使用postSticky方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().postSticky(<span class="keyword">new</span> VoteEvent(obj));</span><br></pre></td></tr></table></figure>
+<p>上面的代码发布了一个点赞的Sticky Event.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">EventBus.getDefault().registerSticky(<span class="keyword">this</span>);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onEventMainThread</span><span class="params">(VoteEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO update adapter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>EventBus 的 registerSticky 方法在每次执行的时候，都会去查询一次 Sticky Event，并调用响应的方法处理。</p>
+<p>除了 registerSticky 方法来触发Sticky Event 之外，我们还可以通过 getStickyEvent 方法来获取响应的 Sticky Event 来进行处理。比如,我们可以在 onResume 方法里面检查 EventBus 里面是否有 VoteEvent 的Sticky Event，从而进行处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onResume();</span><br><span class="line">    VoteEvent voteEvent = EventBus.getDefault().getStickyEvent(VoteEvent.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-0_beta_版本的变化">3.0 beta 版本的变化</h1><p>3.0 版本目前还在 beta 阶段，主要变化时使用注解代替基于惯例的 onEvent 方法，用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Subscribe</span>(threadMode = ThreadMode.MainThread)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onVoteEvent</span><span class="params">(VoteEvent event)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="进阶">进阶</h1><p>想要探索更幽深的世界，就去看源码吧：</p>
+<p><a href="http://kymjs.com/code/2015/12/12/01/" target="_blank" rel="external">EventBus源码研读</a></p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/"> #android </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/28/android-data-binding-2/">
                 MVVM 和 Android Data Binding 续
               </a>
@@ -927,95 +1054,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/05/02/pentaho-report-designer/">
-                Pentaho Report Designer生火指南
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-05-02
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/相对挨踢/">相对挨踢</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/02/pentaho-report-designer/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/02/pentaho-report-designer/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="一、认识Pentaho_Report_Designer">一、认识Pentaho Report Designer</h2><p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-1.png" alt="Pentaho Report Designer"></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/02/pentaho-report-designer/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/pentaho/"> #pentaho </a>
-          
-            <a href="/tags/report/"> #report </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1051,7 +1089,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
