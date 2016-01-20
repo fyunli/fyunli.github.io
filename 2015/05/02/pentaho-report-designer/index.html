@@ -175,7 +175,7 @@
 </ul>
 <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-8.png" alt=""></p>
 <ul>
-<li>打开的界面定义参数： </li>
+<li>打开的界面定义参数：</li>
 </ul>
 <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-report-9.png" alt=""></p>
 <ul>
@@ -214,8 +214,8 @@
 <ul>
 <li>引用Report地址，Pentaho BI Server弹出框要求输入用户名，密码</li>
 </ul>
-<p>修改pentaho-solutions/system/applicationContext-spring-context.xml，在filterChainProxy中api, plugin对应增加requestParameterProcessingFilter。修改后如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;bean id=&#34;filterChainProxy&#34; class=&#34;org.springframework.security.util.FilterChainProxy&#34;&#62;&#10;  &#60;property name=&#34;filterInvocationDefinitionSource&#34;&#62;&#10;    &#60;value&#62;&#10;      &#60;![CDATA[CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON&#10;      PATTERN_TYPE_APACHE_ANT&#10;      /webservices/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /api/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /plugin/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /**=securityContextHolderAwareRequestFilter,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,httpSessionReuseDetectionFilter,logoutFilter,authenticationProcessingFilter,basicProcessingFilter,requestParameterProcessingFilter,requestParameterProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor]]&#62;&#10;    &#60;/value&#62;&#10;  &#60;/property&#62;&#10;&#60;/bean&#62;</span><br></pre></td></tr></table></figure>
+<p>修改pentaho-solutions/system/applicationContext-spring-security.xml，在filterChainProxy中api, plugin对应增加requestParameterProcessingFilter。修改后如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;bean id=&#34;filterChainProxy&#34; class=&#34;org.springframework.security.util.FilterChainProxy&#34;&#62;&#10;  &#60;property name=&#34;filterInvocationDefinitionSource&#34;&#62;&#10;    &#60;value&#62;&#10;      &#60;![CDATA[CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON&#10;      PATTERN_TYPE_APACHE_ANT&#10;      /webservices/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /api/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /plugin/**=securityContextHolderAwareRequestFilterForWS,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,requestParameterProcessingFilter,basicProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilterForWS,filterInvocationInterceptorForWS&#10;      /**=securityContextHolderAwareRequestFilter,httpSessionPentahoSessionContextIntegrationFilter,httpSessionContextIntegrationFilter,httpSessionReuseDetectionFilter,logoutFilter,authenticationProcessingFilter,basicProcessingFilter,requestParameterProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor]]&#62;&#10;    &#60;/value&#62;&#10;  &#60;/property&#62;&#10;&#60;/bean&#62;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -316,7 +316,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

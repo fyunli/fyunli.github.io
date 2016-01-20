@@ -1150,7 +1150,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ccdbe8;
+  background: #6947a8;
 }
 .sidebar-nav {
   margin: 0;
@@ -1374,7 +1374,6 @@ input.menu-search-input {
 .posts-expand .post-meta .post-category-list-link {
   color: #999;
 }
-.posts-expand .post-body h1,
 .posts-expand .post-body h2,
 .posts-expand .post-body h3,
 .posts-expand .post-body h4,
@@ -1914,7 +1913,6 @@ input.menu-search-input {
 .test {
   border: 10px;
 }
-h1,
 h2,
 h3,
 h4,
