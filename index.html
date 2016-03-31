@@ -161,9 +161,9 @@
           <p>偶尔有需要将本机 WEB 项目展示给异地的朋友，虽然次数不多，但是一旦有这种需求就很抓狂。为了临时性的需求，专门鼓捣一遍部署到 VPS 上实在有些牛刀杀鸡的感觉，特别是 VPS 上刚好没有相关运行环境的时候简直打人的心都有了。</p>
 <p>很多年以前，曾经用过花生壳动态域名来做映射，自从背弃了 WINDOWS 阵营之后，就再也没用过了。</p>
 <p>幸好，有 <a href="https://github.com/inconshreveable/ngrok" target="_blank" rel="external">ngrok</a>。这里有一篇 <a href="http://www.imike.me/2016/03/23/CentOS%E4%B8%8B%E9%83%A8%E7%BD%B2Ngrok%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="external">ngrok部署教程</a></p>
-<p>但是，作为一个更为纯粹的懒人，我要告诉你一个更省事的法子，那就是使用 natapp.cn 服务。</p>
+<p>但是，作为一个更为纯粹的懒人，我要告诉你一个更省事的法子，那就是使用 <a href="http://natapp.cn/" target="_blank" rel="external">natapp.cn</a> 服务。</p>
 <ol>
-<li>上 natapp.cn 下载客户端；</li>
+<li>上 <a href="http://natapp.cn/" target="_blank" rel="external">natapp.cn</a> 下载客户端；</li>
 <li>解压后运行 ngrok -config ngrok.cfg -subdomain myapp 80 (myapp是你webapp别名，80是本机映射端口);</li>
 <li>打开 <a href="http://myapp.ngrok.natapp.cn" target="_blank" rel="external">http://myapp.ngrok.natapp.cn</a> 访问吧</li>
 </ol>
