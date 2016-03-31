@@ -7,8 +7,31 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Fri, 15 Jan 2016 04:27:39 GMT</pubDate>
+    <pubDate>Thu, 31 Mar 2016 13:07:46 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[ngrok使用]]></title>
+      <link>http://fyun.li/2016/03/31/ngrok/</link>
+      <guid>http://fyun.li/2016/03/31/ngrok/</guid>
+      <pubDate>Wed, 30 Mar 2016 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>偶尔有需要将本机 WEB 项目展示给异地的朋友，虽然次数不多，但是一旦有这种需求就很抓狂。为了临时性的需求，专门鼓捣一遍部署到 VPS 上实在有些牛刀杀鸡的感觉，特别是 VPS 上刚好没有相关运行环境的时候简直打人的心都有了。</p>
+<p>很多年以前，曾经用过花生壳动态域]]>
+      </description>
+      <content:encoded><![CDATA[<p>偶尔有需要将本机 WEB 项目展示给异地的朋友，虽然次数不多，但是一旦有这种需求就很抓狂。为了临时性的需求，专门鼓捣一遍部署到 VPS 上实在有些牛刀杀鸡的感觉，特别是 VPS 上刚好没有相关运行环境的时候简直打人的心都有了。</p>
+<p>很多年以前，曾经用过花生壳动态域名来做映射，自从背弃了 WINDOWS 阵营之后，就再也没用过了。</p>
+<p>幸好，有 <a href="https://github.com/inconshreveable/ngrok" target="_blank" rel="external">ngrok</a>。这里有一篇 <a href="http://www.imike.me/2016/03/23/CentOS%E4%B8%8B%E9%83%A8%E7%BD%B2Ngrok%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="external">ngrok部署教程</a></p>
+<p>但是，作为一个更为纯粹的懒人，我要告诉你一个更省事的法子，那就是使用 natapp.cn 服务。</p>
+<ol>
+<li>上 natapp.cn 下载客户端；</li>
+<li>解压后运行 ngrok -config ngrok.cfg -subdomain myapp 80 (myapp是你webapp别名，80是本机映射端口);</li>
+<li>打开 <a href="http://myapp.ngrok.natapp.cn" target="_blank" rel="external">http://myapp.ngrok.natapp.cn</a> 访问吧</li>
+</ol>
+<p>// ~OVER</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2016/03/31/ngrok/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[EventBus 使用]]></title>
@@ -1255,45 +1278,6 @@
 <p>collapseAll: function() {<br>    tabs.each(function() {<br>        $(this).next().slideUp();<br>    });<br>    tabs.removeClass(conf.current);<br>    current = -1;<br>}<br>最后，再推荐一个地方：<a href="http://leigeber.com" target="_blank" rel="external">leigeber.com</a>，好几个tinyx的组件真的不错。</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2010/04/28/jquery-tools/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[java:取得汉字拼音]]></title>
-      <link>http://fyun.li/2010/04/21/java-hans/</link>
-      <guid>http://fyun.li/2010/04/21/java-hans/</guid>
-      <pubDate>Tue, 20 Apr 2010 16:09:44 GMT</pubDate>
-      <description>
-      <![CDATA[<p>请看这个开源项目：<a href="http://pinyin4j.sf.net" target="_blank" rel="external">pinyin4j</a></p>
-<p>不多说了，上代码。</p>
-<pre lang="java">import net.so]]>
-      </description>
-      <content:encoded><![CDATA[<p>请看这个开源项目：<a href="http://pinyin4j.sf.net" target="_blank" rel="external">pinyin4j</a></p>
-<p>不多说了，上代码。</p>
-<pre lang="java">import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
-/**
- * @author Fyun Li
- */
-public class PinyinTest {
-
-    public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination {
-        HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
-        format.setVCharType(HanyuPinyinVCharType.WITH_V);
-        format.setCaseType(HanyuPinyinCaseType.UPPERCASE);
-        format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-        String[] ss = PinyinHelper.toHanyuPinyinStringArray('吕', format);
-        for (String s : ss) {
-            System.out.println(s);
-        }
-    }
-
-}</pre>]]></content:encoded>
-      <comments>http://fyun.li/2010/04/21/java-hans/#disqus_thread</comments>
     </item>
     
   </channel>

@@ -112,6 +112,107 @@
           
           
             
+              <a class="post-title-link" href="/2010/04/21/java-hans/">
+                java:取得汉字拼音
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2010-04-20
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2010/04/21/java-hans/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2010/04/21/java-hans/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>请看这个开源项目：<a href="http://pinyin4j.sf.net" target="_blank" rel="external">pinyin4j</a></p>
+<p>不多说了，上代码。</p>
+<pre lang="java">import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+/**
+ * @author Fyun Li
+ */
+public class PinyinTest {
+
+    public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination {
+        HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
+        format.setVCharType(HanyuPinyinVCharType.WITH_V);
+        format.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+        format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+        String[] ss = PinyinHelper.toHanyuPinyinStringArray('吕', format);
+        for (String s : ss) {
+            System.out.println(s);
+        }
+    }
+
+}</pre>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2010/04/13/eclipse-code-review-plugins/">
                 Eclipse Code Review Plugins
               </a>
@@ -837,89 +938,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2009/12/13/not-my-college/">
-                不是我的的少年
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2009-12-13
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/读书写字/">读书写字</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2009/12/13/not-my-college/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/12/13/not-my-college/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/book-cjdsn.jpg" alt=""></p>
-<p>候机的无聊迫使我决定消灭一下播放器上的小说，我选中的是《此间的少年》。</p>
-<p>从2000年左右就在金庸客栈，清韵零零散散地看江南的小说，文笔是相当的不错，九州缥缈录更是让我追了几年。不过江南文品非常的不厚道，大坑一堆，基本上都没有想填埋的迹象。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2009/12/13/not-my-college/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -955,7 +973,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -969,7 +987,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -112,6 +112,98 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/31/ngrok/">
+                ngrok使用
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-03-30
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/31/ngrok/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/31/ngrok/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>偶尔有需要将本机 WEB 项目展示给异地的朋友，虽然次数不多，但是一旦有这种需求就很抓狂。为了临时性的需求，专门鼓捣一遍部署到 VPS 上实在有些牛刀杀鸡的感觉，特别是 VPS 上刚好没有相关运行环境的时候简直打人的心都有了。</p>
+<p>很多年以前，曾经用过花生壳动态域名来做映射，自从背弃了 WINDOWS 阵营之后，就再也没用过了。</p>
+<p>幸好，有 <a href="https://github.com/inconshreveable/ngrok" target="_blank" rel="external">ngrok</a>。这里有一篇 <a href="http://www.imike.me/2016/03/23/CentOS%E4%B8%8B%E9%83%A8%E7%BD%B2Ngrok%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="external">ngrok部署教程</a></p>
+<p>但是，作为一个更为纯粹的懒人，我要告诉你一个更省事的法子，那就是使用 natapp.cn 服务。</p>
+<ol>
+<li>上 natapp.cn 下载客户端；</li>
+<li>解压后运行 ngrok -config ngrok.cfg -subdomain myapp 80 (myapp是你webapp别名，80是本机映射端口);</li>
+<li>打开 <a href="http://myapp.ngrok.natapp.cn" target="_blank" rel="external">http://myapp.ngrok.natapp.cn</a> 访问吧</li>
+</ol>
+<p>// ~OVER</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/workbench/"> #workbench </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/01/11/eventbus/">
                 EventBus 使用
               </a>
@@ -926,96 +1018,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/05/02/pentaho-cde/">
-                Pentaho CDE生火指南
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-05-02
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/相对挨踢/">相对挨踢</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/02/pentaho-cde/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/02/pentaho-cde/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="1、安装CDA、CDE插件">1、安装CDA、CDE插件</h2><p>登录BI Server后菜单Home - Marketplace</p>
-<p><img src="http://7xivqe.com1.z0.glb.clouddn.com/2015/05/pentaho-cde-1.png" alt="MarketMenu"></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/02/pentaho-cde/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/pentaho/"> #pentaho </a>
-          
-            <a href="/tags/report/"> #report </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1051,7 +1053,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1065,7 +1067,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
