@@ -7,8 +7,43 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Thu, 31 Mar 2016 13:13:06 GMT</pubDate>
+    <pubDate>Fri, 01 Apr 2016 13:12:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Spring Boot (一): 快速构建 WebMvc 应用]]></title>
+      <link>http://fyun.li/2016/04/01/spring-boot-mvc/</link>
+      <guid>http://fyun.li/2016/04/01/spring-boot-mvc/</guid>
+      <pubDate>Thu, 31 Mar 2016 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<h1 id="1-_引言">1. 引言</h1><p>作为多年的 Java 成猿，在 Spring 扫荡 Java 界的时代，不可避免的被长长的 …ApplicationContext.xml 刷屏。更可悲的是不管被刷过多少屏，被虐过多少次，依然没法记住那长长的配置项。</p>
+<p>终于，在配置深坑苦苦煎熬之后，有人垂下了一根绳索，带来了 Spring Boot。</p>
+<p>Spring Boot充分利用了 JavaConfig 配置模式以及“约定优于配置”的理念，能够极大的简化基于 Spring 的应用开发。为了简化依赖图，Boot 的功能是模块化的，通过导入 Boot 所谓的“starter” 模块，可以将许多的依赖添加到工程之中。</p>
+<p>下面，我们就使用 IDEA 和 Gradle 构建一个最简单的 SpringMVC 应用。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<h1 id="1-_引言">1. 引言</h1><p>作为多年的 Java 成猿，在 Spring 扫荡 Java 界的时代，不可避免的被长长的 …ApplicationContext.xml 刷屏。更可悲的是不管被刷过多少屏，被虐过多少次，依然没法记住那长长的配置项。</p>
+<p>终于，在配置深坑苦苦煎熬之后，有人垂下了一根绳索，带来了 Spring Boot。</p>
+<p>Spring Boot充分利用了 JavaConfig 配置模式以及“约定优于配置”的理念，能够极大的简化基于 Spring 的应用开发。为了简化依赖图，Boot 的功能是模块化的，通过导入 Boot 所谓的“starter” 模块，可以将许多的依赖添加到工程之中。</p>
+<p>下面，我们就使用 IDEA 和 Gradle 构建一个最简单的 SpringMVC 应用。</p>
+<a id="more"></a>
+<h1 id="2-_Hello_MVC">2. Hello MVC</h1><h2 id="2-1-_创建一个基于_Gradle_的_Java_Web_应用">2.1. 创建一个基于 Gradle 的 Java Web 应用</h2><p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1f2hhq1lirxj20wi0l7jtr.jpg" alt="idea gradle web"></p>
+<p>创建之后，代码结构如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1f2hhr3u0qhj209v08eaak.jpg" alt="structure"></p>
+<h2 id="2-2-_添加_Spring_Boot_Web_依赖">2.2. 添加 Spring Boot Web 依赖</h2><p>build.gradle 内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">group <span class="string">'li.fyun'</span></span><br><span class="line">version <span class="string">'1.0-SNAPSHOT'</span></span><br><span class="line"></span><br><span class="line">apply plugin: <span class="string">'java'</span></span><br><span class="line">apply plugin: <span class="string">'war'</span></span><br><span class="line">apply plugin: <span class="string">'idea'</span></span><br><span class="line">apply plugin: <span class="string">'spring-boot'</span></span><br><span class="line"></span><br><span class="line">sourceCompatibility = <span class="number">1.8</span></span><br><span class="line">targetCompatibility = <span class="number">1.8</span></span><br><span class="line"></span><br><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath(<span class="string">"org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jar &#123;</span><br><span class="line">    baseName = <span class="string">'springboot'</span></span><br><span class="line">    version = <span class="string">'0.1.0'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile(<span class="string">"org.springframework.boot:spring-boot-starter-web"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-_打个招呼吧">2.3. 打个招呼吧</h2><p>Application.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> li.fyunli.springboot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.builder.SpringApplicationBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.context.web.SpringBootServletInitializer;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by fyunli on 16/4/1.</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> <span class="keyword">extends</span> <span class="title">SpringBootServletInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> SpringApplicationBuilder <span class="title">configure</span><span class="params">(SpringApplicationBuilder application)</span> </span>&#123;</span><br><span class="line">        application.listeners();</span><br><span class="line">        <span class="keyword">return</span> application.sources(applicationClass);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Class&lt;Application&gt; applicationClass = Application.class;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HelloController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> li.fyunli.springboot.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by fyunli on 16/4/1.</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="annotation">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello Boot!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-_展示成果">2.4. 展示成果</h2><p>运行 Application.java, 控制台很友好地告知这是基于 Spring Boot 的应用：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;  .   ____          _            __ _ _&#10; /\\ / ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \&#10;( ( )\___ | &#39;_ | &#39;_| | &#39;_ \/ _` | \ \ \ \&#10; \\/  ___)| |_)| | | | | || (_| |  ) ) ) )&#10;  &#39;  |____| .__|_| |_|_| |_\__, | / / / /&#10; =========|_|==============|___/=/_/_/_/&#10; :: Spring Boot ::        (v1.3.3.RELEASE)&#10;&#10;......</span><br></pre></td></tr></table></figure>
+<p>浏览器访问 <a href="http://localhost:8080/hello" target="_blank" rel="external">http://localhost:8080/hello</a>, 显示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1f2hiadzuchj20gc0a53yp.jpg" alt="hello boot"></p>
+<p>OK， 第一个 Spring Boot MVC 程序完成。</p>
+]]></content:encoded>
+      <comments>http://fyun.li/2016/04/01/spring-boot-mvc/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[ngrok使用]]></title>
@@ -31,6 +66,18 @@
 <p>// ~OVER</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2016/03/31/ngrok/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[Spring Session + Redis 实现分布式会话]]></title>
+      <link>http://fyun.li/2016/02/14/spring-session-redis/</link>
+      <guid>http://fyun.li/2016/02/14/spring-session-redis/</guid>
+      <pubDate>Sat, 13 Feb 2016 16:00:00 GMT</pubDate>
+      <description>
+      
+      </description>
+      <content:encoded></content:encoded>
+      <comments>http://fyun.li/2016/02/14/spring-session-redis/#disqus_thread</comments>
     </item>
     
     <item>
@@ -1222,62 +1269,6 @@
 <p><a href="http://hi.baidu.com/wangyongjin87/blog/item/c9cf2cec4e19de232df534cb.html" target="_blank" rel="external">http://hi.baidu.com/wangyongjin87/blog/item/c9cf2cec4e19de232df534cb.html</a></p>
 ]]></content:encoded>
       <comments>http://fyun.li/2010/05/23/spring-aop-annotation/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[xfire两则]]></title>
-      <link>http://fyun.li/2010/05/12/xfire-tips-2010/</link>
-      <guid>http://fyun.li/2010/05/12/xfire-tips-2010/</guid>
-      <pubDate>Wed, 12 May 2010 11:09:57 GMT</pubDate>
-      <description>
-      <![CDATA[<p>1、生成客户端stub时：Thrown by JAXB : undefined element declaration ‘s:schema’</p>
-<p>解决方法：</p>
-<p>删除</p>
-<p>&lt;s:import namespace=”<a href="http://www.w3.org/2001/XMLSchema&quot;/&amp;gt">http://www.w3.org/2001/XMLSchema&quot;/&amp;gt</a>;</p>
-<p>and</p>
-<p>&lt;s:element ref=”s:schema” /&gt;</p>
-<p>不要手软，全部格杀勿论。</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<p>1、生成客户端stub时：Thrown by JAXB : undefined element declaration ‘s:schema’</p>
-<p>解决方法：</p>
-<p>删除</p>
-<p>&lt;s:import namespace=”<a href="http://www.w3.org/2001/XMLSchema&quot;/&amp;gt" target="_blank" rel="external">http://www.w3.org/2001/XMLSchema&quot;/&amp;gt</a>;</p>
-<p>and</p>
-<p>&lt;s:element ref=”s:schema” /&gt;</p>
-<p>不要手软，全部格杀勿论。</p>
-<a id="more"></a>
-<p>2、XFireFault: Could not marshall type</p>
-<p>namespace相同的两个webservice生成stub时，会覆盖ObjectFactory.java</p>
-<p>解决办法：</p>
-<p>备份，合并，还有其它办法吗？好像没有了。</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2010/05/12/xfire-tips-2010/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[JQuery Tools]]></title>
-      <link>http://fyun.li/2010/04/28/jquery-tools/</link>
-      <guid>http://fyun.li/2010/04/28/jquery-tools/</guid>
-      <pubDate>Wed, 28 Apr 2010 05:25:31 GMT</pubDate>
-      <description>
-      <![CDATA[<p>这几天我折腾起了前端，因为我想让应用的体验稍微好那么一点，在茫茫网络世界中，我上了JQuery的贼船。</p>
-<p>理所当然地，我首先选择了官方性质的jquery ui库，但是其臃肿的体型，杯具的性能以及难缠的界面定制（官方有themeroller工具，但是除了配色你能改变它那个骚样吗？而且圆角在IE上并不支持）让我只好努力寻找其他的替代者。最终我相中了<a href="http://flowplayer.org/tools">JQuery Tools</a>，主要包括最常用的几个组件：Tabs(Accordion, Slideshow), Tooltips，Overlay（Box），Expose, Scrollable, Flashembed。怎么用俺就不说了，因为我懒，上官网吧，文档还是很齐全的。另外这里有个中文链接：</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<p>这几天我折腾起了前端，因为我想让应用的体验稍微好那么一点，在茫茫网络世界中，我上了JQuery的贼船。</p>
-<p>理所当然地，我首先选择了官方性质的jquery ui库，但是其臃肿的体型，杯具的性能以及难缠的界面定制（官方有themeroller工具，但是除了配色你能改变它那个骚样吗？而且圆角在IE上并不支持）让我只好努力寻找其他的替代者。最终我相中了<a href="http://flowplayer.org/tools" target="_blank" rel="external">JQuery Tools</a>，主要包括最常用的几个组件：Tabs(Accordion, Slideshow), Tooltips，Overlay（Box），Expose, Scrollable, Flashembed。怎么用俺就不说了，因为我懒，上官网吧，文档还是很齐全的。另外这里有个中文链接：</p>
-<a id="more"></a>
-<p><a href="http://css9.net/flexible-ui-library-jquery-tools/" target="_blank" rel="external">http://css9.net/flexible-ui-library-jquery-tools/</a></p>
-<p>JQuery Tools让我爽的地方是：</p>
-<p>1、小巧，真正做到了传说中的精悍；</p>
-<p>2、js, html, css的分工很明确，侵入性很低，不会因为使用个库就强行甩给你一个垃圾模样，当然你也可以很懒，照抄官网示例的样式吧。</p>
-<p>3、扩展性很好；</p>
-<p>比如Accordion，我们客户希望能增加全部展开/关闭功能，只要增加这两个方法即可：</p>
-<p><pre lang="javascript">expandAll: function() {<br>    tabs.each(function() {<br>        $(this).next().slideDown();<br>    });<br>    tabs.addClass(conf.current);<br>    current = -1;<br>},</pre></p>
-<p>collapseAll: function() {<br>    tabs.each(function() {<br>        $(this).next().slideUp();<br>    });<br>    tabs.removeClass(conf.current);<br>    current = -1;<br>}<br>最后，再推荐一个地方：<a href="http://leigeber.com" target="_blank" rel="external">leigeber.com</a>，好几个tinyx的组件真的不错。</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2010/04/28/jquery-tools/#disqus_thread</comments>
     </item>
     
   </channel>
