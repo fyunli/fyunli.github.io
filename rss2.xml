@@ -7,7 +7,7 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Fri, 01 Apr 2016 13:12:54 GMT</pubDate>
+    <pubDate>Fri, 01 Apr 2016 13:20:31 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -41,6 +41,7 @@
 <p>浏览器访问 <a href="http://localhost:8080/hello" target="_blank" rel="external">http://localhost:8080/hello</a>, 显示：</p>
 <p><img src="http://ww1.sinaimg.cn/large/620f1e7egw1f2hiadzuchj20gc0a53yp.jpg" alt="hello boot"></p>
 <p>OK， 第一个 Spring Boot MVC 程序完成。</p>
+<p>源代码可以在 <a href="https://github.com/fyunli/spring-boot-sample" target="_blank" rel="external">github</a> 找到。</p>
 ]]></content:encoded>
       <comments>http://fyun.li/2016/04/01/spring-boot-mvc/#disqus_thread</comments>
     </item>
