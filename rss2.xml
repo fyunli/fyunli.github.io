@@ -7,11 +7,11 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Sat, 02 Apr 2016 10:04:38 GMT</pubDate>
+    <pubDate>Sat, 02 Apr 2016 10:05:01 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title><![CDATA[Spring Boot (二)：集成 FreeMarker 与 Bootstrap]]></title>
+      <title><![CDATA[Spring Boot (二): 集成 FreeMarker 与 Bootstrap]]></title>
       <link>http://fyun.li/2016/04/02/spring-boot-freemarker/</link>
       <guid>http://fyun.li/2016/04/02/spring-boot-freemarker/</guid>
       <pubDate>Fri, 01 Apr 2016 16:00:00 GMT</pubDate>
