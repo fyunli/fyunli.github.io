@@ -7,7 +7,7 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Sat, 02 Apr 2016 10:06:35 GMT</pubDate>
+    <pubDate>Sat, 02 Apr 2016 10:10:55 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -71,6 +71,7 @@
 <li>/static/</li>
 <li>/public/</li>
 </ul>
+<h1 id="源代码">源代码</h1><p>源代码链接: <a href="https://github.com/fyunli/spring-boot-samples/tree/master/spring-boot-todo" target="_blank" rel="external">github</a></p>
 ]]></content:encoded>
       <comments>http://fyun.li/2016/04/02/spring-boot-freemarker/#disqus_thread</comments>
     </item>
