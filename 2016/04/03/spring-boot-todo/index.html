@@ -31,7 +31,7 @@
 
 
 
-  <title> Spring Boot (三): 提供 Todo Restful API // 雲之彼岸 </title>
+  <title> Spring Boot (三): TODO App // 雲之彼岸 </title>
 </head>
 
 <body>
@@ -110,7 +110,7 @@
           
           
             
-              Spring Boot (三): 提供 Todo Restful API
+              Spring Boot (三): TODO App
             
           
         </h1>
@@ -157,6 +157,7 @@
 <p>关于 Rest API 的介绍，可参考 <a href="http://www.restapitutorial.com/" target="_blank" rel="external">Rest API Tutorial</a>.</p>
 <h1 id="提供_TODO_REST_API">提供 TODO REST API</h1><h2 id="引入_Spring_Data_JPA_依赖">引入 Spring Data JPA 依赖</h2><p>在 build.gradle 中加入以下依赖:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">runtime(<span class="string">"com.h2database:h2"</span>)</span><br><span class="line">compile(<span class="string">"org.springframework.boot:spring-boot-starter-data-jpa"</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>Spring Boot 默认支持 H2, HSQLDB, SQLITE等内嵌数据库的支持，只需要发现 classpath 中有对应 jar 包，即可正确配置数据源。</p>
 <p>如需要使用其他数据库，可通过 application.properties 进行配置，如:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql:<span class="comment">//localhost/demo?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true</span></span><br><span class="line">spring.datasource.username=devuser</span><br><span class="line">spring.datasource.password=devuser</span><br><span class="line">spring.datasource.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>=com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
