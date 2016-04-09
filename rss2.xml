@@ -7,7 +7,7 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Sat, 09 Apr 2016 07:28:33 GMT</pubDate>
+    <pubDate>Sat, 09 Apr 2016 07:29:49 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -17,11 +17,14 @@
       <pubDate>Fri, 08 Apr 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p>在 <a href="http://fyun.li/2015/12/19/ubuntu-ss/">《Ubuntu 搭建 shadowsocks》</a> 一文中，我们讨论了如何在墙外 Ubuntu 服务器上搭建 Shadowsocks。</p>
-<p>但是大部分终端并不支持]]>
+<p>但是大部分终端并不支持 SS 使用的 socks5 协议，此时，我们就需要使用 polipo 来进行协议转换，让终端也支持 SS 代理。</p>
+<h1 id="安装">安装</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install polipo</span><br></pre></td></tr></table></figure>]]>
+      
       </description>
       <content:encoded><![CDATA[<p>在 <a href="http://fyun.li/2015/12/19/ubuntu-ss/">《Ubuntu 搭建 shadowsocks》</a> 一文中，我们讨论了如何在墙外 Ubuntu 服务器上搭建 Shadowsocks。</p>
 <p>但是大部分终端并不支持 SS 使用的 socks5 协议，此时，我们就需要使用 polipo 来进行协议转换，让终端也支持 SS 代理。</p>
 <h1 id="安装">安装</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install polipo</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h1 id="修改配置">修改配置</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span><br><span class="line">&lt;plist version="1.0"&gt;</span><br><span class="line">  &lt;dict&gt;</span><br><span class="line">    &lt;key&gt;Label&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;homebrew.mxcl.polipo&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span><br><span class="line">    &lt;true/&gt;</span><br><span class="line">    &lt;key&gt;KeepAlive&lt;/key&gt;</span><br><span class="line">    &lt;true/&gt;</span><br><span class="line">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span><br><span class="line">    &lt;array&gt;</span><br><span class="line">        &lt;string&gt;/usr/local/opt/polipo/bin/polipo&lt;/string&gt;</span><br><span class="line">        &lt;string&gt;socksParentProxy=localhost:1080&lt;/string&gt;</span><br><span class="line">    &lt;/array&gt;</span><br><span class="line">    &lt;!-- Set `ulimit -n 20480`. The default OS X limit is 256, that's</span><br><span class="line">         not enough for Polipo (displays 'too many files open' errors).</span><br><span class="line">         It seems like you have no reason to lower this limit</span><br><span class="line">         (and unlikely will want to raise it). --&gt;</span><br><span class="line">    &lt;key&gt;SoftResourceLimits&lt;/key&gt;</span><br><span class="line">    &lt;dict&gt;</span><br><span class="line">      &lt;key&gt;NumberOfFiles&lt;/key&gt;</span><br><span class="line">      &lt;integer&gt;20480&lt;/integer&gt;</span><br><span class="line">    &lt;/dict&gt;</span><br><span class="line">  &lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
 <p>修改的地方在于增加：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string&gt;socksParentProxy=localhost:1080&lt;/string&gt;</span><br></pre></td></tr></table></figure>
