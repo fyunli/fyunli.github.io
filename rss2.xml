@@ -713,20 +713,33 @@
       <guid>http://fyun.li/2015/12/19/ubuntu-ss/</guid>
       <pubDate>Sat, 19 Dec 2015 11:30:21 GMT</pubDate>
       <description>
-      <![CDATA[<p>在Ubuntu下安装ss很简单。只需要依次执行下面3条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pr]]>
+      <![CDATA[<h2 id="安装">安装</h2><p>在 Ubuntu 下安装 ss 很简单。只需要依次执行下面 3 条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span clas]]>
       </description>
-      <content:encoded><![CDATA[<p>在Ubuntu下安装ss很简单。只需要依次执行下面3条命令：</p>
+      <content:encoded><![CDATA[<h2 id="安装">安装</h2><p>在 Ubuntu 下安装 ss 很简单。只需要依次执行下面 3 条命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update&#10;apt-get install python-pip&#10;pip install shadowsocks</span><br></pre></td></tr></table></figure>
 <p>pip 是 python 下的方便安装的工具，类似 apt-get。</p>
 <p>全部执行完毕且没有报错的话，我们的 shadowsocks 就算是装完了。接下来就是配置部署了。</p>
-<p>写一个配置文件保存为etc/shadowsocks.json，文件内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;server&#34;:&#34;my_server_ip&#34;,&#10;    &#34;server_port&#34;:8388,&#10;    &#34;local_address&#34;: &#34;127.0.0.1&#34;,&#10;    &#34;local_port&#34;:1080,&#10;    &#34;password&#34;:&#34;mypassword&#34;,&#10;    &#34;timeout&#34;:300,&#10;    &#34;method&#34;:&#34;aes-256-cfb&#34;,&#10;    &#34;fast_open&#34;: false&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>写一个配置文件保存为 etc/shadowsocks.json，文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;server&#34;:&#34;0.0.0.0&#34;,&#10;    &#34;server_port&#34;:8388,&#10;    &#34;local_address&#34;: &#34;127.0.0.1&#34;,&#10;    &#34;local_port&#34;:1080,&#10;    &#34;password&#34;:&#34;mypassword&#34;,&#10;    &#34;timeout&#34;:600&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>server, server_port, password 需要自行根据自己的实际情况修改。</p>
 <p>配置文件编辑完成后，接下来就可以部署运行了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
+<h2 id="启动与停止">启动与停止</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
 <p>当然，我们可不希望每次重启服务器都手动启动 SS, 因此我们要把这条命令放到这个文件下：/etc/rc.d/rc.local，这样以后就能开机自动运行了。</p>
 <p>好了，打开客户端呼吸墙外的空气吧！</p>
+<p>停止 SS：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d stop</span><br></pre></td></tr></table></figure>
+<h2 id="自动启动">自动启动</h2><p>新建脚本文件/etc/systemd/system/shadowsocks.service，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Unit]&#10;Description=Shadowsocks&#10;&#10;[Service]&#10;TimeoutStartSec=0&#10;ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json&#10;&#10;[Install]&#10;WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>启动 shadowsocks 服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable shadowsocks&#10;systemctl start shadowsocks</span><br></pre></td></tr></table></figure>
+<p>检查服务是否正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status shadowsocks -l</span><br></pre></td></tr></table></figure>
+<h2 id="错误排除">错误排除</h2><p>出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: /usr/lib/x86_64-Linux-gnu/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CTX_cleanup</span><br></pre></td></tr></table></figure>
+<p>是由于在 openssl1.1.0 版本中，废弃了 EVP_CIPHER_CTX_cleanup 函数，只需打开</p>
+<p>/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py</p>
+<p>替换 cleanup 为 reset，重启 SS。</p>
 <p><a href="https://shadowsocks.com/client.html" target="_blank" rel="external">客户端下载链接</a></p>
 ]]></content:encoded>
       <comments>http://fyun.li/2015/12/19/ubuntu-ss/#disqus_thread</comments>
