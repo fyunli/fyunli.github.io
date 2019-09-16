@@ -214,8 +214,7 @@ h6 {
   font-family: Cambria, Georgia, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", "Times New Roman", serif;
 }
 h1 {
-  font-size: 28px;
-  margin: 24px 0;
+  font-size: 24px;
 }
 @media (max-width: 767px) {
   h1 {
@@ -285,14 +284,6 @@ img {
   margin: auto 0;
   max-width: 100%;
   height: auto;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
 }
 ul {
   list-style: square;
@@ -1151,7 +1142,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6947a8;
+  background: #25b121;
 }
 .sidebar-nav {
   margin: 0;
@@ -2180,4 +2171,8 @@ li {
 }
 .post-more-link a {
   border-bottom: 0px;
+}
+h1 {
+  font-size: 28px;
+  margin: 24px 0;
 }

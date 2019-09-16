@@ -7,8 +7,20 @@
     <link>http://fyun.li/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description></description>
-    <pubDate>Sat, 09 Apr 2016 07:29:49 GMT</pubDate>
+    <pubDate>Sat, 13 Jan 2018 12:56:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[HTTP Cache]]></title>
+      <link>http://fyun.li/2018/01/11/http-cache/</link>
+      <guid>http://fyun.li/2018/01/11/http-cache/</guid>
+      <pubDate>Wed, 10 Jan 2018 16:00:00 GMT</pubDate>
+      <description>
+      
+      </description>
+      <content:encoded></content:encoded>
+      <comments>http://fyun.li/2018/01/11/http-cache/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[为 Mac 终端设置 Shadowsocks 代理]]></title>
@@ -865,6 +877,10 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">description "Tomcat Server"</span><br><span class="line"></span><br><span class="line">start on runlevel [2345]</span><br><span class="line">stop on runlevel [!2345]</span><br><span class="line">respawn</span><br><span class="line">respawn limit 10 5</span><br><span class="line"></span><br><span class="line">setuid tomcat</span><br><span class="line">setgid tomcat</span><br><span class="line"></span><br><span class="line">env JAVA_HOME=/usr/lib/jvm/java-8-oracle</span><br><span class="line">env CATALINA_HOME=/opt/apache-tomcat-8.0.26</span><br><span class="line"></span><br><span class="line"># Modify these options as needed</span><br><span class="line">env JAVA_OPTS="-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"</span><br><span class="line">env CATALINA_OPTS="-Xms512M -Xmx1024M -server -XX:+UseParallelGC"</span><br><span class="line"></span><br><span class="line">exec $CATALINA_HOME/bin/catalina.sh run</span><br><span class="line"></span><br><span class="line"># cleanup temp directory after stop</span><br><span class="line">post-stop script</span><br><span class="line">    rm -rf $CATALINA_HOME/temp/*</span><br><span class="line">end script</span><br></pre></td></tr></table></figure>
 <p>重载配置并启动</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo initctl reload-configuration</span><br><span class="line">sudo initctl start tomcat</span><br></pre></td></tr></table></figure>
+<ul>
+<li>某些情况启动缓慢的处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim $JAVA_HOME/jre/lib/security/java.security&#10;&#10;securerandom.source=file:/dev/random&#10;-&#62;&#10;securerandom.source=file:/dev/urandom</span><br></pre></td></tr></table></figure>
 <h1 id="六、启动多个_Tomcat_实例">六、启动多个 Tomcat 实例</h1><h2 id="1、建立新的_tomcat_实例目录_tomcat1，并复制必要的文件:">1、建立新的 tomcat 实例目录 tomcat1，并复制必要的文件:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /opt/tomcat-instance/tomcat1</span><br><span class="line">cd /opt/tomcat-instance/tomcat1</span><br><span class="line">sudo cp -r /opt/apache-tomcat-<span class="number">8.0</span>.26/conf conf</span><br><span class="line">sudo cp -r /opt/apache-tomcat-<span class="number">8.0</span>.26/webapps webapps</span><br><span class="line">sudo mkdir logs</span><br><span class="line">sudo mkdir temp</span><br></pre></td></tr></table></figure>
 <h2 id="2、修改_tomcat1_目录权限">2、修改 tomcat1 目录权限</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R tomcat:tomcat /opt/tomcat-instance/tomcat1</span><br></pre></td></tr></table></figure>
 <h2 id="3、修改端口设置">3、修改端口设置</h2><p>打开 server.xml 配置文件：</p>
@@ -1329,66 +1345,6 @@
     }
 })(jQuery);</pre>]]></content:encoded>
       <comments>http://fyun.li/2012/04/27/jquery-plugin-scaffold/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[Macbook Pro精简安装记事]]></title>
-      <link>http://fyun.li/2011/06/06/macbook-pro-debut/</link>
-      <guid>http://fyun.li/2011/06/06/macbook-pro-debut/</guid>
-      <pubDate>Mon, 06 Jun 2011 04:49:15 GMT</pubDate>
-      <description>
-      <![CDATA[<p>进入微博时代，我的惰性越发泛滥，别说不写博客，几乎瞄都没瞄上两眼。这次借着MACBOOK PRO的新鲜劲儿涂鸦两笔，假装是应<a href="http://weibo.com/melthaw">@<em>dz</em>菠菜_</a>的要求，其实是秀秀装逼感。</p>
-<p>话说我上一个本子是T60 2007-FA6，港版的水货本，用到现在已经4岁了，跑起WIN7来跟个破车似地，尤其是动不动就会停顿住那么几十秒抗议我对它的摧残，即使我将内存奢侈地增加到了3G也于事无补。所以，我趁着有预算赶紧折腾着换个新本，基本上是在THINKPAD RW3和MBP MC721ZP之间选择，THINKPAD新款的T420那悲剧性的16：9屏幕和可耻的多点触控板让我毫无犹豫地把他放弃了，而MBP是多么的标致得适合装逼，虽然我加配后MBP要15400HKD，而水THINKPAD只要8200RMB，但是尼玛的MBP是行货，有木有！！！</p>]]>
-      
-      </description>
-      <content:encoded><![CDATA[<p>进入微博时代，我的惰性越发泛滥，别说不写博客，几乎瞄都没瞄上两眼。这次借着MACBOOK PRO的新鲜劲儿涂鸦两笔，假装是应<a href="http://weibo.com/melthaw" target="_blank" rel="external">@<em>dz</em>菠菜_</a>的要求，其实是秀秀装逼感。</p>
-<p>话说我上一个本子是T60 2007-FA6，港版的水货本，用到现在已经4岁了，跑起WIN7来跟个破车似地，尤其是动不动就会停顿住那么几十秒抗议我对它的摧残，即使我将内存奢侈地增加到了3G也于事无补。所以，我趁着有预算赶紧折腾着换个新本，基本上是在THINKPAD RW3和MBP MC721ZP之间选择，THINKPAD新款的T420那悲剧性的16：9屏幕和可耻的多点触控板让我毫无犹豫地把他放弃了，而MBP是多么的标致得适合装逼，虽然我加配后MBP要15400HKD，而水THINKPAD只要8200RMB，但是尼玛的MBP是行货，有木有！！！</p>
-<a id="more"></a>
-<p>取回本子后真的有些爱不释手，绝对标致，多点触控板更是大爱，基本上可以抛弃鼠标愉快地完成一切操作了，操作细节我就不说，嘿嘿。因此，我也就放弃了再配一个Magic Mouse的念想，完全没有必要，顶多继续偶尔用下我那个灵敏度欠奉，时不时还掉线的罗技M555b就行了。</p>
-<p>开机初始化后自然是配置网络，配置VPN（我发誓我不经常翻墙的，体力不好），安装除IE外的各系浏览器，安装输入法——我选择的是FUN INPUT TOY。</p>
-<p>然后一顿狂找各种软件，MAC APP STORE的收费软件比IOS的要贵不少，看着都肉疼（我为自己说出这话小小地内疚一下），所以我只购买了不超过3款的价格在5刀以下的软件，其它的都是免费的或者破解的（再鄙视一下自己）。</p>
-<p>以下是软件列表，有比我更白痴的可以参考：</p>
-<p>aMule：电驴，你懂的；</p>
-<p>Brew：MAC的apt-get，免费；</p>
-<p>FileZilla：FTP客户端，为什么选它，因为它免费；</p>
-<p>uTorrent：BT客户端，还是免费；</p>
-<p>Speed Download：下载工具，传说是MAC下最好的，我尝试使用免费的folx，但是是在太烂了，而SD太他妈贵了，所以我盗版了——我真的觉得下载工具应该免费的，:P。</p>
-<p>iTerm：用以替换系统自带的终端，免费；</p>
-<p>CleanMyMac：系统清理，用以清理垃圾，卸载软件不错，盗版的；</p>
-<p>Disk Order：MAC下类似TC的工具，貌似盗版，但我好像不用KEY不用破解也能用；</p>
-<p>gfxCardStatus：显示显卡状态，并能用以切换集县或独显，免费；</p>
-<p>MiniUsage：在任务栏显示系统状况，信息很齐全并能显示占资源最多的十个进程，免费。之前装了个istat menu，搞得任务栏跟花一样，果断扔了；</p>
-<p>istat pro：Dashboard中的系统状况查看插件，免费；</p>
-<p>HyperDock：让Dock有WIN7一样的预览效果，可点击预览图激活或关闭窗口，我忘了是不是盗版了；</p>
-<p>iBackup：系统备份工具，免费；</p>
-<p>MyTunesControllerPlus：任务栏图标控制itunes，并能桌面显示歌词，免费；</p>
-<p>ntfsMounter：MAC默认只读NTFS格式，其实内置可写的，此工具就是打开写功能，运行后任务栏有个很丑的图表，将NTFS分区挂上去就OK了，免费；</p>
-<p>QuickSilver：神器，可以快速查找、启动、各种方式打开你需要的种种，功能和系统自带的Spotlight，Google Quick Search Box有些重叠，免费；</p>
-<p>smcFanControl：显示温度和风扇转速，可指令在正常和高转速之间切换，免费；</p>
-<p>The Unachiever：比自带的好用，免费；</p>
-<p>DropBox：你懂的；</p>
-<p>Balsamiq Mockups：原型绘制工具，我有KEY，不算盗版；</p>
-<p>Evernote：笔记本，资料管理，免费；</p>
-<p>FreeMind：思维导图工具，免费；</p>
-<p>iChm：看名字就知道了，免费；</p>
-<p>Stanza：看电子书的，免费；</p>
-<p>Xee：图片浏览，免费；</p>
-<p>MacVim：神器，免费；</p>
-<p>Office 2011 for Mac：盗版，不需要注册也能用；</p>
-<p>MPlayerX：播放器，免费；</p>
-<p>射手播放器：买的，2.99刀；</p>
-<p>QQ：不解释；</p>
-<p>Twitter for Mac：不解释；</p>
-<p>欧陆词典：带屏幕取词，免费；</p>
-<p>RDC：远程连接WINDOWS桌面，免费；</p>
-<p>Vmware Fusion：虚拟机软件，盗版的；</p>
-<p>开发方面安装JAVA、RUBY都很简单，系统有自带的，ECLIPSE直接下载就能用，安装插件和windows一样，就是Subclipse默认只能用SVNKIT，JAVAHL需要安装SVN才有，下载个<a href="http://downloads.open.collab.net/binaries.html" target="_blank" rel="external">openCollabNet</a>版安装就行；</p>
-<p>MySQL直接到官网下载安装即可。</p>
-<p>UML工具用惯了JUDE，现在改名叫Astah，还是用了这个，跨平台就是好，免费；</p>
-<p>其实MAC的软件安装真的超简单，基本上拖拽到应用程序文件夹就成了，package就直接双击安装；</p>
-<p>一不小心写了这么长，收工。</p>
-]]></content:encoded>
-      <comments>http://fyun.li/2011/06/06/macbook-pro-debut/#disqus_thread</comments>
     </item>
     
   </channel>
