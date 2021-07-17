@@ -112,6 +112,105 @@
           
           
             
+              <a class="post-title-link" href="/2021/07/11/mkcert-nginx/">
+                使用 mkcert 配置 nginx SSL认证（双向）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2021-07-10
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2021/07/11/mkcert-nginx/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/11/mkcert-nginx/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1_安装_mkcert">1 安装 mkcert</h2><p>mkcert 有发布到 Homebrew, MacPorts 等，使用 Homebrew 安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mkcert</span><br></pre></td></tr></table></figure>
+<p>其他系统安装请自行搜索。</p>
+<h2 id="2-_使用_mkcert">2. 使用 mkcert</h2><ul>
+<li>安装 mkcert 根证书</li>
+</ul>
+<p>首先需要先将mkcert的根证书安装到电脑中， 执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkcert -install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成服务器证书</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; mkcert &#34;*.mydomain.com&#34; &#34;*.yourdomain.com&#34; ::1&#10;&#10;// &#29983;&#25104; pem &#26684;&#24335;&#35777;&#20070;&#22914;&#19979;&#65306;&#10;// _wildcard.mydomain.com+2-key.pem _wildcard.mydomain.com+2.pem</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成客户端证书</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; mkcert -pkcs12 -client &#34;*.mydomain.com&#34; &#34;*.yourdomain.com&#34; &#10;&#10;// &#29983;&#25104;p12&#26684;&#24335;&#23458;&#25143;&#31471;&#35777;&#20070;&#22914;&#19979;&#65306;&#10;// _wildcard.mydomain.com+1-client.p12&#10;// win&#29992;&#25143;&#21487;&#20197;&#30452;&#25509;&#23548;&#20837;&#65292;&#40664;&#35748;&#23494;&#30721;&#20026;&#65306;&#8220;changeit&#8221;</span><br></pre></td></tr></table></figure>
+<h2 id="3-_配置_nginx_使用证书：">3. 配置 nginx 使用证书：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssl on;&#10;ssl_prefer_server_ciphers on;&#10;ssl_certificate &#34;./_wildcard.mydomain.com+2.pem&#34;;&#10;ssl_certificate_key &#34;./_wildcard.mydomain.com+2-key.pem&#34;;&#10;&#10;ssl_trusted_certificate &#34;./mkcert-CA.pem&#34;; // mkcert &#26681;&#35777;&#20070;&#10;ssl_client_certificate &#34;./mkcert-CA.pem&#34;;&#10;&#10;ssl_verify_client on; // &#35201;&#27714;&#23458;&#25143;&#31471;&#35777;&#20070;&#35748;&#35777;&#10;ssl_verify_depth 6; &#10;&#10;ssl_session_timeout 5m;&#10;ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;&#10;ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/workbench/"> #workbench </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2018/01/11/http-cache/">
                 HTTP Cache
               </a>
@@ -914,94 +1013,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/26/android-data-binding/">
-                MVVM 与 Android Data Binding
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-12-26
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/相对挨踢/">相对挨踢</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/26/android-data-binding/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/android-data-binding/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。Activity/Fragment 实际上成了 View 和 Controller 的混合体，既要承担 View 的显示功能，又要承担 Controller 的控制功能。承担的功能过多，膨胀成繁芜的巨类也就不足为怪了。</p>
-<h1 id="UI_界面设计模式">UI 界面设计模式</h1><p>在传统的 UI 设计模式中，MVC 已经实践中证明了其价值，并在漫长的使用过程中（（MVC最早出现于 1970 年代）演化出 MVP 和 MVVM 多个变种。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/26/android-data-binding/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/android/"> #android </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1037,7 +1048,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1113,7 +1124,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2015 - 
-  2019
+  2021
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

@@ -112,6 +112,94 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/26/android-data-binding/">
+                MVVM 与 Android Data Binding
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/相对挨踢/">相对挨踢</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/26/android-data-binding/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/android-data-binding/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>在 Android 开发过程中，由于 Android 作为 View 描述的 xml 视图功能较弱，开发中很容易写出臃肿繁杂的 Activity/Fragment，甚至有写出过数千行代码的 Activity。大量的显示、校验、事件响应、回调接口充斥在 Activity 中。Activity/Fragment 实际上成了 View 和 Controller 的混合体，既要承担 View 的显示功能，又要承担 Controller 的控制功能。承担的功能过多，膨胀成繁芜的巨类也就不足为怪了。</p>
+<h1 id="UI_界面设计模式">UI 界面设计模式</h1><p>在传统的 UI 设计模式中，MVC 已经实践中证明了其价值，并在漫长的使用过程中（（MVC最早出现于 1970 年代）演化出 MVP 和 MVVM 多个变种。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/26/android-data-binding/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/"> #android </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/19/ubuntu-ss/">
                 Ubuntu 搭建 shadowsocks
               </a>
@@ -951,116 +1039,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012/04/27/jquery-plugin-scaffold/">
-                jQuery Plugin Scaffold
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-04-27
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/相对挨踢/">相对挨踢</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2012/04/27/jquery-plugin-scaffold/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/04/27/jquery-plugin-scaffold/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><strong>The First One:</strong></p>
-<pre lang="javascript">(function($) {
-    $.fn.joey = function(options) {
-        debug(this);
-
-        var opts = $.extend({}, $.fn.joey.defaults, options);
-
-        return this.each(function() {
-            $this = $(this);
-
-            // build element specific options
-            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
-
-            // do something
-        });
-    };
-
-    // private function for debugging
-    function debug($obj) {
-        if (window.console &amp;&amp; window.console.log)
-            window.console.log('joey selection count: ' + $obj.size());
-    }
-    ;
-
-    // plugin defaults
-    $.fn.joey.defaults = {
-        // some options
-    };
-
-})(jQuery);</pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012/04/27/jquery-plugin-scaffold/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1096,7 +1074,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1172,7 +1150,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2015 - 
-  2019
+  2021
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
